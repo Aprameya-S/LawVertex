@@ -1,4 +1,4 @@
-[
+{"abi":[
 	{
 		"inputs": [],
 		"stateMutability": "nonpayable",
@@ -14,6 +14,16 @@
 			{
 				"internalType": "string",
 				"name": "_desc",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_size",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_createdAt",
 				"type": "string"
 			},
 			{
@@ -99,7 +109,7 @@
 				"type": "address"
 			}
 		],
-		"name": "getAllUsers",
+		"name": "getUser",
 		"outputs": [
 			{
 				"components": [
@@ -328,6 +338,87 @@
 					},
 					{
 						"internalType": "string",
+						"name": "size",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "createdAt",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "publicid",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "cid",
+						"type": "string"
+					},
+					{
+						"internalType": "bool",
+						"name": "searchable",
+						"type": "bool"
+					},
+					{
+						"internalType": "bool",
+						"name": "canRequest",
+						"type": "bool"
+					},
+					{
+						"internalType": "bool",
+						"name": "exists",
+						"type": "bool"
+					}
+				],
+				"internalType": "struct filetransfer.PrivateFile",
+				"name": "",
+				"type": "tuple"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "_publicid",
+				"type": "string"
+			}
+		],
+		"name": "viewOwnedFile",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "address",
+						"name": "owner",
+						"type": "address"
+					},
+					{
+						"internalType": "string",
+						"name": "name",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "desc",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "size",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "createdAt",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
 						"name": "publicid",
 						"type": "string"
 					},
@@ -379,6 +470,16 @@
 					{
 						"internalType": "string",
 						"name": "desc",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "size",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "createdAt",
 						"type": "string"
 					},
 					{
@@ -437,6 +538,16 @@
 						"type": "string"
 					},
 					{
+						"internalType": "string",
+						"name": "size",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "createdAt",
+						"type": "string"
+					},
+					{
 						"internalType": "bool",
 						"name": "exists",
 						"type": "bool"
@@ -451,3 +562,4 @@
 		"type": "function"
 	}
 ]
+}

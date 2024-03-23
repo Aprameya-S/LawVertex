@@ -85,11 +85,11 @@ const DashboardNav = (
               
             </nav>
             <div className="">
-              <main className='bg-white dark:bg-[#0e0e10] pt-[35px] px-[60px] mt-[60px] pb-[150px] min-h-[100vh] '>
+              <main className='bg-white dark:bg-[#0e0e10] pt-[95px] px-[60px] pb-[150px] min-h-[100vh] '>
                 { children }
               </main>
             </div>
-          </div>
+    </div>
   )
 }
 

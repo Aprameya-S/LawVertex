@@ -13,6 +13,10 @@ $bg-color: #ffffff;
   border: 2px linear-gradient(#1767fb9b,rgba(114,69,240,0));
 }
 
+.simplebar-placeholder{
+  display: none;
+}
+
 .gradient-button {
     background-image: linear-gradient(#1767fb9b,rgba(114,69,240,0));
     background-position: 0px -5px;

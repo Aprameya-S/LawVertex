@@ -1,32 +1,73 @@
 "use client"
-import React, { useEffect, useState } from 'react'
-import { useFileTransferContext } from '@/hooks/FileTransferContext'
-import { useContract, useContractRead } from '@thirdweb-dev/react'
+import { viewOwnedFiles } from "@/hooks/useFileTransferContract"
+import { useState, useLayoutEffect, Key } from "react"
+import OwnedFile from "@/components/OwnedFile"
+import { Input } from "@/components/ui/input"
+import ownedFilesPlaceholder from '../../../public/images/ownedFilesPlaceholder.png'
+import { Button } from "@/components/ui/button"
+import Image from "next/image"
+import FileUploadButton from "@/components/FileUploadButton"
+import { MediaRenderer } from "@thirdweb-dev/react";
+
 
 
 const page = () => {
-  const {getFiles} = useFileTransferContext()
-  // const [files, setFiles] = useState([])
-  // const { contract } = useContract("0x17a7F3A1Dd257d1f5e84826aB83d9Be5c3e481b6");
-    
-  // const func = async() => {
-    // const { data, isLoading } = useContractRead(contract, "viewOwnedFiles", [])
-    // console.log(data)
-  // }
+  const [searchQuery, setSearchQuery] = useState<string>("")
+  const [isLoading, setIsLoading] = useState(true)
+  const [listView, setListView] = useState<any|undefined>(undefined)
+  const [files, setFiles] = useState<any>([])
 
-  // useEffect(() => {
-  //   getFiles()
-  // },[])
+  const loadFiles = async() => {
+    var data = await viewOwnedFiles()
+    data=data.filter((i:any) => i.name.toUpperCase().indexOf(searchQuery.toUpperCase()) > -1)
+    setFiles(data)
+    setIsLoading(false)
+  }
 
+  useLayoutEffect(() => {
+    loadFiles()
+  },[searchQuery])
 
-
-  //   console.log(contract)
-
-  return (
-    <div>
-      page
-      <button onClick={getFiles}>click me</button>
-    </div>
+  
+  return isLoading ? (
+    <>
+      <p>loading...</p>
+    </>
+  ) : (
+    <>
+          <div className="flex gap-4">
+            <Input type="text" placeholder="Search" onChange={(e)=>setSearchQuery(e.target.value)}/>
+          </div>
+      { // If user owns no files
+        files.length===0 ? (
+        <div className="grid min-h-[60vh] justify-items-center content-center">
+          <Image
+            src={ownedFilesPlaceholder}
+            alt="No files found"
+            className="w-[300px] mb-5"
+          />
+          <h1 className="font-medium text-[20px]">No files found</h1>
+          { // If search result is empty
+            searchQuery==="" && <>
+              <h2 className="text-gray-500 text-[15px] mb-5"> Get started by dropping files or selecting from your computer </h2>
+              <FileUploadButton />
+            </>
+          }
+        </div>
+        ) : (
+          <>
+          <div className="grid grid-cols-3 gap-3 mt-8">
+            {
+              files?.map((file:any, index:number) => (
+                <OwnedFile key={index} listView={listView} file={file} refreshData={loadFiles}/>
+              ))
+            }
+          </div>
+          </>
+        )
+      }
+        
+    </>
   )
 }
 

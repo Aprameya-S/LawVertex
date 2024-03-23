@@ -5,6 +5,8 @@ import DashboardNav from "@/components/DashboardNav";
 import "./index.scss"
 const inter = Inter({ subsets: ["latin"] });
 import Providers from "./providers"; 
+import { Toaster } from "@/components/ui/toaster";
+import { ToastContainer } from "react-toastify";
 
 export const metadata: Metadata = {
   title: "LawVertex",
@@ -18,13 +20,26 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning >
-          <body className={`${inter.className} bg-[#f5f6f8] dark:bg-[#0e0e10]`}>
+          <body className={`${inter.className} bg-white dark:bg-[#0e0e10]`}>
             <Providers>
               <link rel="icon" href="/logo.svg" sizes="any" />
+              <ToastContainer
+                position="bottom-center"
+                autoClose={4000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="dark"
+              />
               <DashboardNav>
                 {children}
               </DashboardNav>
             </Providers>
+            <Toaster />
           </body>
     </html>
   );
