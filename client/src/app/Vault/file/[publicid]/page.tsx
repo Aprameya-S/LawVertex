@@ -5,6 +5,7 @@ import PdfRenderer from '@/components/PdfRenderer'
 import { MediaRenderer } from "@thirdweb-dev/react";
 import { Button } from '@/components/ui/button';
 import { DownloadIcon } from '@radix-ui/react-icons';
+import Loader from '@/components/Loader';
 
 const page = ({ params }: { params: { publicid: string } }) => {
   const [file, setFile] = useState<any>({})
@@ -44,10 +45,9 @@ const page = ({ params }: { params: { publicid: string } }) => {
   
 
   return isLoading ? (
-    <h1>loading...</h1>
+    <Loader />
   ) : (
     <div>
-      
       {
         fileFormat==="pdf" ? (
           <PdfRenderer url={`https://b75d97dda9827edd7e665521bd610b09.ipfscdn.io/ipfs/${file?.cid.split('//')[1]}`} />

@@ -211,7 +211,7 @@ const PdfRenderer = ({ url }: PdfRendererProps) => {
                 setNumPages(numPages)
               }
               file={url}
-              className={`w-full ${rotation%180===0?'aspect-[1/1.414]':'aspect-[1.414/1]'} overflow-auto h-[600px]`}>
+              className={`w-full  overflow-auto max-h-[600px]`}>
               {isLoading && renderedScale ? (
                 <Page
                   width={width ? width : 1}

@@ -1,13 +1,13 @@
 "use client"
 import { viewOwnedFiles } from "@/hooks/useFileTransferContract"
-import { useState, useLayoutEffect, Key } from "react"
+import { useState, useLayoutEffect, Key, useEffect } from "react"
 import OwnedFile from "@/components/OwnedFile"
 import { Input } from "@/components/ui/input"
 import ownedFilesPlaceholder from '../../../public/images/ownedFilesPlaceholder.png'
-import { Button } from "@/components/ui/button"
 import Image from "next/image"
 import FileUploadButton from "@/components/FileUploadButton"
-import { MediaRenderer } from "@thirdweb-dev/react";
+import Loader from "@/components/Loader"
+import { connectWallet } from '@/hooks/useFileTransferContract'
 
 
 
@@ -18,11 +18,18 @@ const page = () => {
   const [files, setFiles] = useState<any>([])
 
   const loadFiles = async() => {
-    var data = await viewOwnedFiles()
-    data=data.filter((i:any) => i.name.toUpperCase().indexOf(searchQuery.toUpperCase()) > -1)
-    setFiles(data)
+    var data = await viewOwnedFiles().then((res) => {
+      if(res){
+        var d=res.filter((i:any) => i.name.toUpperCase().indexOf(searchQuery.toUpperCase()) > -1)
+        setFiles(d)
+      }
+    })
     setIsLoading(false)
   }
+
+    useEffect(() => {
+      connectWallet()
+    })
 
   useLayoutEffect(() => {
     loadFiles()
@@ -31,7 +38,7 @@ const page = () => {
   
   return isLoading ? (
     <>
-      <p>loading...</p>
+      <Loader/>
     </>
   ) : (
     <>

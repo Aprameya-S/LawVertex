@@ -7,6 +7,7 @@ const inter = Inter({ subsets: ["latin"] });
 import Providers from "./providers"; 
 import { Toaster } from "@/components/ui/toaster";
 import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 export const metadata: Metadata = {
   title: "LawVertex",

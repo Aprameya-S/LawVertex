@@ -25,8 +25,22 @@ import uploadFilesPlaceholder from '../../public/images/uploadFIlesPlaceholder.p
 import { addFile } from '@/hooks/useFileTransferContract';
 import { Badge } from './ui/badge';
 import { convertBytes, generateId } from '@/lib/utils';
+import { encryptfile } from '@/lib/encryptFile';
 
 
+
+// function get_blob_from_string (string, type, name) {
+//   let array = new Uint8Array(string.length);
+//   for (let i = 0; i < string.length; i++){
+//       array[i] = string.charCodeAt(i);
+//   }
+//   let end_file = new Blob([array], {type: type, name: name});
+//   let a = document.createElement("a");
+//   a.href = URL.createObjectURL(end_file);
+//   a.download = name;
+//   a.target = "_blank";
+//   a.click();
+// }
 
 const FileUploadButton = () => {
   const { toast } = useToast()
@@ -48,6 +62,8 @@ const FileUploadButton = () => {
   const onDrop = useCallback(
     async  (acceptedFile: File[]) => {
       setFile(acceptedFile)
+
+      
     },
     [upload]
   )
@@ -77,12 +93,12 @@ const FileUploadButton = () => {
       // console.log(form)
   
       await addFile(form)
-      // .then(() => {
-      //   toast({
-      //     title: "Upload successful!",
-      //     action: <ToastAction altText="View">View</ToastAction>,
-      //   })
-      // })
+      .then(() => {
+        toast({
+          title: "Pinned on IPFS",
+          // action: <ToastAction altText="View">View</ToastAction>,
+        })
+      })
       .then(() => {
         setForm({
           name: '',
@@ -108,6 +124,7 @@ const FileUploadButton = () => {
     }
   }
 
+  // console.log(file)
 
   return (
     <>

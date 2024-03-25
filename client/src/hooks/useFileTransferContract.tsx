@@ -1,18 +1,28 @@
-"use client"
 import { ethers } from "ethers";
 import abi from '../lib/contract.json'
 import {toast} from  'react-toastify';
 
 
-const { ethereum } = window;
-
 export const connectWallet = async () => {
-  try {
+    try {
+    const { ethereum } = window;
     if (!ethereum) return toast("Please install MetaMask.");
 
-    const accounts = await ethereum.request({ method: "eth_requestAccounts", });
+    const provider = new ethers.providers.Web3Provider(window.ethereum, "any");
+    let accounts = await provider.send("eth_requestAccounts", []);
+    let account = accounts[0];
+    provider.on('accountsChanged', function (accounts) {
+        account = accounts[0];
+        console.log(address); // Print new address
+    });
 
-    window.location.reload();
+    const signer = provider.getSigner();
+
+    const address = await signer.getAddress();
+
+    console.log(address);
+
+    // window.location.reload();
   } catch (error:any) {
     if(error.code === 4100){
       toast.error("Contract call failure: This action requires a connected wallet to sign the transaction. Please connect your wallet and try again. ", error)      
@@ -27,8 +37,12 @@ export const connectWallet = async () => {
   }
 };
 
+
+
 export const createEthereumContract = () => {
-  const provider = new ethers.providers.Web3Provider(ethereum);
+  // const provider = new ethers.providers.JsonRpcProvider('https://eth-sepolia.g.alchemy.com/v2/-OHVSCL0DxGaycEqcJqlTHyH1mPk4QTP');
+  const provider = new ethers.providers.Web3Provider(window.ethereum);
+
   const signer = provider.getSigner();
   const fileTransferContract = new ethers.Contract("0x3921408DAA247Eb852FdA6385E17D7Aace895Edf", abi.abi, signer);
 
