@@ -5,7 +5,6 @@ import {
   DialogTrigger,
 } from './ui/dialog'
 import { Button } from './ui/button'
-import { Expand, Loader2 } from 'lucide-react'
 import SimpleBar from 'simplebar-react'
 import { Document, Page } from 'react-pdf'
 import { useToast } from './ui/use-toast'
@@ -39,7 +38,7 @@ const PdfFullscreen = ({ fileUrl }: PdfFullscreenProps) => {
           variant='ghost'
           className='gap-1.5 p-1 h-fit'
           aria-label='fullscreen'>
-          <Expand className='h-4 w-4' />
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-expand"><path d="m21 21-6-6m6 6v-4.8m0 4.8h-4.8"/><path d="M3 16.2V21m0 0h4.8M3 21l6-6"/><path d="M21 7.8V3m0 0h-4.8M21 3l-6 6"/><path d="M3 7.8V3m0 0h4.8M3 3l6 6"/></svg>
         </Button>
       </DialogTrigger>
       <DialogContent className='max-w-7xl w- border-input'>
@@ -50,7 +49,8 @@ const PdfFullscreen = ({ fileUrl }: PdfFullscreenProps) => {
             <Document
               loading={
                 <div className='flex justify-center overflow-hidden'>
-                  <Loader2 className='my-24 h-6 w-6 animate-spin' />
+
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-loader-circle my-24 animate-spin"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg>
                 </div>
               }
               onLoadError={() => {

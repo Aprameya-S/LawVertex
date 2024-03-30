@@ -1,6 +1,5 @@
 import { type ClassValue, clsx } from "clsx"
 import { twMerge } from "tailwind-merge"
-import * as CryptoJS from 'crypto-js'
 
 
 export function cn(...inputs: ClassValue[]) {
@@ -17,9 +16,7 @@ export const convertBytes = (x:string) => {
   return(n.toFixed(n < 10 && l > 0 ? 1 : 0) + ' ' + units[l]);
 }
 
-const encryptAES = (text:string, key:string) => {
-  return CryptoJS.AES.encrypt(text, key).toString();
-};
+
 
 export const dec2hex = (dec:number) => {
   return dec.toString(16).padStart(2, "0")

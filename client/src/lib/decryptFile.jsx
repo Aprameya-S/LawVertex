@@ -1,3 +1,6 @@
+import toast from 'react-toastify'
+
+
 function readfile(file){
   return new Promise((resolve, reject) => {
     var fr = new FileReader();  
@@ -7,22 +10,23 @@ function readfile(file){
     fr.readAsArrayBuffer(file);
   });
 }
+export 	async function decryptfile(objFile,fileFormat,decPassPhrase) {
 
-export async function encryptfile(objFile,fileFormat,encPassPhrase) {
-  // console.log(objFile)
-  var plaintextbytes=await readfile(objFile)
+  var cipherbytes=await readfile(objFile)
   .catch(function(err){
     console.error(err);
   });	
-  var plaintextbytes=new Uint8Array(plaintextbytes);
+  var cipherbytes=new Uint8Array(cipherbytes);
 
   var pbkdf2iterations=10000;
-  var passphrasebytes=new TextEncoder("utf-8").encode(encPassPhrase);
-  var pbkdf2salt=window.crypto.getRandomValues(new Uint8Array(8));
+  var passphrasebytes=new TextEncoder("utf-8").encode(decPassPhrase);
+  var pbkdf2salt=cipherbytes.slice(8,16);
+
 
   var passphrasekey=await window.crypto.subtle.importKey('raw', passphrasebytes, {name: 'PBKDF2'}, false, ['deriveBits'])
   .catch(function(err){
     console.error(err);
+
   });
   // console.log('passphrasekey imported');
 
@@ -35,32 +39,30 @@ export async function encryptfile(objFile,fileFormat,encPassPhrase) {
 
   var keybytes=pbkdf2bytes.slice(0,32);
   var ivbytes=pbkdf2bytes.slice(32);
+  cipherbytes=cipherbytes.slice(16);
 
-  var key=await window.crypto.subtle.importKey('raw', keybytes, {name: 'AES-CBC', length: 256}, false, ['encrypt']) 
+  var key=await window.crypto.subtle.importKey('raw', keybytes, {name: 'AES-CBC', length: 256}, false, ['decrypt']) 
   .catch(function(err){
     console.error(err);
   });
   // console.log('key imported');		
 
-  var cipherbytes=await window.crypto.subtle.encrypt({name: "AES-CBC", iv: ivbytes}, key, plaintextbytes)
+  var plaintextbytes=await window.crypto.subtle.decrypt({name: "AES-CBC", iv: ivbytes}, key, cipherbytes)
   .catch(function(err){
     console.error(err);
   });
 
-  if(!cipherbytes) {
-    // console.log("Error in encrypting file")
+  if(!plaintextbytes) {
+    //  spnDecstatus.classList.add("redspan");
+    // spnDecstatus.innerHTML='<p>Error decrypting file.  Password may be incorrect.</p>';
+    // console.log("Error decrypting file")
     return;
   }
 
-  // console.log('plaintext encrypted');
-  cipherbytes=new Uint8Array(cipherbytes);
+  // console.log('ciphertext decrypted');
+  plaintextbytes=new Uint8Array(plaintextbytes);
 
-  var resultbytes=new Uint8Array(cipherbytes.length+16)
-  resultbytes.set(new TextEncoder("utf-8").encode('Salted__'));
-  resultbytes.set(pbkdf2salt, 8);
-  resultbytes.set(cipherbytes, 16);
-
-  var blob=new Blob([resultbytes], {type: fileFormat});
+  var blob=new Blob([plaintextbytes], {type: fileFormat});
   var blobUrl=URL.createObjectURL(blob);
   return {fileBlob:blob, fileLink:blobUrl}
 }

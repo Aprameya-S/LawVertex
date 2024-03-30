@@ -1,12 +1,5 @@
 'use client'
 
-import {
-  ChevronDown,
-  ChevronUp,
-  Loader2,
-  RotateCw,
-  Search,
-} from 'lucide-react'
 import { Document, Page, pdfjs } from 'react-pdf'
 
 import 'react-pdf/dist/Page/AnnotationLayer.css'
@@ -104,7 +97,7 @@ const PdfRenderer = ({ url }: PdfRendererProps) => {
             variant='ghost'
             aria-label='previous page'
             className='p-1 h-fit'>
-            <ChevronDown className='h-4 w-4' />
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-chevron-down"><path d="m6 9 6 6 6-6"/></svg>
           </Button>
 
           <div className='flex items-center gap-1.5'>
@@ -140,7 +133,7 @@ const PdfRenderer = ({ url }: PdfRendererProps) => {
             variant='ghost'
             aria-label='next page'
             className='p-1 h-fit'>
-            <ChevronUp className='h-4 w-4' />
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-chevron-up"><path d="m18 15-6-6-6 6"/></svg>
           </Button>
         </div>
 
@@ -153,7 +146,7 @@ const PdfRenderer = ({ url }: PdfRendererProps) => {
                 variant='ghost'>
                 {/* <Search className='h-4 w-4' /> */}
                 {scale * 100}%
-                <ChevronDown className='h-4 w-4 opacity-50' />
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-chevron-down"><path d="m6 9 6 6 6-6"/></svg>
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent>
@@ -181,7 +174,7 @@ const PdfRenderer = ({ url }: PdfRendererProps) => {
             variant='ghost'
             aria-label='rotate 90 degrees'
             className='p-1 h-fit'>
-            <RotateCw className='h-4 w-4' />
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-rotate-cw"><path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/></svg>
           </Button>
 
           <PdfFullscreen fileUrl={url} />
@@ -197,7 +190,7 @@ const PdfRenderer = ({ url }: PdfRendererProps) => {
             <Document
               loading={
                 <div className='flex justify-center'>
-                  <Loader2 className='my-24 h-6 w-6 animate-spin' />
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-loader-circle my-24 animate-spin"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg>
                 </div>
               }
               onLoadError={() => {
@@ -231,7 +224,7 @@ const PdfRenderer = ({ url }: PdfRendererProps) => {
                 key={'@' + scale}
                 loading={
                   <div className='flex justify-center'>
-                    <Loader2 className='my-24 h-6 w-6 animate-spin' />
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-loader-circle my-24 animate-spin"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg>
                   </div>
                 }
                 onRenderSuccess={() =>

@@ -18,6 +18,11 @@
 			},
 			{
 				"internalType": "string",
+				"name": "_format",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
 				"name": "_size",
 				"type": "string"
 			},
@@ -38,12 +43,22 @@
 			},
 			{
 				"internalType": "bool",
+				"name": "_encrypted",
+				"type": "bool"
+			},
+			{
+				"internalType": "bool",
 				"name": "_searchable",
 				"type": "bool"
 			},
 			{
 				"internalType": "bool",
 				"name": "_canRequest",
+				"type": "bool"
+			},
+			{
+				"internalType": "bool",
+				"name": "_copy",
 				"type": "bool"
 			}
 		],
@@ -155,19 +170,24 @@
 				"type": "string"
 			},
 			{
+				"internalType": "string",
+				"name": "_cid",
+				"type": "string"
+			},
+			{
 				"internalType": "address",
 				"name": "_receivingUserAddress",
 				"type": "address"
 			},
 			{
+				"internalType": "string",
+				"name": "_ogpublicid",
+				"type": "string"
+			},
+			{
 				"internalType": "bool",
 				"name": "_viewOnly",
 				"type": "bool"
-			},
-			{
-				"internalType": "string",
-				"name": "_privatekey",
-				"type": "string"
 			}
 		],
 		"name": "grantAccess",
@@ -189,24 +209,6 @@
 			}
 		],
 		"name": "revokeAccess",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "string",
-				"name": "_publicid",
-				"type": "string"
-			},
-			{
-				"internalType": "address",
-				"name": "_newAddressOwner",
-				"type": "address"
-			}
-		],
-		"name": "transferOwnership",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
@@ -286,6 +288,11 @@
 						"type": "address"
 					},
 					{
+						"internalType": "string",
+						"name": "ogpublicid",
+						"type": "string"
+					},
+					{
 						"internalType": "bool",
 						"name": "viewOnly",
 						"type": "bool"
@@ -310,11 +317,6 @@
 				"internalType": "string",
 				"name": "_publicid",
 				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "_privatekey",
-				"type": "string"
 			}
 		],
 		"name": "viewFile",
@@ -334,6 +336,11 @@
 					{
 						"internalType": "string",
 						"name": "desc",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "format",
 						"type": "string"
 					},
 					{
@@ -358,6 +365,11 @@
 					},
 					{
 						"internalType": "bool",
+						"name": "encrypted",
+						"type": "bool"
+					},
+					{
+						"internalType": "bool",
 						"name": "searchable",
 						"type": "bool"
 					},
@@ -368,7 +380,7 @@
 					},
 					{
 						"internalType": "bool",
-						"name": "exists",
+						"name": "copy",
 						"type": "bool"
 					}
 				],
@@ -409,6 +421,11 @@
 					},
 					{
 						"internalType": "string",
+						"name": "format",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
 						"name": "size",
 						"type": "string"
 					},
@@ -429,6 +446,11 @@
 					},
 					{
 						"internalType": "bool",
+						"name": "encrypted",
+						"type": "bool"
+					},
+					{
+						"internalType": "bool",
 						"name": "searchable",
 						"type": "bool"
 					},
@@ -439,7 +461,7 @@
 					},
 					{
 						"internalType": "bool",
-						"name": "exists",
+						"name": "copy",
 						"type": "bool"
 					}
 				],
@@ -474,6 +496,11 @@
 					},
 					{
 						"internalType": "string",
+						"name": "format",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
 						"name": "size",
 						"type": "string"
 					},
@@ -494,6 +521,11 @@
 					},
 					{
 						"internalType": "bool",
+						"name": "encrypted",
+						"type": "bool"
+					},
+					{
+						"internalType": "bool",
 						"name": "searchable",
 						"type": "bool"
 					},
@@ -504,7 +536,7 @@
 					},
 					{
 						"internalType": "bool",
-						"name": "exists",
+						"name": "copy",
 						"type": "bool"
 					}
 				],
@@ -539,6 +571,11 @@
 					},
 					{
 						"internalType": "string",
+						"name": "format",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
 						"name": "size",
 						"type": "string"
 					},
@@ -548,12 +585,37 @@
 						"type": "string"
 					},
 					{
+						"internalType": "string",
+						"name": "publicid",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "cid",
+						"type": "string"
+					},
+					{
 						"internalType": "bool",
-						"name": "exists",
+						"name": "encrypted",
+						"type": "bool"
+					},
+					{
+						"internalType": "bool",
+						"name": "searchable",
+						"type": "bool"
+					},
+					{
+						"internalType": "bool",
+						"name": "canRequest",
+						"type": "bool"
+					},
+					{
+						"internalType": "bool",
+						"name": "copy",
 						"type": "bool"
 					}
 				],
-				"internalType": "struct filetransfer.FileInfo[]",
+				"internalType": "struct filetransfer.PrivateFile[]",
 				"name": "",
 				"type": "tuple[]"
 			}

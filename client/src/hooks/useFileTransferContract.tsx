@@ -20,7 +20,7 @@ export const connectWallet = async () => {
 
     const address = await signer.getAddress();
 
-    console.log(address);
+    // console.log(address);
 
     // window.location.reload();
   } catch (error:any) {
@@ -44,7 +44,7 @@ export const createEthereumContract = () => {
   const provider = new ethers.providers.Web3Provider(window.ethereum);
 
   const signer = provider.getSigner();
-  const fileTransferContract = new ethers.Contract("0x3921408DAA247Eb852FdA6385E17D7Aace895Edf", abi.abi, signer);
+  const fileTransferContract = new ethers.Contract("0xD09F7561E18d47f3fB36A3C0D863c8B29A929ed6", abi.abi, signer);
 
   return fileTransferContract;
 };
@@ -53,8 +53,8 @@ export const viewOwnedFiles = async() => {
   try {
     // await connectWallet()
     const fileTransferContract = createEthereumContract()
-    const data = await fileTransferContract.viewOwnedFiles()
-    // console.log(data)
+    var data = await fileTransferContract.viewOwnedFiles()
+    data = data.filter((item:any) => item['copy']==false)
     return data
   } catch (error) {
     console.log(error)
@@ -65,8 +65,8 @@ export const getOwnedFile = async(publicid:string) => {
   try {
     // await connectWallet()
     const fileTransferContract = createEthereumContract()
-    const data = await fileTransferContract.viewOwnedFile(publicid)
-    // console.log(data)
+    var data = await fileTransferContract.viewOwnedFile(publicid)
+    
     return data
   } catch (error) {
     console.log(error)
@@ -80,12 +80,15 @@ export const addFile = async(form:any) => {
     const data = await fileTransferContract.addFile(
       form.name, 
       form.desc,
+      form.format,
       form.size,
       form.createAt, 
       form.publicid,
       form.cid,
+      form.encrypted,
       form.searchable,
-      form.canRequest
+      form.canRequest,
+      false
     )
     console.log(data)
     toast("Upload successful!")
@@ -103,5 +106,36 @@ export const deleteFile = async(publicid:string) => {
     // return data
   } catch (error) {
     throw(error)
+  }
+}
+
+export const grantAccess = async(form:any) => {
+  try {
+    // await connectWallet()
+    const fileTransferContract = createEthereumContract()
+    const data = await fileTransferContract.grantAccess(
+      form.publicid,
+      form.cid,
+      form.receivingUserAddress, 
+      form.ogpublicid,
+      form.viewOnly
+    )
+    console.log(data)
+    toast("Access granted")
+    // return data
+  } catch (error) {
+    throw(error)
+  }
+}
+
+export const viewAccessList = async(publicid:string) => {
+  try {
+    // await connectWallet()
+    const fileTransferContract = createEthereumContract()
+    const data = await fileTransferContract.viewAccessList(publicid)
+    // console.log(data)
+    return data
+  } catch (error) {
+    console.log(error)
   }
 }
