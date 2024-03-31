@@ -1,7 +1,7 @@
 "use client"
 import React from 'react'
-import { ThemeProvider } from "@/components/ThemeProvider"
-import { ThirdwebProvider } from "@/components/ThirdwebProvider";
+import { ThemeProvider } from "next-themes"
+import { ThirdwebProvider } from "@thirdweb-dev/react";
 import { Sepolia } from "@thirdweb-dev/chains"
 
 

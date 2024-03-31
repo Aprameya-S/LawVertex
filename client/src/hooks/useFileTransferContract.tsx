@@ -139,3 +139,27 @@ export const viewAccessList = async(publicid:string) => {
     console.log(error)
   }
 }
+
+export const viewRecievedFiles = async() => {
+  try {
+    // await connectWallet()
+    const fileTransferContract = createEthereumContract()
+    var data = await fileTransferContract.viewRecievedFiles()
+    data = data.filter((item:any) => item['copy']==true)
+    return data
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export const viewFile = async(publicid:string) => {
+  try {
+    // await connectWallet()
+    const fileTransferContract = createEthereumContract()
+    var data = await fileTransferContract.viewFile(publicid)
+    
+    return data
+  } catch (error) {
+    console.log(error)
+  }
+}

@@ -1,12 +1,18 @@
 "use client"
 import React, { useEffect, useState } from 'react'
-import { getOwnedFile } from '@/hooks/useFileTransferContract'
+import { viewFile } from '@/hooks/useFileTransferContract'
 import { Button } from '@/components/ui/button';
 import Loader from '@/components/Loader';
 import { decryptfile } from '@/lib/decryptFile';
 import MultiMediaRenderer from '@/components/MultiMediaRenderer';
-import FileInfo from '@/components/FileInfo';
-
+import {
+  InputOTP,
+  InputOTPGroup,
+  InputOTPSeparator,
+  InputOTPSlot,
+} from "@/components/ui/input-otp"
+import { REGEXP_ONLY_DIGITS_AND_CHARS } from 'input-otp';
+import {toast} from 'react-toastify';
 
 function readFile(input:any){
   const fr = new FileReader()
@@ -21,11 +27,12 @@ const page = ({ params }: { params: { publicid: string } }) => {
   const [file, setFile] = useState<any>({})
   const [fileUrl, setFileUrl] = useState<any>("")
   const [isLoading, setIsLoading] = useState(true)
-  const [visible, setVisible] = useState(true);
+  const [passwordModalVisible, setPasswordModalVisible] = useState(false);
+  const [password, setPassword] = useState<string>("")
 
   const  fetchData = async() => {
     try{
-      const data = await getOwnedFile(params.publicid as string)
+      const data = await viewFile(params.publicid as string)
       .then((res) => {
         setFile({
           owner: res[0],
@@ -50,8 +57,12 @@ const page = ({ params }: { params: { publicid: string } }) => {
             readFile(blob)
             const nfile = new File([blob],res[1], {type : res[3]});
             // console.log(nfile)
-            decryptfile(nfile,res[3],"password")
+            decryptfile(nfile,res[3],"newpassword")
             .then((res) => {
+              if(res===undefined){
+                toast("Wrong password")
+                throw("Wrong password")
+              }
               setFileUrl(res?.fileLink)
               // console.log(res)
             })
@@ -68,41 +79,60 @@ const page = ({ params }: { params: { publicid: string } }) => {
      
     } catch(error) {
       console.log(error)
-      // setIsLoading(false)
+      
     }
-
-    
   }
 
   useEffect(() => {
-    fetchData()
+    try {
+      fetchData()
+    } catch (error) {
+      console.log("wrong password")
+    }
   },[])
 
-  // console.log(fileUrl)
+
 
   return isLoading ? (
     <Loader />
+  ) : passwordModalVisible ? (
+    <>
+      
+      <div className="w-full h-full">
+        <h1>password</h1>
+        <InputOTP maxLength={10} pattern={REGEXP_ONLY_DIGITS_AND_CHARS} onChange={(e) => setPassword(e)}>
+          <InputOTPGroup>
+            <InputOTPSlot index={0} />
+            <InputOTPSlot index={1} />
+            <InputOTPSlot index={2} />
+            <InputOTPSlot index={3} />
+            <InputOTPSlot index={4} />
+          </InputOTPGroup>
+          <InputOTPSeparator />
+          <InputOTPGroup>
+            <InputOTPSlot index={5} />
+            <InputOTPSlot index={6} />
+            <InputOTPSlot index={7} />
+            <InputOTPSlot index={8} />
+            <InputOTPSlot index={9} />
+          </InputOTPGroup>
+        </InputOTP>
+      </div>
+    </>
   ) : (
     <div>
-      <FileInfo file={file}/>
       {
         !file.encrypted && <MultiMediaRenderer url={fileUrl}/>
       }
 
-      <div className="flex mt-5 gap-3">
-        <a href={fileUrl} download={file.name}>
-          <Button>
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-download mr-2">
-              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/>
-            </svg>
-            Download
-          </Button>
-        </a>
-
-        <Button variant='destructive' size='icon' className=''>
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-trash-2"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/></svg>
+      <a href={fileUrl} download={file.name}>
+        <Button>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-download mr-2">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/>
+          </svg>
+          Download
         </Button>
-      </div>
+      </a>
 
     </div>
   )

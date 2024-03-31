@@ -44,7 +44,7 @@ const layout = ({
       }
     </nav>
     <main className="ml-[300px] mt-[18px] min-h-[calc(100vh-150px)]">
-      {children}
+        {children}
     </main>
     </>
   )

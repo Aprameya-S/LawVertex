@@ -23,8 +23,7 @@ interface Props {
 }
 
 
-
-const OwnedFile = (props:Props) => {
+const ReceivedFile = (props:Props) => {
   const [isDeleteLoading, setIsDeleteLoading] = useState(false)
   const { toast } = useToast()
 
@@ -38,7 +37,6 @@ const OwnedFile = (props:Props) => {
         linkCard?.remove()
         toast({
           title: "Delete successful!",
-          description: "The file has been permanently removed for everyone who had access to it.",
         })
         props.refreshData();
       })
@@ -50,7 +48,7 @@ const OwnedFile = (props:Props) => {
   }
 
   return (
-    <Link href={`/Vault/file/${props.file.publicid}`}>
+    <Link href={`/Vault/receivedFiles/${props.file.publicid}`}>
     <Card className='border-input w-full p-[15px] bg-transparent overflow-hidden border-[2px] hover:border-[#4A92FE] cursor-pointer relative h-[150px]'>
       <div className="flex justify-between items-center">
         <div className="flex h-fit gap-2 items-end">
@@ -78,12 +76,6 @@ const OwnedFile = (props:Props) => {
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent className='border-input text-[14px]'>
-              <Link href={`/Vault/manageAccess/${props.file.publicid}`} >
-                <DropdownMenuItem onClick={(e:any)=>{e.stopPropagation()}} className="cursor-pointer">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-users mr-2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-                  Manage Access
-                </DropdownMenuItem>
-              </Link>
               
               <DropdownMenuItem onClick={handleDelete} className="cursor-pointer">
                 {
@@ -113,4 +105,4 @@ const OwnedFile = (props:Props) => {
   )
 }
 
-export default OwnedFile
+export default ReceivedFile

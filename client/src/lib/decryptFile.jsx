@@ -49,7 +49,8 @@ export 	async function decryptfile(objFile,fileFormat,decPassPhrase) {
 
   var plaintextbytes=await window.crypto.subtle.decrypt({name: "AES-CBC", iv: ivbytes}, key, cipherbytes)
   .catch(function(err){
-    console.error(err);
+    console.log("Decryption error");
+    return
   });
 
   if(!plaintextbytes) {

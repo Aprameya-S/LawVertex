@@ -4,7 +4,7 @@ import "./globals.css";
 import DashboardNav from "@/components/DashboardNav";
 import "./index.scss"
 const inter = Inter({ subsets: ["latin"] });
-import Providers from "./providers"; 
+import Providers from "./Providers"; 
 import { Toaster } from "@/components/ui/toaster";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
