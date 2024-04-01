@@ -1,5 +1,5 @@
 import { ethers } from "ethers";
-import abi from '../lib/contract.json'
+import abi from '../lib/fileTransferContract.json'
 import {toast} from  'react-toastify';
 
 
@@ -44,7 +44,7 @@ export const createEthereumContract = () => {
   const provider = new ethers.providers.Web3Provider(window.ethereum);
 
   const signer = provider.getSigner();
-  const fileTransferContract = new ethers.Contract("0xD09F7561E18d47f3fB36A3C0D863c8B29A929ed6", abi.abi, signer);
+  const fileTransferContract = new ethers.Contract("0x5cC31794eAF40Aa7C383094Bd549d8b0fe483B3c", abi.abi, signer);
 
   return fileTransferContract;
 };
@@ -122,6 +122,23 @@ export const grantAccess = async(form:any) => {
     )
     console.log(data)
     toast("Access granted")
+    // return data
+  } catch (error) {
+    throw(error)
+  }
+}
+
+export const revokeAccess = async(form:any) => {
+  try {
+    // await connectWallet()
+    console.log(form)
+    const fileTransferContract = createEthereumContract()
+    const data = await fileTransferContract.revokeAccess(
+      form.publicid,
+      form.userAddress
+    )
+    console.log(data)
+    toast("Access revoked")
     // return data
   } catch (error) {
     throw(error)

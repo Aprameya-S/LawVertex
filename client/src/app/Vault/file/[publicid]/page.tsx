@@ -1,11 +1,12 @@
 "use client"
 import React, { useEffect, useState } from 'react'
-import { getOwnedFile } from '@/hooks/useFileTransferContract'
+import { deleteFile, getOwnedFile } from '@/hooks/useFileTransferContract'
 import { Button } from '@/components/ui/button';
 import Loader from '@/components/Loader';
 import { decryptfile } from '@/lib/decryptFile';
 import MultiMediaRenderer from '@/components/MultiMediaRenderer';
 import FileInfo from '@/components/FileInfo';
+import { useToast } from '@/components/ui/use-toast';
 
 
 function readFile(input:any){
@@ -21,7 +22,25 @@ const page = ({ params }: { params: { publicid: string } }) => {
   const [file, setFile] = useState<any>({})
   const [fileUrl, setFileUrl] = useState<any>("")
   const [isLoading, setIsLoading] = useState(true)
-  const [visible, setVisible] = useState(true);
+  const [isDeleteLoading, setIsDeleteLoading] = useState(false)
+  const { toast } = useToast()
+
+  const handleDelete = async(e:any) => {
+    e.stopPropagation()
+    try {
+      setIsDeleteLoading(true);
+      await deleteFile(file.publicid)
+      .then(()=>{
+        toast({
+          title: "Delete successful!",
+        })
+      })
+      setIsDeleteLoading(false);
+    } catch (error) {
+      setIsDeleteLoading(false);
+      console.log(error)
+    }
+  }
 
   const  fetchData = async() => {
     try{
@@ -70,8 +89,6 @@ const page = ({ params }: { params: { publicid: string } }) => {
       console.log(error)
       // setIsLoading(false)
     }
-
-    
   }
 
   useEffect(() => {
@@ -99,11 +116,17 @@ const page = ({ params }: { params: { publicid: string } }) => {
           </Button>
         </a>
 
-        <Button variant='destructive' size='icon' className=''>
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-trash-2"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/></svg>
+        <Button variant='destructive' size='icon' className='' onClick={handleDelete} disabled={isDeleteLoading}>
+          {
+            isDeleteLoading ? (
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-rotate-cw animate-spin"><path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/></svg>
+            ) : (
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-trash-2"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/></svg>
+            )
+          }
         </Button>
       </div>
-
+{/* {file.publicid} */}
     </div>
   )
 }

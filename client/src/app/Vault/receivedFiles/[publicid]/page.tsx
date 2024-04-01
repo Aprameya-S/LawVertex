@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/input-otp"
 import { REGEXP_ONLY_DIGITS_AND_CHARS } from 'input-otp';
 import {toast} from 'react-toastify';
+import FileInfo from '@/components/FileInfo';
 
 function readFile(input:any){
   const fr = new FileReader()
@@ -57,7 +58,7 @@ const page = ({ params }: { params: { publicid: string } }) => {
             readFile(blob)
             const nfile = new File([blob],res[1], {type : res[3]});
             // console.log(nfile)
-            decryptfile(nfile,res[3],"newpassword")
+            decryptfile(nfile,res[3],"password12")
             .then((res) => {
               if(res===undefined){
                 toast("Wrong password")
@@ -121,19 +122,21 @@ const page = ({ params }: { params: { publicid: string } }) => {
     </>
   ) : (
     <div>
-      {
-        !file.encrypted && <MultiMediaRenderer url={fileUrl}/>
-      }
+      <FileInfo file={file}/>
+      <div className="mt-4">
+        {
+          !file.encrypted && <MultiMediaRenderer url={fileUrl}/>
+        }
 
-      <a href={fileUrl} download={file.name}>
-        <Button>
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-download mr-2">
-            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/>
-          </svg>
-          Download
-        </Button>
-      </a>
-
+        <a href={fileUrl} download={file.name}>
+          <Button>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-download mr-2">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/>
+            </svg>
+            Download
+          </Button>
+        </a>
+      </div>
     </div>
   )
 }
