@@ -1,7 +1,7 @@
 "use client"
 import { viewOwnedFiles } from "@/hooks/useFileTransferContract"
 import { useState, useLayoutEffect, Key, useEffect } from "react"
-import OwnedFile from "@/components/OwnedFile"
+import OwnedFileCard from "@/components/OwnedFileCard"
 import { Input } from "@/components/ui/input"
 import ownedFilesPlaceholder from '../../../public/images/ownedFilesPlaceholder.png'
 import Image from "next/image"
@@ -54,6 +54,7 @@ const page = () => {
             src={ownedFilesPlaceholder}
             alt="No files found"
             className="w-[300px] mb-5"
+            priority
           />
           <h1 className="font-medium text-[20px]">No files found</h1>
           { // If search result is empty
@@ -68,7 +69,7 @@ const page = () => {
           <div className="grid grid-cols-3 gap-3 mt-8">
             {
               files?.map((file:any, index:number) => (
-                <OwnedFile key={index} listView={listView} file={file} refreshData={loadFiles}/>
+                <OwnedFileCard key={index} listView={listView} file={file} refreshData={loadFiles}/>
               ))
             }
           </div>

@@ -7,7 +7,7 @@ import Image from "next/image"
 import FileUploadButton from "@/components/FileUploadButton"
 import Loader from "@/components/Loader"
 import { connectWallet } from '@/hooks/useFileTransferContract'
-import ReceivedFile from "@/components/ReceivedFile"
+import ReceivedFileCard from "@/components/ReceivedFileCard"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 
@@ -37,7 +37,7 @@ const page = () => {
     loadFiles()
   },[searchQuery])
 
-  console.log(files)
+  // console.log(files)
 
   
   return isLoading ? (
@@ -75,7 +75,7 @@ const page = () => {
           <div className="grid grid-cols-3 gap-3 mt-8">
             {
               files?.map((file:any, index:number) => (
-                <ReceivedFile
+                <ReceivedFileCard
                 key={index}
                 listView={listView}
                 file={file}

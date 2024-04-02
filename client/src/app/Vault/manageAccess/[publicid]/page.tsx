@@ -22,6 +22,8 @@ import { useStorageUpload } from '@thirdweb-dev/react';
 import { generateId } from '@/lib/utils'
 import { Resend } from 'resend';
 import FileInfo from '@/components/FileInfo'
+import Image from 'next/image'
+import accessPlaceholder from '../../../../../public/images/accessPlaceholder.png'
 
 
 
@@ -51,8 +53,8 @@ const page = ({ params }: { params: { publicid: string } }) => {
 
   const handleSubmit = async(e:any) => {
     e.preventDefault()
-    setIsGrantLoading(true)
     try {
+      setIsGrantLoading(true)
       var newpublicid=generateId(40)
           fetch(`https://b75d97dda9827edd7e665521bd610b09.ipfscdn.io/ipfs/${ogFile.cid.split('//')[1]}`)
           .then((res) => res.blob())
@@ -70,6 +72,8 @@ const page = ({ params }: { params: { publicid: string } }) => {
                 })
   
                 await grantAccess({...form,['ogpublicid']:params.publicid,['publicid']:generateId(40),['cid']:uri[0]})
+                setIsGrantLoading(false)
+              
               })
             }
             else{
@@ -80,13 +84,10 @@ const page = ({ params }: { params: { publicid: string } }) => {
                 })
   
                 await grantAccess({...form,['ogpublicid']:params.publicid,['publicid']:newpublicid,['cid']:uri[0]})
+                setIsGrantLoading(false)
             }
           })
 
-          const resend = new Resend('re_UR3stG12_PVARCnBSKq6MyvMB3JH9Lzaz');
-
-
-          setIsGrantLoading(false)
     } catch (error) {
       console.log(error)
       setIsGrantLoading(false)
@@ -122,7 +123,6 @@ const page = ({ params }: { params: { publicid: string } }) => {
   },[])
 
   const handleRevokeAccess = async(publicid:string,userAddress:string,index:number) => {
-    console.log("hi")
     try {
       setIsRevokeLoading(true)
       await revokeAccess({publicid,userAddress})
@@ -134,7 +134,7 @@ const page = ({ params }: { params: { publicid: string } }) => {
       setIsRevokeLoading(false)
     }
   }
-  // console.log(ogFile)
+  // console.log(isGrantLoading)
   
 
   return isLoading ? (
@@ -154,7 +154,7 @@ const page = ({ params }: { params: { publicid: string } }) => {
           </Button>
         </DrawerTrigger>
         <DrawerContent className='grid w-full justify-items-center'>
-          <DrawerClose className='mt-4 w-fit'>
+          <DrawerClose className='mt-4 w-fit' asChild>
             <Button size='sm' variant="outline">Cancel</Button>
           </DrawerClose>
           <DrawerHeader>
@@ -173,9 +173,9 @@ const page = ({ params }: { params: { publicid: string } }) => {
                 <p className='text-gray-500'>Enabling this does not allow file download.</p>
               </label>
             </div>
-            <Button type='submit' className='w-full'>
+            <Button type='submit' className='w-full' disabled={isGrantLoading}>
               {
-                isGrantLoading && <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-rotate-cw animate-spin"><path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/></svg>
+                isGrantLoading && <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-rotate-cw animate-spin mr-2"><path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/></svg>
               }
               Submit
             </Button>
@@ -187,7 +187,20 @@ const page = ({ params }: { params: { publicid: string } }) => {
       
     {
       accessList.length===0 ? (
-        <h1 className='text-[14px]'>Only you have access to this file.</h1>
+        <div className="grid min-h-[40vh] justify-items-center content-center">
+          <Image
+            src={accessPlaceholder}
+            alt="No users found"
+            className="w-[300px] mb-5"
+          />
+          { // If search result is empty
+            searchQuery==="" ? (
+              <h1 className="font-medium text-[20px]">You have not granted access to anyone</h1>
+            ) : (
+              <h1 className="font-medium text-[20px]">User not found</h1>
+            )
+          }
+        </div>
       ) : (
         <div className="overflow-x-scroll w-full">
           <table className='text-sm border-2 border-input rounded-md block min-w-[700px]'>

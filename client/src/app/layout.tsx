@@ -25,9 +25,9 @@ export default function RootLayout({
             <Providers>
               <link rel="icon" href="/logo.svg" sizes="any" />
               <ToastContainer
-                position="bottom-center"
+                position="bottom-right"
                 autoClose={4000}
-                hideProgressBar={false}
+                hideProgressBar={true}
                 newestOnTop={false}
                 closeOnClick
                 rtl={false}
@@ -35,6 +35,8 @@ export default function RootLayout({
                 draggable
                 pauseOnHover
                 theme="dark"
+                progressClassName="toastProgress"
+                bodyClassName="toastBody"
               />
               <DashboardNav>
                 {children}

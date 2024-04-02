@@ -1,5 +1,10 @@
 {"abi":[
 	{
+		"inputs": [],
+		"stateMutability": "nonpayable",
+		"type": "constructor"
+	},
+	{
 		"inputs": [
 			{
 				"internalType": "string",
@@ -52,9 +57,9 @@
 				"type": "bool"
 			},
 			{
-				"internalType": "bool",
-				"name": "_copy",
-				"type": "bool"
+				"internalType": "string",
+				"name": "_copyOf",
+				"type": "string"
 			}
 		],
 		"name": "addFile",
@@ -63,26 +68,16 @@
 		"type": "function"
 	},
 	{
-		"inputs": [
+		"inputs": [],
+		"name": "contractOwner",
+		"outputs": [
 			{
-				"internalType": "string",
-				"name": "_name",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "_email",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "_phone",
-				"type": "string"
+				"internalType": "address",
+				"name": "",
+				"type": "address"
 			}
 		],
-		"name": "addUser",
-		"outputs": [],
-		"stateMutability": "nonpayable",
+		"stateMutability": "view",
 		"type": "function"
 	},
 	{
@@ -142,11 +137,6 @@
 				"internalType": "address",
 				"name": "_revokeUserAddress",
 				"type": "address"
-			},
-			{
-				"internalType": "string",
-				"name": "_ogpublicid",
-				"type": "string"
 			}
 		],
 		"name": "revokeAccess",
@@ -156,114 +146,11 @@
 	},
 	{
 		"inputs": [],
-		"stateMutability": "nonpayable",
-		"type": "constructor"
-	},
-	{
-		"inputs": [],
-		"name": "contractOwner",
-		"outputs": [
-			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "userAddress",
-				"type": "address"
-			}
-		],
-		"name": "getUser",
-		"outputs": [
-			{
-				"components": [
-					{
-						"internalType": "address",
-						"name": "userAddress",
-						"type": "address"
-					},
-					{
-						"internalType": "string",
-						"name": "name",
-						"type": "string"
-					},
-					{
-						"internalType": "string",
-						"name": "email",
-						"type": "string"
-					},
-					{
-						"internalType": "string",
-						"name": "phone",
-						"type": "string"
-					},
-					{
-						"internalType": "uint256",
-						"name": "createdAt",
-						"type": "uint256"
-					}
-				],
-				"internalType": "struct filetransfer.User",
-				"name": "",
-				"type": "tuple"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
 		"name": "usercount",
 		"outputs": [
 			{
 				"internalType": "uint256",
 				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"name": "usersList",
-		"outputs": [
-			{
-				"internalType": "address",
-				"name": "userAddress",
-				"type": "address"
-			},
-			{
-				"internalType": "string",
-				"name": "name",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "email",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "phone",
-				"type": "string"
-			},
-			{
-				"internalType": "uint256",
-				"name": "createdAt",
 				"type": "uint256"
 			}
 		],
@@ -384,9 +271,9 @@
 						"type": "bool"
 					},
 					{
-						"internalType": "bool",
-						"name": "copy",
-						"type": "bool"
+						"internalType": "string",
+						"name": "copyOf",
+						"type": "string"
 					}
 				],
 				"internalType": "struct filetransfer.PrivateFile",
@@ -465,9 +352,9 @@
 						"type": "bool"
 					},
 					{
-						"internalType": "bool",
-						"name": "copy",
-						"type": "bool"
+						"internalType": "string",
+						"name": "copyOf",
+						"type": "string"
 					}
 				],
 				"internalType": "struct filetransfer.PrivateFile",
@@ -540,9 +427,9 @@
 						"type": "bool"
 					},
 					{
-						"internalType": "bool",
-						"name": "copy",
-						"type": "bool"
+						"internalType": "string",
+						"name": "copyOf",
+						"type": "string"
 					}
 				],
 				"internalType": "struct filetransfer.PrivateFile[]",
@@ -615,9 +502,9 @@
 						"type": "bool"
 					},
 					{
-						"internalType": "bool",
-						"name": "copy",
-						"type": "bool"
+						"internalType": "string",
+						"name": "copyOf",
+						"type": "string"
 					}
 				],
 				"internalType": "struct filetransfer.PrivateFile[]",

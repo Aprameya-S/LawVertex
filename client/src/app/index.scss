@@ -54,6 +54,13 @@ $bg-color: #ffffff;
   }
 }
 
+.toastProgress {
+  background: #1767fb !important;
+}
+.Toastify__toast {
+  background-color: transparent;
+  @apply shadow-md border border-input bg-[#0e0e10] dark:bg-white text-white dark:text-black
+}
 
 
 .gradient-button {
