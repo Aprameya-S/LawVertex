@@ -35,7 +35,7 @@ const page = () => {
     loadFiles()
   },[searchQuery])
 
-  console.log(files)
+  // console.log(files)
 
   
   return isLoading ? (

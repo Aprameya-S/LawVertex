@@ -42,7 +42,7 @@ export const createEthereumContract = () => {
   const provider = new ethers.providers.Web3Provider(window.ethereum);
 
   const signer = provider.getSigner();
-  const fileTransferContract = new ethers.Contract("0x68ED2854aBAA52E7c6928D24fD1E0bd7A632e530", abi.abi, signer);
+  const fileTransferContract = new ethers.Contract("0x3CB604EA814292899Be8c215467B06568cD269a3", abi.abi, signer);
 
   return fileTransferContract;
 };
@@ -52,7 +52,7 @@ export const viewOwnedFiles = async() => {
     // await connectWallet()
     const fileTransferContract = createEthereumContract()
     var data = await fileTransferContract.viewOwnedFiles()
-    console.log(data)
+    // console.log(data)
     data = data.filter((item:any) => item['copyOf']==="")
     return data
   } catch (error) {

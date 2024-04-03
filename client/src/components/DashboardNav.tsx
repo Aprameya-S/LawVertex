@@ -14,15 +14,15 @@ const DashboardNav = (
   const headerLinks = [
     {
       title:"Case Details",
-      href:"CaseDetails" 
+      href:"/CaseDetails" 
     },
     {
       title:"Vault",
-      href:"Vault" 
+      href:"/Vault" 
     },
     {
       title:"Search Advocate",
-      href:"SearchAdvocate" 
+      href:"/SearchAdvocate" 
     },
   ]
   return (
@@ -68,7 +68,7 @@ const DashboardNav = (
                     {
                       headerLinks.map((item,index) => (
                         <Link href={`/${item.href}`} key={index} className='font-semibold text-[14px]'>
-                          <Button variant='ghost' className='px-2 py-1 h-fit'>
+                          <Button variant='ghost' className='px-2 py-1 h-fit font-semibold'>
                             {item.title}
                           </Button>
                         </Link>
