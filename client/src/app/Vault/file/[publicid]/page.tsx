@@ -131,4 +131,4 @@ const page = ({ params }: { params: { publicid: string } }) => {
   )
 }
 
-export default page
+export default Page
