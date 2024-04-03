@@ -3,11 +3,12 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import DashboardNav from "@/components/DashboardNav";
 import "./index.scss"
-const inter = Inter({ subsets: ["latin"] });
-import Providers from "./Providers"; 
+const inter = Inter({ subsets: ["latin"] }); 
 import { Toaster } from "@/components/ui/toaster";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import Providers from "@/components/Providers";
+
 
 export const metadata: Metadata = {
   title: "LawVertex",
