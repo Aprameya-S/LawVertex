@@ -14,15 +14,15 @@ const DashboardNav = (
   const headerLinks = [
     {
       title:"Case Details",
-      href:"/CaseDetails" 
+      href:"CaseDetails" 
     },
     {
       title:"Vault",
-      href:"/Vault" 
+      href:"Vault" 
     },
     {
       title:"Search Advocate",
-      href:"/SearchAdvocate" 
+      href:"SearchAdvocate" 
     },
   ]
   return (
