@@ -2,8 +2,8 @@
 import React from 'react'
 import { ThemeProvider } from "next-themes"
 import { ThirdwebProvider } from "@thirdweb-dev/react";
-import { Sepolia } from "@thirdweb-dev/chains"
-
+import { Localhost } from "@thirdweb-dev/chains"
+// import {}
 
 const Providers = ({
   children,
@@ -13,7 +13,7 @@ const Providers = ({
   return (
     <ThirdwebProvider
       clientId={'b75d97dda9827edd7e665521bd610b09'}
-      activeChain={Sepolia}
+      activeChain={Localhost}
     >
         <ThemeProvider
           attribute="class"

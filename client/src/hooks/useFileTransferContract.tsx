@@ -37,14 +37,12 @@ export const connectWallet = async () => {
   }
 };
 
-
-
 export const createEthereumContract = () => {
   // const provider = new ethers.providers.JsonRpcProvider('https://eth-sepolia.g.alchemy.com/v2/-OHVSCL0DxGaycEqcJqlTHyH1mPk4QTP');
   const provider = new ethers.providers.Web3Provider(window.ethereum);
 
   const signer = provider.getSigner();
-  const fileTransferContract = new ethers.Contract("0xaF7154cA73b84294ffBD8FE6cF04843BDD2DA98E", abi.abi, signer);
+  const fileTransferContract = new ethers.Contract("0x68ED2854aBAA52E7c6928D24fD1E0bd7A632e530", abi.abi, signer);
 
   return fileTransferContract;
 };
