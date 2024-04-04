@@ -4,7 +4,7 @@ import {toast} from  'react-toastify';
 import { useState, useLayoutEffect } from "react";
 import Loader from "./Loader";
 import ConnectWalletBtn from "./ConnectWalletBtn";
-
+import { useRouter } from "next/navigation";
 
 const FileTransferConnect = ({
   children,
@@ -13,7 +13,10 @@ const FileTransferConnect = ({
 }>) => {
   const [isWalletConnected, setIsWalletConnected] = useState(false)
   const [address, setAddress] = useState("")
+  const [addressExists, setAddressExists] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
+
+  const { push } = useRouter();
 
   const connect = async() => {
     setIsLoading(true)
@@ -24,18 +27,36 @@ const FileTransferConnect = ({
       const provider = new ethers.providers.Web3Provider(window.ethereum, "any");
       // let request = await provider.send("eth_requestAccounts", []);
       const accounts = await ethereum.request({method: 'eth_accounts'})
-      .then((res:any) => {
+      .then(async(res:any) => {
         if(res)
           setAddress(res[0])
+
+        const response = await fetch('/api/vault/addressExists', {
+          method: 'POST',
+          headers: {
+            'content-type': 'application/json'
+          },
+          body: JSON.stringify({
+            address:res[0]
+          })
+        })
+        const data = await response.json()
+        .then((result) => {
+          console.log(result)
+          setAddressExists(result.addressExists)
+          if(!result.addressExists)
+            push(`/Signup/vault/${res[0]}`)
+        })
       })
-      
-      ethereum.on('accountsChanged', function (accounts:any) {
-          setAddress(accounts[0])
-          // console.log(account); // Print new address
-      });
-
-      setIsLoading(false)
-
+      .then(() => {
+        ethereum.on('accountsChanged', function (accounts:any) {
+            setAddress(accounts[0])
+            window.location.reload()
+            // console.log(account); // Print new address
+        });
+  
+        setIsLoading(false)
+      })
       // window.location.reload();
     } catch (error:any) {
       if(error.code === 4100){
@@ -58,10 +79,23 @@ const FileTransferConnect = ({
     connect()
   },[])
 
-  console.log(address)
+
+
+  // console.log(address)
   return (address) ? (
+    
     <>
-      {children}
+      {
+        addressExists ? (
+          <>
+            {children}
+          </>
+        ) : (
+          <div className="w-full h-[70vh] grid content-center justify-items-center transition-all">
+            <Loader />
+          </div>
+        )
+      }
     </>
   ) : (
     <>
@@ -69,7 +103,7 @@ const FileTransferConnect = ({
         {
           isLoading ? <Loader /> : (
             <>
-            <p className="transition-all mt-7 mb-2">Please connect your wallet to acces your vault</p>
+            <p className="transition-all mt-7 mb-2">Please connect your wallet to access your vault</p>
 
             <div className="scale-75 transition-all">
               <ConnectWalletBtn />

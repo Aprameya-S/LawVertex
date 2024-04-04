@@ -86,7 +86,7 @@ const page = ({ params }: { params: { publicid: string } }) => {
                 await grantAccess({...form,['ogpublicid']:params.publicid,['publicid']:newpublicid,['cid']:uri[0]})
                 setIsGrantLoading(false)
             }
-            const response = await fetch('/api/newFilePassword', {
+            const response = await fetch('/api/fileTransfer/newFilePasswordMail', {
               method: 'POST',
               headers: {
                 'content-type': 'application/json'
