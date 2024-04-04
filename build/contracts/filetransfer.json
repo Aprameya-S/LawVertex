@@ -25395,12 +25395,12 @@
     "5777": {
       "events": {},
       "links": {},
-      "address": "0x3CB604EA814292899Be8c215467B06568cD269a3",
-      "transactionHash": "0x46a66ba525b5aad0157d8e2f05f362aa199baf208a6398ab5d3f6fca0c326d35"
+      "address": "0x8e1ba81a4e1828cA895ec3F3d9c7f5e40EF8b3C9",
+      "transactionHash": "0x57143cb2cdc5fd270dfc85c7095092ccaf02fbc1437f000125f95d03ea472bb9"
     }
   },
   "schemaVersion": "3.4.16",
-  "updatedAt": "2024-04-03T13:57:33.133Z",
+  "updatedAt": "2024-04-04T02:19:45.985Z",
   "networkType": "ethereum",
   "devdoc": {
     "custom:dev-run-script": "./scripts/deploy_with_ethers.ts",

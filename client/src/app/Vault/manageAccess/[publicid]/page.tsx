@@ -86,6 +86,22 @@ const page = ({ params }: { params: { publicid: string } }) => {
                 await grantAccess({...form,['ogpublicid']:params.publicid,['publicid']:newpublicid,['cid']:uri[0]})
                 setIsGrantLoading(false)
             }
+            const response = await fetch('/api/newFilePassword', {
+              method: 'POST',
+              headers: {
+                'content-type': 'application/json'
+              },
+              body: JSON.stringify({
+                fileName: ogFile.name,
+                senderName: "Name",
+                senderWalletAddress: ogFile.owner,
+                receiverWalletAddress: form.receivingUserAddress,
+                password: "password12",
+                publicid:newpublicid,
+                mailTo:"aprameya083@gmail.com"
+              })
+            })
+            console.log(await response.json())
           })
 
     } catch (error) {
@@ -116,6 +132,7 @@ const page = ({ params }: { params: { publicid: string } }) => {
     })
     setAccessList(accessData)
     setIsLoading(false)
+    
   } 
 
   useEffect(() => {

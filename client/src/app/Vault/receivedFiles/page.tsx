@@ -6,7 +6,6 @@ import receivedFilesPlaceholder from '../../../../public/images/receivedFilesPla
 import Image from "next/image"
 import FileUploadButton from "@/components/FileUploadButton"
 import Loader from "@/components/Loader"
-import { connectWallet } from '@/hooks/useFileTransferContract'
 import ReceivedFileCard from "@/components/ReceivedFileCard"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
@@ -29,9 +28,6 @@ const page = () => {
     setIsLoading(false)
   }
 
-    useEffect(() => {
-      connectWallet()
-    })
 
   useLayoutEffect(() => {
     loadFiles()

@@ -7,8 +7,6 @@ import ownedFilesPlaceholder from '../../../public/images/ownedFilesPlaceholder.
 import Image from "next/image"
 import FileUploadButton from "@/components/FileUploadButton"
 import Loader from "@/components/Loader"
-import { connectWallet } from '@/hooks/useFileTransferContract'
-
 
 
 const page = () => {
@@ -27,16 +25,9 @@ const page = () => {
     setIsLoading(false)
   }
 
-    useEffect(() => {
-      connectWallet()
-    })
-
   useLayoutEffect(() => {
     loadFiles()
   },[searchQuery])
-
-  // console.log(files)
-
   
   return isLoading ? (
     <>
