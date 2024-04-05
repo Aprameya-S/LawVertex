@@ -17,6 +17,14 @@ $bg-color: #ffffff;
   display: none;
 }
 
+.border-b[data-state="closed"] {
+  @apply border-input border-b-2
+}
+
+.border-b[data-state="open"] {
+  @apply border-blue-600 border-b-2
+}
+
 @keyframes jump {  
   25% {
     transform: translateY(0);

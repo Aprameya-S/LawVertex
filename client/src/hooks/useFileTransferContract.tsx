@@ -124,6 +124,26 @@ export const viewAccessList = async(publicid:string) => {
   }
 }
 
+
+export const getAllFilesAccessList = async() => {
+  try {
+    // await connectWallet()
+    const fileTransferContract = createEthereumContract()
+    var data = await fileTransferContract.viewOwnedFiles()
+    data = data.filter((item:any) => item['copyOf']==="")
+    var newdata:any = []
+    data.forEach(async(file:any) => {
+      var accessList = await viewAccessList(file.publicid)
+      newdata.push({...file,['accesslist'] : accessList})
+    });
+    // console.log(newdata)
+    
+    return newdata
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 export const viewRecievedFiles = async() => {
   try {
     // await connectWallet()

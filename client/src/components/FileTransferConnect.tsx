@@ -25,10 +25,14 @@ const FileTransferConnect = ({
       if (!ethereum) return toast("Please install MetaMask.");
 
       const provider = new ethers.providers.Web3Provider(window.ethereum, "any");
+      //uncomment below line to propmt metamask connection automatically
       // let request = await provider.send("eth_requestAccounts", []);
       const accounts = await ethereum.request({method: 'eth_accounts'})
       .then(async(res:any) => {
-        if(res)
+        // console.log(res)
+        if(!res || res.length===0){
+          return
+        }
           setAddress(res[0])
 
         const response = await fetch('/api/vault/addressExists', {
@@ -42,7 +46,7 @@ const FileTransferConnect = ({
         })
         const data = await response.json()
         .then((result) => {
-          console.log(result)
+          // console.log(result)
           setAddressExists(result.addressExists)
           if(!result.addressExists)
             push(`/Signup/vault/${res[0]}`)
@@ -71,7 +75,7 @@ const FileTransferConnect = ({
       else {
         toast(error.message);
       }
-      throw(error)
+      console.log(error)
     }
   }
 
