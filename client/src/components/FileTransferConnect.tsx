@@ -11,7 +11,6 @@ const FileTransferConnect = ({
 }: Readonly<{
   children: React.ReactNode;
 }>) => {
-  const [isWalletConnected, setIsWalletConnected] = useState(false)
   const [address, setAddress] = useState("")
   const [addressExists, setAddressExists] = useState(false)
   const [isLoading, setIsLoading] = useState(true)

@@ -4,8 +4,6 @@ import {
   Drawer,
   DrawerClose,
   DrawerContent,
-  DrawerDescription,
-  DrawerFooter,
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
@@ -20,7 +18,6 @@ import { decryptfile } from '@/lib/decryptFile'
 import { encryptfile } from '@/lib/encryptFile'
 import { useStorageUpload } from '@thirdweb-dev/react';
 import { generateId } from '@/lib/utils'
-import { Resend } from 'resend';
 import FileInfo from '@/components/FileInfo'
 import Image from 'next/image'
 import accessPlaceholder from '../../../../../public/images/accessPlaceholder.png'
@@ -46,7 +43,6 @@ const page = ({ params }: { params: { publicid: string } }) => {
   const [ogFile, setOgFile] = useState<any>({})
   const [isLoading, setIsLoading] = useState(true)
   const [isGrantLoading, setIsGrantLoading] = useState(false)
-  const [isRevokeLoading, setIsRevokeLoading] = useState(false)
   const [accessList, setAccessList] = useState<any>([])
   const [searchQuery, setSearchQuery] = useState<string>("")
   const [allUsers, setAllUsers] = useState([])

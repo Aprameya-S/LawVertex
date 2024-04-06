@@ -23,8 +23,8 @@ const layout = ({
       href:"/Vault/manageAccess"
     },
     {
-      title:"Access Requests",
-      href:"/Vault/accessReq"
+      title:"Request Files",
+      href:"/Vault/requestFiles"
     }
   ]
   let path = usePathname()
