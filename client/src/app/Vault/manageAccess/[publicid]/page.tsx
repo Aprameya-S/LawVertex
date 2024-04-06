@@ -87,6 +87,10 @@ const page = ({ params }: { params: { publicid: string } }) => {
                 await grantAccess({...form,['ogpublicid']:params.publicid,['publicid']:newpublicid,['cid']:uri[0]})
                 setIsGrantLoading(false)
             }
+
+            var owner= allUsers.filter((i:any) => i.address.toLowerCase()==ogFile.owner.toLowerCase())[0]
+            var rec= allUsers.filter((i:any) => i.address.toLowerCase()==form.receivingUserAddress.toLowerCase())[0]
+
             const response = await fetch('/api/vault/newFilePasswordMail', {
               method: 'POST',
               headers: {
@@ -94,12 +98,12 @@ const page = ({ params }: { params: { publicid: string } }) => {
               },
               body: JSON.stringify({
                 fileName: ogFile.name,
-                senderName: allUsers.filter((i:any) => i.address.toLowerCase()==ogFile.owner.toLowerCase())[0] ? allUsers.filter((i:any) => i.address.toLowerCase()==ogFile.owner.toLowerCase())[0]['name'] : 'Unknown user',
+                senderName:owner['name'],
                 senderWalletAddress: ogFile.owner,
                 receiverWalletAddress: form.receivingUserAddress,
                 password: "password12",
                 publicid: newpublicid,
-                mailTo:"aprameya083@gmail.com"
+                mailTo:rec['email']
               })
             })
             console.log(await response.json())

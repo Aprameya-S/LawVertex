@@ -10,6 +10,8 @@ import {
 } from "@/components/ui/accordion"
 import AccessListTable from '@/components/AccessListTable'
 import { Badge } from '@/components/ui/badge'
+import Link from 'next/link'
+import { Button } from '@/components/ui/button'
 
 const page = () => {
   const [searchQuery, setSearchQuery] = useState<string>("")
@@ -55,9 +57,10 @@ const page = () => {
     <div>
       <Input type="text" placeholder="Search file" onChange={(e)=>setSearchQuery(e.target.value)}/>
       <div className="">
+        
         {
-          files.map((file:any) => (
-            <Accordion type="single" collapsible>
+          files.map((file:any,index:number) => (
+            <Accordion type="single" collapsible key={index}>
               <AccordionItem value="item-1">
                 <AccordionTrigger className='hover:no-underline px-2'>
                   <div className="flex gap-4">
@@ -69,6 +72,9 @@ const page = () => {
                   </div>
                 </AccordionTrigger>
                 <AccordionContent className='px-2'>
+                  <Link href={`/Vault/manageAccess/${file.publicid}`}>
+                    <Button className='mb-2'>View more</Button>
+                  </Link>
                   <AccessListTable publicid={file.publicid} users={allUsers}/>
                 </AccordionContent>
               </AccordionItem>
