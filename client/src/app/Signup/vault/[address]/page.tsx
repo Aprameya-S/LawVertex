@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button'
 import { useRouter } from 'next/navigation'
 import { toast } from 'react-toastify'
 
-const page = ({ params }: { params: { address: string } }) => {
+const Page = ({ params }: { params: { address: string } }) => {
   const [isLoading, setIsLoading] = useState(false)
   const [form, setForm] = useState({name:"",email:""})
 
@@ -90,4 +90,4 @@ const page = ({ params }: { params: { address: string } }) => {
   )
 }
 
-export default page
+export default Page

@@ -2,7 +2,7 @@
 import Hero from "@/components/Hero/Hero";
 import Image from "next/image";
 
-export default function page() {
+export default function Page() {
   return (
 
         <main className="">

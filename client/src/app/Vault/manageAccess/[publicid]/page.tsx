@@ -34,7 +34,7 @@ function readFile(input:any){
 }
 
 
-const page = ({ params }: { params: { publicid: string } }) => {
+const Page = ({ params }: { params: { publicid: string } }) => {
   const [form, setForm] = useState({
     receivingUserAddress:'',
     viewOnly:false
@@ -230,4 +230,4 @@ const page = ({ params }: { params: { publicid: string } }) => {
   )
 }
 
-export default page
+export default Page

@@ -13,7 +13,7 @@ import { Badge } from '@/components/ui/badge'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 
-const page = () => {
+const Page = () => {
   const [searchQuery, setSearchQuery] = useState<string>("")
   const [isLoading, setIsLoading] = useState(true)
   const [listView, setListView] = useState<any|undefined>(undefined)
@@ -86,4 +86,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page

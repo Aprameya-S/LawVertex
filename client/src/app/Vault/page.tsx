@@ -9,7 +9,7 @@ import FileUploadButton from "@/components/FileUploadButton"
 import Loader from "@/components/Loader"
 
 
-const page = () => {
+const Page = () => {
   const [searchQuery, setSearchQuery] = useState<string>("")
   const [isLoading, setIsLoading] = useState(true)
   const [listView, setListView] = useState<any|undefined>(undefined)
@@ -73,4 +73,4 @@ const page = () => {
 }
 
 
-export default page
+export default Page
