@@ -68,7 +68,7 @@ const page = () => {
         </div>
         ) : (
           <>
-          <div className="grid grid-cols-3 gap-3 mt-8">
+          <div className="grid xl:grid-cols-3 sm:grid-cols-2 gap-3 mt-8">
             {
               files?.map((file:any, index:number) => (
                 <ReceivedFileCard

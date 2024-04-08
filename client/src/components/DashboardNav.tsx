@@ -3,6 +3,8 @@ import Link from "next/link";
 import DarkModeSwitcher from './DarkModeSwitch';
 import { Button } from './ui/button';
 import ConnectWalletButton from '../components/ConnectWalletBtn'
+import { HeaderLinks } from '@/lib/links';
+import HamburgerMenu from './HamburgerMenu';
 
 const DashboardNav = (
   {
@@ -11,27 +13,14 @@ const DashboardNav = (
     children: React.ReactNode;
   }
 ) => {
-  const headerLinks = [
-    {
-      title:"Case Details",
-      href:"CaseDetails" 
-    },
-    {
-      title:"Vault",
-      href:"Vault" 
-    },
-    {
-      title:"Search Advocate",
-      href:"SearchAdvocate" 
-    },
-  ]
+  
   return (
     <div className="layout-wrapper">
-            <nav className="navbar bg-white/40 dark:bg-[#0e0e10]/60 fixed top-0 min-w-full border-[#131417] dark:border-zinc-800 border-b transition-all py-2 backdrop-blur z-50">
-              <div className="flex justify-between align-middle px-6">
+            <nav className="navbar bg-white/40 dark:bg-[#0e0e10]/60 fixed top-0 min-w-full border-[#131417] dark:border-zinc-800 border-b transition-all py-1 sm:py-2 backdrop-blur z-50">
+              <div className="flex justify-between align-middle px-[22px] lg:px-[60px] static">
                 <div className="flex items-center gap-4">
-                  <Link href='/' className=" text-black dark:text-white text-[18px] font-bold flex items-center gap-1 ml-2">
-                  <svg className='mr-[-0px] scale-[0.8]' width="34" height="32" viewBox="0 0 34 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <Link href='/' className=" text-black dark:text-white text-[18px] font-bold flex items-center gap-1">
+                  <svg className='mr-[-0px] sm:scale-[0.8] scale-[0.7]' width="34" height="32" viewBox="0 0 34 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M33.1353 16.0683L17.5753 31.6544C17.4658 31.7642 17.3357 31.8512 17.1926 31.9106C17.0495 31.97 16.8961 32.0006 16.7412 32.0006C16.5863 32.0006 16.433 31.97 16.2899 31.9106C16.1467 31.8512 16.0167 31.7642 15.9072 31.6544L0.347156 16.0683C0.182406 15.903 0.0702326 15.6925 0.0248053 15.4634C-0.0206219 15.2343 0.0027372 14.9968 0.0919264 14.781C0.181116 14.5651 0.332137 14.3806 0.525917 14.2507C0.719697 14.1208 0.94754 14.0514 1.18067 14.0512H32.3007C32.534 14.0512 32.762 14.1205 32.9559 14.2503C33.1498 14.3801 33.301 14.5646 33.3903 14.7805C33.4797 14.9963 33.5031 15.2339 33.4577 15.4631C33.4123 15.6923 33.3001 15.9029 33.1353 16.0683Z" fill="#0846A1"/>
                     <path d="M33.1354 9.04109L17.5753 24.6315C17.3588 24.8501 17.0652 24.9746 16.7578 24.9782L10.9753 7.02188H32.3008C32.5342 7.02196 32.7624 7.09137 32.9565 7.22136C33.1505 7.35135 33.3018 7.53608 33.3911 7.75219C33.4804 7.96829 33.5038 8.20607 33.4583 8.43549C33.4128 8.6649 33.3004 8.87565 33.1354 9.04109Z" fill="url(#paint0_linear_30_191)"/>
                     <path d="M33.1354 9.04109L26.1894 16.0011L10.9753 7.02188H32.3008C32.5342 7.02196 32.7624 7.09137 32.9565 7.22136C33.1505 7.35135 33.3018 7.53608 33.3911 7.75219C33.4804 7.96829 33.5038 8.20607 33.4583 8.43549C33.4128 8.6649 33.3004 8.87565 33.1354 9.04109Z" fill="url(#paint1_linear_30_191)"/>
@@ -61,14 +50,14 @@ const DashboardNav = (
                     </linearGradient>
                     </defs>
                     </svg>
-                      lawvertex
+                    <span className='hidden sm:block'>lawvertex</span>
                   </Link>
 
-                  <div className="flex gap-4 items-center">
+                  <div className="hidden gap-4 items-center sm:flex">
                     {
-                      headerLinks.map((item,index) => (
+                      HeaderLinks.map((item,index) => (
                         <Link href={`/${item.href}`} key={index} className='font-semibold text-[14px]'>
-                          <Button variant='ghost' className='px-2 py-1 h-fit font-semibold'>
+                          <Button variant='ghost' className='px-2 py-1 h-fit font-medium mb-[-6px]'>
                             {item.title}
                           </Button>
                         </Link>
@@ -77,15 +66,22 @@ const DashboardNav = (
                   </div>
                 </div>
 
-                <div className="transition-all scale-75 flex items-center gap-3 justify-between mr-[-12px]">
-                  <DarkModeSwitcher/>
-                  <ConnectWalletButton />
+                <div className="transition-all  flex items-center justify-between mr-[-25px]">
+                  <div className="hidden sm:block scale-75">
+                    <DarkModeSwitcher/>
+                  </div>
+                  <div className="sm:hidden">
+                      <HamburgerMenu/>
+                  </div>
+                  <div className="scale-75 ml-[-16px] mr-2">
+                    <ConnectWalletButton />
+                  </div>
                 </div>
               </div>
               
             </nav>
             <div className="">
-              <main className='bg-white dark:bg-[#0e0e10] pt-[95px] px-[60px] pb-[150px] min-h-[100vh] '>
+              <main className='bg-white dark:bg-[#0e0e10] pt-[95px] px-6 lg:px-[60px] pb-[150px] min-h-[100vh] '>
                 { children }
               </main>
             </div>
