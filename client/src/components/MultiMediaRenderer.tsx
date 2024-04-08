@@ -1,7 +1,8 @@
 import React from 'react'
 import PdfRenderer from '@/components/PdfRenderer'
 import { MediaRenderer } from "@thirdweb-dev/react";
-
+import PreviewModal from "react-media-previewer";
+import { render } from "react-dom";
 
 interface dataType{
   fileUrl: string,

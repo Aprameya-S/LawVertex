@@ -12,7 +12,7 @@ import { Button } from "@/components/ui/button"
 
 
 
-const Page = () => {
+const page = () => {
   const [searchQuery, setSearchQuery] = useState<string>("")
   const [isLoading, setIsLoading] = useState(true)
   const [listView, setListView] = useState<any|undefined>(undefined)
@@ -89,4 +89,4 @@ const Page = () => {
 }
 
 
-export default Page
+export default page

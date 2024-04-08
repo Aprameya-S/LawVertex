@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button'
 import { toast } from 'react-toastify'
 
 
-const Page = () => {
+const page = () => {
   const [form, setForm] = useState({ownerAddress:"",fileName:""})
   const [isLoading, setIsLoading] = useState(false)
 
@@ -72,4 +72,4 @@ const Page = () => {
   )
 }
 
-export default Page
+export default page

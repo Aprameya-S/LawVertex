@@ -24,7 +24,7 @@ function readFile(input:any){
   })
 }
 
-const Page = ({ params }: { params: { publicid: string } }) => {
+const page = ({ params }: { params: { publicid: string } }) => {
   const [file, setFile] = useState<any>({})
   const [fileUrl, setFileUrl] = useState<any>("")
   const [isLoading, setIsLoading] = useState(true)
@@ -149,4 +149,4 @@ const Page = ({ params }: { params: { publicid: string } }) => {
   )
 }
 
-export default Page
+export default page
