@@ -16,8 +16,8 @@ const DashboardNav = (
   
   return (
     <div className="layout-wrapper">
-            <nav className="navbar bg-white/40 dark:bg-[#0e0e10]/60 fixed top-0 min-w-full border-[#131417] dark:border-zinc-800 border-b transition-all py-1 sm:py-2 backdrop-blur z-50">
-              <div className="flex justify-between align-middle px-[22px] lg:px-[60px] static">
+            <nav className="navbar bg-white/40 dark:bg-[#0e0e10]/60 fixed top-0 min-w-full border-[#131417] dark:border-zinc-800 border-b transition-all py-1 sm:py-2 backdrop-blur z-50 sm:h-[77.2px] flex items-center">
+              <div className="flex justify-between align-middle px-[22px] lg:px-[60px] static w-full">
                 <div className="flex items-center gap-4">
                   <Link href='/' className=" text-black dark:text-white text-[18px] font-bold flex items-center gap-1">
                   <svg className='mr-[-0px] sm:scale-[0.8] scale-[0.7]' width="34" height="32" viewBox="0 0 34 32" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -66,14 +66,14 @@ const DashboardNav = (
                   </div>
                 </div>
 
-                <div className="transition-all  flex items-center justify-between mr-[-25px]">
+                <div className="transition-all  grid grid-cols-[40px_135px] items-center justify-between mr-[5px] sm:mr-[6px]">
                   <div className="hidden sm:block scale-75">
                     <DarkModeSwitcher/>
                   </div>
                   <div className="sm:hidden">
                       <HamburgerMenu/>
                   </div>
-                  <div className="scale-75 ml-[-16px] mr-2">
+                  <div className="scale-75 ml-[-16px] mr-1">
                     <ConnectWalletButton />
                   </div>
                 </div>

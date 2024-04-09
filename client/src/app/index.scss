@@ -25,6 +25,10 @@ $bg-color: #ffffff;
   @apply border-blue-600 border-b-2
 }
 
+.tw-connect-wallet{
+  width: 180px !important;
+}
+
 @keyframes jump {  
   25% {
     transform: translateY(0);

@@ -23,6 +23,7 @@ const ConnectWalletBtn = () => {
         title:
           "Immutable Integrity, Infinite Access: Transforming Legal Records with Blockchain.",
       }}
+      className="w-[180px]"
     />
   )
 }

@@ -50,7 +50,7 @@ const page = () => {
           <h1 className="font-medium text-[20px]">No files found</h1>
           { // If search result is empty
             searchQuery==="" && <>
-              <h2 className="text-gray-500 text-[15px] mb-5"> Get started by dropping files or selecting from your computer </h2>
+              <h2 className="text-gray-500 text-[15px] mb-5 text-center"> Get started by dropping files or selecting from your computer </h2>
               <FileUploadButton />
             </>
           }
