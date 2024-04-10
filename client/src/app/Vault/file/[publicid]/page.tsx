@@ -95,7 +95,7 @@ const page = ({ params }: { params: { publicid: string } }) => {
     fetchData()
   },[])
 
-  console.log(fileUrl)
+  console.log(file)
 
   return isLoading ? (
     <Loader />

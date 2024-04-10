@@ -1,7 +1,6 @@
 import { ethers } from "ethers";
 import abi from '../lib/fileTransferContract.json'
 import {toast} from  'react-toastify';
-import { useState, useLayoutEffect } from "react";
 
 
 

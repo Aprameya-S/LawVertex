@@ -57,7 +57,7 @@ const FileInfo = ({file}:{file:PropsType}) => {
       
 
       <p className='font-medium text-[15px] mb-4 mt-1'>{file.desc}</p>
-      <p className='text-[13px] mb-2'>Sent by: {file.owner}</p>
+      <p className='text-[13px] mb-2'>Owner: {file.owner}</p>
       <div className="flex gap-2">
         <Badge variant='outline'>Created: {file.createAt}</Badge>
         <Badge variant='outline'>Size: {file.size}</Badge>

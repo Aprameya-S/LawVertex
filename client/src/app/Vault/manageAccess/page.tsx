@@ -12,6 +12,9 @@ import AccessListTable from '@/components/AccessListTable'
 import { Badge } from '@/components/ui/badge'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
+import Image from 'next/image'
+import FileUploadButton from '@/components/FileUploadButton'
+import ownedFilesPlaceholder from '../../../../public/images/ownedFilesPlaceholder.png'
 
 const page = () => {
   const [searchQuery, setSearchQuery] = useState<string>("")
@@ -56,8 +59,25 @@ const page = () => {
   return (
     <div>
       <Input type="text" placeholder="Search file" onChange={(e)=>setSearchQuery(e.target.value)}/>
+      { // If user owns no files
+        files.length===0 ? (
+        <div className="grid min-h-[60vh] justify-items-center content-center">
+          <Image
+            src={ownedFilesPlaceholder}
+            alt="No files found"
+            className="w-[300px] mb-5"
+            priority
+          />
+          <h1 className="font-medium text-[20px]">No files found</h1>
+          { // If search result is empty
+            searchQuery==="" && <>
+              <h2 className="text-gray-500 text-[15px] mb-5 text-center"> Get started by dropping files or selecting from your computer </h2>
+              <FileUploadButton />
+            </>
+          }
+        </div>
+        ) : (
       <div className="">
-        
         {
           files.map((file:any,index:number) => (
             <Accordion type="single" collapsible key={index}>
@@ -82,6 +102,8 @@ const page = () => {
           ))
         }
       </div>
+      )
+    }
     </div>
   )
 }
