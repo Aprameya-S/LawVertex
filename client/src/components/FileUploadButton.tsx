@@ -140,7 +140,7 @@ const FileUploadButton = () => {
           <form onSubmit={handleSubmit} className="grid w-full justify-center gap-1.5  overflow-y-auto">
             <div className="" {...getRootProps()}>
               {/* <Label htmlFor="file">Files</Label> */}
-              <Input {...getInputProps()} id="file" type="file" name="file" required novalidate/>
+              <Input {...getInputProps()} id="file" type="file" name="file"/>
               {
                 isDragActive ? 
                 <div className='grid justify-items-center text-center border border-dashed border-gray-500 p-[30px] rounded-[20px] w-fit'>

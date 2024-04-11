@@ -16,7 +16,7 @@ import Image from 'next/image'
 import FileUploadButton from '@/components/FileUploadButton'
 import ownedFilesPlaceholder from '../../../../public/images/ownedFilesPlaceholder.png'
 
-const page = () => {
+const Page = () => {
   const [searchQuery, setSearchQuery] = useState<string>("")
   const [isLoading, setIsLoading] = useState(true)
   const [listView, setListView] = useState<any|undefined>(undefined)
@@ -108,4 +108,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page
