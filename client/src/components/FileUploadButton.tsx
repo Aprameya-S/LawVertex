@@ -120,7 +120,7 @@ const FileUploadButton = () => {
     <>
     <Drawer>
       <DrawerTrigger asChild>
-        <Button className='mb-5' >
+        <Button className='mb-5' type="button">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-upload mr-2">
           <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" x2="12" y1="3" y2="15"/>
         </svg>
@@ -140,7 +140,7 @@ const FileUploadButton = () => {
           <form onSubmit={handleSubmit} className="grid w-full justify-center gap-1.5  overflow-y-auto">
             <div className="" {...getRootProps()}>
               {/* <Label htmlFor="file">Files</Label> */}
-              <Input {...getInputProps()} id="file" type="file" required/>
+              <Input {...getInputProps()} id="file" type="file" name="file" required novalidate/>
               {
                 isDragActive ? 
                 <div className='grid justify-items-center text-center border border-dashed border-gray-500 p-[30px] rounded-[20px] w-fit'>
@@ -161,7 +161,7 @@ const FileUploadButton = () => {
                     acceptedFiles.length===0?(
                       <>
                         <h1 className='text-sm mb-3'>Drag and drop your file<br/>OR<br/></h1>
-                        <Button>Select file</Button>
+                        <Button type="button">Select file</Button>
                       </>
                     ) : (
                       <>
