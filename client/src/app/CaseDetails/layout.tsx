@@ -1,7 +1,7 @@
 import React from 'react'
 import Link from "next/link";
 
-const layout = ({
+const Layout = ({
   children,
 }: Readonly<{
   children: React.ReactNode;
@@ -25,4 +25,4 @@ const layout = ({
   )
 }
 
-export default layout
+export default Layout

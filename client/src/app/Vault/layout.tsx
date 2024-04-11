@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import FileTransferConnect from "@/components/FileTransferConnect";
 import { VaultLinks } from "@/lib/links"
 
-const layout = ({
+const Layout = ({
   children,
 }: Readonly<{
   children: React.ReactNode;
@@ -40,4 +40,4 @@ const layout = ({
   )
 }
 
-export default layout
+export default Layout
