@@ -12,7 +12,7 @@ const Providers = ({
 }>) => {
   return (
     <ThirdwebProvider
-      clientId={'b75d97dda9827edd7e665521bd610b09'}
+      clientId={process.env.NEXT_PUBLIC_THIRDWEB_CLIENT_ID}
       activeChain={Localhost}
     >
         <ThemeProvider
