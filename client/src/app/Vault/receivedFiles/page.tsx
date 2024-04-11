@@ -9,6 +9,7 @@ import Loader from "@/components/Loader"
 import ReceivedFileCard from "@/components/ReceivedFileCard"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
+import useLocalStorage from "@/hooks/useLocalStorage"
 
 
 
@@ -28,6 +29,8 @@ const Page = () => {
     setIsLoading(false)
   }
 
+  const [recvFilesLayout,setRecvFileLayout] = useLocalStorage("layout","grid")
+
 
   useLayoutEffect(() => {
     loadFiles()
@@ -42,8 +45,16 @@ const Page = () => {
     </>
   ) : (
     <>
-          <div className="flex gap-4">
+          <div className="flex gap-3">
             <Input type="text" placeholder="Search" onChange={(e)=>setSearchQuery(e.target.value)}/>
+            <Button variant='ghost' size='icon' className="mr-2" onClick={(e) => setRecvFileLayout((prev:string) => prev=="grid"?"list":"grid")}>
+              {recvFilesLayout!=="grid" ? (
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-layout-grid"><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/></svg>
+              ) : (
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-layout-list"><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/><path d="M14 4h7"/><path d="M14 9h7"/><path d="M14 15h7"/><path d="M14 20h7"/></svg>
+              )
+              }
+            </Button>
           </div>
       { // If user owns no files
         files.length===0 ? (
@@ -68,12 +79,12 @@ const Page = () => {
         </div>
         ) : (
           <>
-          <div className="grid xl:grid-cols-3 sm:grid-cols-2 gap-3 mt-8">
+          <div className={`${recvFilesLayout==="grid"?'grid':'block'} sm:grid-cols-2 xl:grid-cols-3 gap-3 mt-8`}>
             {
               files?.map((file:any, index:number) => (
                 <ReceivedFileCard
                 key={index}
-                listView={listView}
+                filesLayout={recvFilesLayout}
                 file={file}
                 refreshData={loadFiles}
                 />

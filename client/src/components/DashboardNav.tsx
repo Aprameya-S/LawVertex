@@ -53,7 +53,7 @@ const DashboardNav = (
                     <span className='hidden sm:block'>lawvertex</span>
                   </Link>
 
-                  <div className="hidden gap-4 items-center sm:flex">
+                  <div className="hidden gap-4 items-center lg:flex">
                     {
                       HeaderLinks.map((item,index) => (
                         <Link href={`/${item.href}`} key={index} className='font-semibold text-[14px]'>
@@ -67,10 +67,10 @@ const DashboardNav = (
                 </div>
 
                 <div className="transition-all  grid grid-cols-[40px_135px] items-center justify-between mr-[5px] sm:mr-[6px]">
-                  <div className="hidden sm:block scale-75">
+                  <div className="hidden lg:block">
                     <DarkModeSwitcher/>
                   </div>
-                  <div className="sm:hidden">
+                  <div className="block lg:hidden">
                       <HamburgerMenu/>
                   </div>
                   <div className="scale-75 ml-[-16px] mr-1">
