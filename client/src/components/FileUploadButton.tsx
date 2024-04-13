@@ -25,8 +25,11 @@ import { Badge } from './ui/badge';
 import { convertBytes, generateId } from '@/lib/utils';
 import { encryptfile } from '@/lib/encryptFile';
 
+interface Props {
+  onlyIcon?: boolean
+}
 
-const FileUploadButton = () => {
+const FileUploadButton = (props:Props) => {
   const { toast } = useToast()
   const [file, setFile] = useState<File[]>([])
   const [isUploadLoading, setIsUploadLoading] = useState(false)
@@ -120,13 +123,24 @@ const FileUploadButton = () => {
     <>
     <Drawer>
       <DrawerTrigger asChild>
-        <Button className='mb-5' type="button">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-upload mr-2">
-          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" x2="12" y1="3" y2="15"/>
-        </svg>
+        {
+          props.onlyIcon ? (
+            <Button size={'icon'} className='fixed z-50 bottom-7 right-7 shadow-lg sm:hidden' type="button">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-plus"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+            </Button>
+          ) : (
+            <Button className={`mb-5`} type="button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-upload mr-2">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" x2="12" y1="3" y2="15"/>
+            </svg>
+                Upload File
+            </Button>
+          )
+        }
         
-          Upload File
-        </Button>
+
+        
+
       </DrawerTrigger>
       <DrawerContent>
         <DrawerHeader className='grid w-full justify-items-center'>

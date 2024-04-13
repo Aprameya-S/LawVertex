@@ -13,7 +13,7 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Checkbox } from '@/components/ui/checkbox'
 import Loader from '@/components/Loader'
-import { getOwnedFile, grantAccess, viewAccessList, revokeAccess } from '@/hooks/useFileTransferContract'
+import { getOwnedFile, grantAccess, viewAccessList } from '@/hooks/useFileTransferContract'
 import { decryptfile } from '@/lib/decryptFile'
 import { encryptfile } from '@/lib/encryptFile'
 import { useStorageUpload } from '@thirdweb-dev/react';
@@ -112,9 +112,6 @@ const Page = ({ params }: { params: { publicid: string } }) => {
   }
 
   const getData = async() => {
-    var accessData = await viewAccessList(params.publicid)
- 
-
     const data = await getOwnedFile(params.publicid as string)
     .then((res) => {
       setOgFile({
@@ -140,12 +137,32 @@ const Page = ({ params }: { params: { publicid: string } }) => {
         'content-type': 'application/json'
       }
     })
+
     const users = await response.json()
-    .then((result) => {
+    .then(async(result) => {
       setAllUsers(result)
+      var accessData = await viewAccessList(params.publicid)
+      .then((res) => {
+        // console.log(res)
+        let list:any = []
+
+        res.forEach((i:any) => {
+          let item = {
+            ogpublicid:i.ogpublicid,
+            publicid:i.publicid,
+            user:i.user,
+            username: result.filter((j:any) => j.address.toLowerCase()==i.user.toLowerCase())[0]['name'],
+            valid:i.valid,
+            viewOnly: i.viewOnly,
+          }
+          list.push(item)
+        })
+
+        setAccessList(list)
+      })
     })
 
-    setAccessList(accessData)
+    // setAccessList(accessData)
     setIsLoading(false)
     
   } 
@@ -153,9 +170,8 @@ const Page = ({ params }: { params: { publicid: string } }) => {
   useEffect(() => {
     getData()
   },[])
-
-  // console.log(isGrantLoading)
   
+
 
   return isLoading ? (
     <Loader />
@@ -164,7 +180,10 @@ const Page = ({ params }: { params: { publicid: string } }) => {
     <FileInfo file={ogFile}/>
 
     <div className="flex gap-4 my-4">
-      <Input type="text" placeholder="Search" onChange={(e)=>setSearchQuery(e.target.value)}/>
+      <div className="relative w-full">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="lucide lucide-search absolute left-2 top-2.5 h-4 w-4 text-muted-foreground"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg>
+        <Input className='pl-8' type="text" placeholder="Search name or address" onChange={(e)=>setSearchQuery(e.target.value)}/>
+      </div>
 
       <Drawer>
         <DrawerTrigger asChild>
@@ -206,7 +225,7 @@ const Page = ({ params }: { params: { publicid: string } }) => {
     </div>
       
     {
-      accessList.length===0 ? (
+      accessList.filter((i:any) => i.username.toUpperCase().indexOf(searchQuery.toUpperCase()) > -1 || i.user.toUpperCase().indexOf(searchQuery.toUpperCase()) > -1).length===0 ? (
         <div className="grid min-h-[40vh] justify-items-center content-center">
           <Image
             src={accessPlaceholder}
@@ -222,7 +241,7 @@ const Page = ({ params }: { params: { publicid: string } }) => {
           }
         </div>
       ) : (
-        <AccessListTable publicid={params.publicid} users={allUsers}/>
+        <AccessListTable accessList={accessList.filter((i:any) => i.username.toUpperCase().indexOf(searchQuery.toUpperCase()) > -1 || i.user.toUpperCase().indexOf(searchQuery.toUpperCase()) > -1)}/>
       )
     }
 

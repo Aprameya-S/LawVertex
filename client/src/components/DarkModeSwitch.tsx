@@ -13,7 +13,7 @@ const DarkModeSwitcher = () => {
   return (
       <Button
         variant='ghost'
-        className='h-[40px] scale-75 px-2 mr-1 mt-[-6px] lg:mr-0 cursor-pointer'
+        className='h-[40px] scale-75 px-2 mr-1 mt-[-6px] lg:mt-0 lg:mr-0 cursor-pointer'
         onClick={() => theme == "dark"? setTheme('light'): setTheme("dark")}
       >
         {

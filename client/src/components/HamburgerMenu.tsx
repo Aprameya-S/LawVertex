@@ -17,8 +17,8 @@ const HamburgerMenu = () => {
 
   return (
     <>
-      <Button variant='ghost' className='px-2 py-1' onClick={(e) => setIsMenuOpen((prev) => !prev)}>
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-menu"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+      <Button variant='ghost' className='p-1 scale-x-125' onClick={(e) => setIsMenuOpen((prev) => !prev)}>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="lucide lucide-menu"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
       </Button>
 
       <div className={`menu transition-all fixed top-[65.2px] sm:top-[77.2px] w-screen h-screen bg-white dark:bg-[#0e0e10] z-50 px-6 pt-5 ease-out duration-300 grid grid-cols-[auto_38px] ${isMenuOpen?'left-0':'left-[100vw]'}`}>
@@ -41,7 +41,7 @@ const HamburgerMenu = () => {
 
           <Link href='SearchAdvocate'onClick={(e) => setIsMenuOpen((prev) => !prev)}>Search Advocate</Link>
         </div>
-        <div className="">
+        <div className="" onClick={(e) => setIsMenuOpen((prev) => !prev)}>
           <DarkModeSwitcher/>
         </div>
       </div>

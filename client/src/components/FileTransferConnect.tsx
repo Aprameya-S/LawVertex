@@ -21,7 +21,7 @@ const FileTransferConnect = ({
     setIsLoading(true)
     try {
       const { ethereum } = window;
-      if (!ethereum) return toast("Please install MetaMask.");
+      if (!ethereum) return toast("Please install MetaMask.", {toastId: 'metamaskPrompt'});
 
       const provider = new ethers.providers.Web3Provider(window.ethereum, "any");
       //uncomment below line to propmt metamask connection automatically

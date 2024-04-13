@@ -3,7 +3,6 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import DashboardNav from "@/components/DashboardNav";
 import "./index.scss"
-const inter = Inter({ subsets: ["latin"] }); 
 import { Toaster } from "@/components/ui/toaster";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
@@ -14,6 +13,8 @@ export const metadata: Metadata = {
   title: "LawVertex",
   description: "Immutable Integrity, Infinite Access: Transforming Legal Records with Blockchain.",
 };
+
+const inter = Inter({ subsets: ["latin"] }); 
 
 export default function RootLayout({
   children,
