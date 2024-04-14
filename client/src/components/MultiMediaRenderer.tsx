@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 import PdfRenderer from '@/components/PdfRenderer'
 import { MediaRenderer } from "@thirdweb-dev/react";
-import PreviewModal from "react-media-previewer";
+// import PreviewModal from "react-media-previewer";
+import { Button } from './ui/button';
 // import { render } from "react-dom";
 
 interface dataType{
@@ -10,27 +11,34 @@ interface dataType{
 }
 
 const MultiMediaRenderer = (props:any) => {
+  const [visible,setVisible] = useState(false)
+
   return (
-    <>
-    {
+    <div className="shrink-0">
+      {
         props.url.substr(props.url.length - 3)==="pdf" ? (
-          <PdfRenderer url={`https://b75d97dda9827edd7e665521bd610b09.ipfscdn.io/ipfs/${props.url.split('//')[1]}`} />
+          <div className="mt-4">
+            <PdfRenderer url={props.url} />
+          </div>
         ) : (
-          <div className="border border-dashed border-gray-500 p-[30px] rounded-[20px] w-fit">
+          <div className="border border-dashed border-gray-500 p-[30px] rounded-[20px] w-fit mt-4">
             <MediaRenderer className='' src={props.url}/>
           </div>
         )
       }
-      {/* <PreviewModal
-        visible={visible}
-        // name="image.png"
-        setVisible={setVisible}
-        urls={[
-          "https://assets.ruilisi.com/attachment-8de9464b-d286-43a9-b18e-f8a984bf8623.jpg",
-          "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"
-        ]}
-      /> */}
-    </>
+      {/* <Button onClick={() => setVisible((prev) => !prev)}>Preview</Button>
+      <div className="w-[100px] overflow-hidden hidden">
+        <PreviewModal
+          visible={visible}
+          // name="image.png"
+          setVisible={setVisible}
+          urls={[
+            props.url
+          ]}
+        />
+      </div> */}
+      
+    </div>
   )
 }
 

@@ -53,7 +53,7 @@ const OwnedFileCard = (props:Props) => {
     <Link href={`/Vault/file/${props.file.publicid}`}>
     {
       props.filesLayout==="grid" ? (
-        <Card className='border-input w-full p-[15px] bg-transparent overflow-hidden border-[2px] hover:border-[#4A92FE] cursor-pointer relative h-[150px]'>
+        <Card className='border-input w-full p-[15px] bg-transparent overflow-hidden border-[2px] hover:border-[#4A92FE] cursor-pointer relative h-[150px] transition-all'>
           <div className="flex justify-between items-center">
             <div className="flex h-fit gap-2 items-end">
               <Image
@@ -112,7 +112,7 @@ const OwnedFileCard = (props:Props) => {
           </div>
         </Card>
       ) : (
-        <div className="grid grid-cols-[1fr_38px] h-[60px] sm:h-12 px-2 sm:px-3 items-center border-b border-input hover:bg-transparent/5 dark:hover:bg-[#19191c]">
+        <div className="grid grid-cols-[1fr_38px] h-[60px] sm:h-12 px-2 sm:px-3 items-center border-b border-input hover:bg-transparent/5 dark:hover:bg-[#19191c] transition-all">
           <div className="grid grid-cols-[27px_1fr] sm:grid-cols-[27px_1fr] items-center">
               <Image
                 src={fileIcon}

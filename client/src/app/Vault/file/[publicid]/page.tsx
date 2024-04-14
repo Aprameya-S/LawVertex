@@ -6,7 +6,8 @@ import Loader from '@/components/Loader';
 import { decryptfile } from '@/lib/decryptFile';
 import MultiMediaRenderer from '@/components/MultiMediaRenderer';
 import FileInfo from '@/components/FileInfo';
-import { useToast } from '@/components/ui/use-toast';
+import { toast } from 'react-toastify';
+import { useRouter } from 'next/navigation';
 
 
 function readFile(input:any){
@@ -23,7 +24,7 @@ const Page = ({ params }: { params: { publicid: string } }) => {
   const [fileUrl, setFileUrl] = useState<any>("")
   const [isLoading, setIsLoading] = useState(true)
   const [isDeleteLoading, setIsDeleteLoading] = useState(false)
-  const { toast } = useToast()
+  const { push } = useRouter();
 
   const handleDelete = async(e:any) => {
     e.stopPropagation()
@@ -31,9 +32,7 @@ const Page = ({ params }: { params: { publicid: string } }) => {
       setIsDeleteLoading(true);
       await deleteFile(file.publicid)
       .then(()=>{
-        toast({
-          title: "Delete successful!",
-        })
+        toast("Delete successful!")
       })
       setIsDeleteLoading(false);
     } catch (error) {
@@ -85,8 +84,11 @@ const Page = ({ params }: { params: { publicid: string } }) => {
         }
       })
      
-    } catch(error) {
-      console.log(error)
+    } catch(error:any) {
+      if(error.error.code === -32603){
+        toast.error("File not found!",{toastId:"fileNotFound"})
+        push('/Vault')
+      }
       // setIsLoading(false)
     }
   }
@@ -95,20 +97,17 @@ const Page = ({ params }: { params: { publicid: string } }) => {
     fetchData()
   },[])
 
-  console.log(file)
+  console.log(fileUrl)
 
   return isLoading ? (
     <Loader />
   ) : (
-    <div>
+    <>
       <FileInfo file={file}/>
-      {
-        !file.encrypted && <MultiMediaRenderer url={fileUrl}/>
-      }
-
-      <div className="grid grid-cols-[1fr_36px] sm:grid-cols-[136px_36px] mt-5 gap-3">
-        <a href={fileUrl} download={file.name}>
-          <Button className='w-full flex-1'>
+    <div className='w-fit'>
+      <div className="grid grid-cols-[1fr_36px] w-full mt-5 gap-3 h-fit">
+        <a href={fileUrl} download={file.name} target='_blank' className='w-full'>
+          <Button className='w-full'>
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-download mr-2">
               <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/>
             </svg>
@@ -126,8 +125,13 @@ const Page = ({ params }: { params: { publicid: string } }) => {
           }
         </Button>
       </div>
-{/* {file.publicid} */}
+
+      {
+        !file.encrypted && <MultiMediaRenderer url={fileUrl}/>
+      }
+
     </div>
+    </>
   )
 }
 

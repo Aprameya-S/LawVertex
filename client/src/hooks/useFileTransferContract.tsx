@@ -34,8 +34,9 @@ export const getOwnedFile = async(publicid:string) => {
     var data = await fileTransferContract.viewOwnedFile(publicid)
     
     return data
-  } catch (error) {
+  } catch (error:any) {
     console.log(error)
+    throw error
   }
 }
 
