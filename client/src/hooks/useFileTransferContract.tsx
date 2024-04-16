@@ -166,3 +166,15 @@ export const viewFile = async(publicid:string) => {
     console.log(error)
   }
 }
+
+export const viewRequestableFiles = async(address:string) => {
+  try {
+    // await connectWallet()
+    const fileTransferContract = createEthereumContract()
+    const data = await fileTransferContract.viewRequestableFiles(address)
+    console.log(data)
+    return data
+  } catch (error) {
+    console.log(error)
+  }
+}
