@@ -9,11 +9,9 @@ pragma solidity >=0.8.2 <0.9.0;
  */
 contract FileTransfer {
     address public contractOwner;
-    uint256 public usercount;
 
     constructor(){
         contractOwner = msg.sender;
-        usercount = 0;
     }
 
     struct PrivateFile{
@@ -27,7 +25,6 @@ contract FileTransfer {
         string cid;
         
         bool encrypted;
-        bool searchable;
         bool canRequest;
         string copyOf;
     }
@@ -54,7 +51,6 @@ contract FileTransfer {
         string memory _publicid,
         string memory _cid,
         bool _encrypted,
-        bool _searchable,
         bool _canRequest,
         string memory _copyOf
     ) public {
@@ -69,7 +65,6 @@ contract FileTransfer {
         file.publicid=_publicid;
         file.cid=_cid;
         file.encrypted=_encrypted;
-        file.searchable=_searchable;
         file.canRequest=_canRequest;
         file.copyOf=_copyOf;
 
@@ -147,7 +142,7 @@ contract FileTransfer {
             accesslist[_ogpublicid].push(access);
         }
 
-        addFile(file.name, file.desc, file.format, file.size, file.createdAt, _publicid, _cid, file.encrypted, file.searchable, file.canRequest, file.publicid);
+        addFile(file.name, file.desc, file.format, file.size, file.createdAt, _publicid, _cid, file.encrypted, file.canRequest, file.publicid);
 
     }
 
@@ -200,6 +195,23 @@ contract FileTransfer {
             infos[i]=info;
         }
         return infos;
+    }
+    
+    
+    function viewRequestableFiles(address _address)external view returns(string[] memory){
+        string[] memory retFileNames=new string[](ownedFiles[_address].length);
+        uint j=0;
+        for(uint i=0;i<ownedFiles[_address].length;i++){
+            if(privateFiles[ownedFiles[_address][i]].canRequest==true && keccak256(abi.encodePacked(privateFiles[ownedFiles[_address][i]].copyOf)) == keccak256(abi.encodePacked(""))){
+                retFileNames[j]=privateFiles[ownedFiles[_address][i]].name;
+                j++;
+            }
+            else{
+                retFileNames[j]="";
+                j++;
+            }
+        }
+        return retFileNames;
     }
 
     function viewFile(string memory _publicid)external view returns(PrivateFile memory){

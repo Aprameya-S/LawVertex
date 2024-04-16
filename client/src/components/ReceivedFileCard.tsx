@@ -119,7 +119,7 @@ const ReceivedFileCard = (props:Props) => {
                 className='mr-3'
               />
               <div className='grid sm:grid-cols-2'>
-                <p className='flex gap-2 align-middle text-sm font-medium text-nowrap whitespace-nowrap overflow-ellipsis'>
+                <p className='flex gap-2 align-middle text-sm font-medium text-nowrap whitespace-nowrap overflow-ellipsis overflow-hidden mr-2'>
                     {props.file.name}
                     {props.file.encrypted &&
                       <svg className='mt-[1px]' width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">

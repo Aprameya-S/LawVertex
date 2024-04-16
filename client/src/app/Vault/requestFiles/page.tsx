@@ -5,6 +5,7 @@ import { Label } from '@/components/ui/label'
 import { ethers } from 'ethers'
 import { Button } from '@/components/ui/button'
 import { toast } from 'react-toastify'
+import PageTitle from '@/components/PageTitle'
 
 
 const Page = () => {
@@ -55,6 +56,7 @@ const Page = () => {
 
   return (
     <div>
+      <PageTitle>Request Files</PageTitle>
       <form onSubmit={handleRequest}>
         <Label>Request from: </Label>
         <Input placeholder='0x...' onChange={(e) => setForm({...form,['ownerAddress']:e.target.value})} className='mb-4' required/>

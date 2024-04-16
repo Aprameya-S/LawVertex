@@ -47,6 +47,7 @@ const Page = ({ params }: { params: { publicid: string } }) => {
   const [searchQuery, setSearchQuery] = useState<string>("")
   const [allUsers, setAllUsers] = useState([])
 
+  // console.log(allUsers)
 
   const handleSubmit = async(e:any) => {
     e.preventDefault()
@@ -151,7 +152,7 @@ const Page = ({ params }: { params: { publicid: string } }) => {
             ogpublicid:i.ogpublicid,
             publicid:i.publicid,
             user:i.user,
-            username: result.filter((j:any) => j.address.toLowerCase()==i.user.toLowerCase())[0]['name'],
+            username: result.filter((j:any) => j.address.toLowerCase()==i.user.toLowerCase())[0]?result.filter((j:any) => j.address.toLowerCase()==i.user.toLowerCase())[0]['name']:"Unknown",
             valid:i.valid,
             viewOnly: i.viewOnly,
           }
@@ -181,7 +182,7 @@ const Page = ({ params }: { params: { publicid: string } }) => {
 
     <div className="flex gap-4 my-4">
       <div className="relative w-full">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="lucide lucide-search absolute left-2 top-2.5 h-4 w-4 text-muted-foreground"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-search absolute left-2 top-2.5 h-4 w-4 text-muted-foreground"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg>
         <Input className='pl-8' type="text" placeholder="Search name or address" onChange={(e)=>setSearchQuery(e.target.value)}/>
       </div>
 

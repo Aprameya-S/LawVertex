@@ -9,7 +9,7 @@ export const createEthereumContract = () => {
   const provider = new ethers.providers.Web3Provider(window.ethereum);
 
   const signer = provider.getSigner();
-  const fileTransferContract = new ethers.Contract(process.env.NEXT_PUBLIC_FILE_TRANSFER_CONTRACT_ADDRESS || "", abi.abi, signer);
+  const fileTransferContract = new ethers.Contract("0x5aA3B356e4230f71E96a085A72BB7c46f288A7CC" || "", abi.abi, signer);
 
   return fileTransferContract;
 };
@@ -53,9 +53,8 @@ export const addFile = async(form:any) => {
       form.publicid,
       form.cid,
       form.encrypted,
-      form.searchable,
       form.canRequest,
-      false
+      ""
     )
     console.log(data)
     toast("Upload successful!")

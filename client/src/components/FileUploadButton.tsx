@@ -42,7 +42,6 @@ const FileUploadButton = (props:Props) => {
     publicid:'',
     cid: '',
     encrypted: false,
-    searchable: false,
     canRequest: false
   })
   const closeBtnRef = useRef<HTMLButtonElement>(null)
@@ -201,13 +200,6 @@ const FileUploadButton = (props:Props) => {
                 <label className="text-sm font-medium " htmlFor="pfileencrypted">
                   Encryption<br/>
                   <p className='text-gray-500'>File will AES-256 encrypted.</p>
-                </label>
-              </div>
-              <div className="mb-3 flex flex-row items-start space-x-3 space-y-0 rounded-md border border-input p-4 shadow">
-                <Checkbox id='pfilesearchable' className='mt-[2px]' onCheckedChange={(e:any) => setForm({...form, ['searchable']: e?true:false})}/>
-                <label className="text-sm font-medium " htmlFor="pfilesearchable">
-                  Searchable<br/>
-                  <p className='text-gray-500'>Make this file searchable by others.</p>
                 </label>
               </div>
 
