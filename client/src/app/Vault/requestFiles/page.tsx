@@ -80,7 +80,7 @@ const Page = () => {
       const files = await viewRequestableFiles(form.ownerAddress)
       if(!files) throw("User not found")
       setUserFiles(files.filter((i:string) => i!=""))
-    } catch (error:string) {
+    } catch (error:any) {
       toast.error(error)
     }
   }
