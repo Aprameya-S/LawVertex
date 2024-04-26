@@ -23,7 +23,7 @@ import uploadFilesPlaceholder from '../../public/images/uploadFIlesPlaceholder.p
 import { addFile } from '@/hooks/useFileTransferContract';
 import { Badge } from './ui/badge';
 import { convertBytes, generateId } from '@/lib/utils';
-import { encryptfile } from '@/lib/encryptFile';
+import { encryptfile } from '@/lib/AES';
 
 interface Props {
   onlyIcon?: boolean

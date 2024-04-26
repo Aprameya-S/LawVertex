@@ -21,6 +21,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/Vault/file/[publicid]", "src/lib/encryptFile.jsx", "src/lib/mongodb.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/Vault/file/[publicid]", "src/lib/old encryption/encryptFile.jsx", "src/lib/mongodb.js"],
   "exclude": ["node_modules"]
 }

@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { viewFile } from '@/hooks/useFileTransferContract'
 import { Button } from '@/components/ui/button';
 import Loader from '@/components/Loader';
-import { decryptfile } from '@/lib/decryptFile';
+import { decryptfile } from '@/lib/AES';
 import MultiMediaRenderer from '@/components/MultiMediaRenderer';
 import {
   InputOTP,
