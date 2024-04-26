@@ -36,3 +36,20 @@ export const VaultLinks = [
   }
 ]
 
+export const AdminCaseDetailsLinks = [
+  {
+    title:"Add court",
+    href:"/CaseDetails/addCourt"
+  },
+]
+
+export const CaseDetailsLinks = [
+  {
+    title:"Locate Court",
+    href:"/CaseDetails/locateCourt"
+  },
+  {
+    title:"CNR Search",
+    href:"/CaseDetails/cnrSearch"
+  },
+]

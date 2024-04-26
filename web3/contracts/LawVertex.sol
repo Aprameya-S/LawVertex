@@ -193,8 +193,6 @@ contract LawVertex {
     }
   }
 
-
-
   function updateAdvocates(
     string memory _cnr,
     address[] memory _adv_addresses,

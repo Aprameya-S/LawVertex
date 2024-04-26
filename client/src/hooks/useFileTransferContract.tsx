@@ -9,7 +9,7 @@ export const createEthereumContract = () => {
   const provider = new ethers.providers.Web3Provider(window.ethereum);
 
   const signer = provider.getSigner();
-  const fileTransferContract = new ethers.Contract("0x5aA3B356e4230f71E96a085A72BB7c46f288A7CC" || "", abi.abi, signer);
+  const fileTransferContract = new ethers.Contract("0xDD8AF5DABC8A6B0029cbbB79A518DCf48cBddA84" || "", abi.abi, signer);
 
   return fileTransferContract;
 };

@@ -17,7 +17,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [
@@ -145,7 +146,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [
@@ -221,7 +223,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [
@@ -331,7 +334,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [],
@@ -401,7 +405,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [
@@ -420,7 +425,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [
@@ -496,7 +502,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     }
   ],
   "metadata": "{\"compiler\":{\"version\":\"0.8.19+commit.7dd6d404\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"_name\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"_desc\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"_format\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"_size\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"_createdAt\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"_publicid\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"_cid\",\"type\":\"string\"},{\"internalType\":\"bool\",\"name\":\"_encrypted\",\"type\":\"bool\"},{\"internalType\":\"bool\",\"name\":\"_canRequest\",\"type\":\"bool\"},{\"internalType\":\"string\",\"name\":\"_copyOf\",\"type\":\"string\"}],\"name\":\"addFile\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"contractOwner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"_publicid\",\"type\":\"string\"}],\"name\":\"deleteFile\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"_publicid\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"_cid\",\"type\":\"string\"},{\"internalType\":\"address\",\"name\":\"_receivingUserAddress\",\"type\":\"address\"},{\"internalType\":\"string\",\"name\":\"_ogpublicid\",\"type\":\"string\"},{\"internalType\":\"bool\",\"name\":\"_viewOnly\",\"type\":\"bool\"}],\"name\":\"grantAccess\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"_publicid\",\"type\":\"string\"},{\"internalType\":\"address\",\"name\":\"_revokeUserAddress\",\"type\":\"address\"}],\"name\":\"revokeAccess\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"_publicid\",\"type\":\"string\"}],\"name\":\"viewAccessList\",\"outputs\":[{\"components\":[{\"internalType\":\"string\",\"name\":\"publicid\",\"type\":\"string\"},{\"internalType\":\"address\",\"name\":\"user\",\"type\":\"address\"},{\"internalType\":\"string\",\"name\":\"ogpublicid\",\"type\":\"string\"},{\"internalType\":\"bool\",\"name\":\"viewOnly\",\"type\":\"bool\"},{\"internalType\":\"bool\",\"name\":\"valid\",\"type\":\"bool\"}],\"internalType\":\"struct FileTransfer.Access[]\",\"name\":\"\",\"type\":\"tuple[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"_publicid\",\"type\":\"string\"}],\"name\":\"viewFile\",\"outputs\":[{\"components\":[{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"internalType\":\"string\",\"name\":\"name\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"desc\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"format\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"size\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"createdAt\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"publicid\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"cid\",\"type\":\"string\"},{\"internalType\":\"bool\",\"name\":\"encrypted\",\"type\":\"bool\"},{\"internalType\":\"bool\",\"name\":\"canRequest\",\"type\":\"bool\"},{\"internalType\":\"string\",\"name\":\"copyOf\",\"type\":\"string\"}],\"internalType\":\"struct FileTransfer.PrivateFile\",\"name\":\"\",\"type\":\"tuple\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"_publicid\",\"type\":\"string\"}],\"name\":\"viewOwnedFile\",\"outputs\":[{\"components\":[{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"internalType\":\"string\",\"name\":\"name\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"desc\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"format\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"size\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"createdAt\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"publicid\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"cid\",\"type\":\"string\"},{\"internalType\":\"bool\",\"name\":\"encrypted\",\"type\":\"bool\"},{\"internalType\":\"bool\",\"name\":\"canRequest\",\"type\":\"bool\"},{\"internalType\":\"string\",\"name\":\"copyOf\",\"type\":\"string\"}],\"internalType\":\"struct FileTransfer.PrivateFile\",\"name\":\"\",\"type\":\"tuple\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"viewOwnedFiles\",\"outputs\":[{\"components\":[{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"internalType\":\"string\",\"name\":\"name\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"desc\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"format\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"size\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"createdAt\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"publicid\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"cid\",\"type\":\"string\"},{\"internalType\":\"bool\",\"name\":\"encrypted\",\"type\":\"bool\"},{\"internalType\":\"bool\",\"name\":\"canRequest\",\"type\":\"bool\"},{\"internalType\":\"string\",\"name\":\"copyOf\",\"type\":\"string\"}],\"internalType\":\"struct FileTransfer.PrivateFile[]\",\"name\":\"\",\"type\":\"tuple[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"viewRecievedFiles\",\"outputs\":[{\"components\":[{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"internalType\":\"string\",\"name\":\"name\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"desc\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"format\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"size\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"createdAt\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"publicid\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"cid\",\"type\":\"string\"},{\"internalType\":\"bool\",\"name\":\"encrypted\",\"type\":\"bool\"},{\"internalType\":\"bool\",\"name\":\"canRequest\",\"type\":\"bool\"},{\"internalType\":\"string\",\"name\":\"copyOf\",\"type\":\"string\"}],\"internalType\":\"struct FileTransfer.PrivateFile[]\",\"name\":\"\",\"type\":\"tuple[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_address\",\"type\":\"address\"}],\"name\":\"viewRequestableFiles\",\"outputs\":[{\"internalType\":\"string[]\",\"name\":\"\",\"type\":\"string[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"custom:dev-run-script\":\"./scripts/deploy_with_ethers.ts\",\"details\":\"Store & retrieve value in a variable\",\"kind\":\"dev\",\"methods\":{},\"title\":\"Storage\",\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/FileTransfer.sol\":\"FileTransfer\"},\"evmVersion\":\"paris\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/contracts/FileTransfer.sol\":{\"keccak256\":\"0xf8d0e87eca8514eafb6252544a52b1c26c50a8716f02dd697a196428dfbce077\",\"license\":\"GPL-3.0\",\"urls\":[\"bzz-raw://054c31ffb46d4cce17767e0aa5071f52b2fd4522da08bf74fd6852e0098b13e1\",\"dweb:/ipfs/QmZyboKiBecbzvJxLmjcsyKhJ6uUYLzR3iB1tj8wHbWWBc\"]}},\"version\":1}",
@@ -26898,12 +26905,13 @@
     "5777": {
       "events": {},
       "links": {},
-      "address": "0x5aA3B356e4230f71E96a085A72BB7c46f288A7CC",
-      "transactionHash": "0x8750c1e074ae4eb99fa5538239e158af0feb1169172e9fc93e56a8ed1d8f80e1"
+      "address": "0xDD8AF5DABC8A6B0029cbbB79A518DCf48cBddA84",
+      "transactionHash": "0x143d17ad8d061c4c7e5d9a44f489f6e552685b507f49b181bf00edd83c38a22a"
     }
   },
   "schemaVersion": "3.4.16",
-  "updatedAt": "2024-04-24T08:54:18.201Z",
+  "updatedAt": "2024-04-24T08:56:56.917Z",
+  "networkType": "ethereum",
   "devdoc": {
     "custom:dev-run-script": "./scripts/deploy_with_ethers.ts",
     "details": "Store & retrieve value in a variable",
