@@ -121,7 +121,6 @@ Aes.shiftRows = function(s, Nb) {
     // }          // note that this will work for Nb=4,5,6, but not 7,8 (always 4 for AES):
     // return s;  // see asmaes.sourceforge.net/rijndael/rijndaelImplementation.pdf
 
-    // Symmetric Transposition
     s = s.map((_, colIndex) => s.map(row => row[colIndex]));
     s[0][0]=[s[3][3],s[3][3]=s[0][0]][0]
     s[1][1]=[s[2][2],s[2][2]=s[1][1]][0]
