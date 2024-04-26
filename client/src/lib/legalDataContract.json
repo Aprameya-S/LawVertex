@@ -102,6 +102,11 @@
       "inputs": [
         {
           "internalType": "string",
+          "name": "_cnr",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
           "name": "_pet",
           "type": "string"
         },
@@ -129,11 +134,6 @@
           "internalType": "string",
           "name": "_year",
           "type": "string"
-        },
-        {
-          "internalType": "string",
-          "name": "_loc",
-          "type": "string"
         }
       ],
       "name": "addCaseInfo",
@@ -147,6 +147,11 @@
           "internalType": "address",
           "name": "_owner",
           "type": "address"
+        },
+        {
+          "internalType": "string",
+          "name": "_court_type",
+          "type": "string"
         },
         {
           "internalType": "string",
@@ -265,16 +270,21 @@
       "inputs": [
         {
           "internalType": "string",
-          "name": "_cnr",
+          "name": "",
           "type": "string"
+        },
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
         }
       ],
-      "name": "displayPublicDocuments",
+      "name": "docs",
       "outputs": [
         {
-          "internalType": "string[]",
+          "internalType": "string",
           "name": "",
-          "type": "string[]"
+          "type": "string"
         }
       ],
       "stateMutability": "view",
@@ -451,6 +461,11 @@
               "type": "address"
             },
             {
+              "internalType": "string",
+              "name": "court_type",
+              "type": "string"
+            },
+            {
               "internalType": "uint256",
               "name": "slno",
               "type": "uint256"
@@ -534,6 +549,55 @@
           "internalType": "struct LawVertex.Party[]",
           "name": "",
           "type": "tuple[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "",
+          "type": "string"
+        }
+      ],
+      "name": "infos",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "_id",
+          "type": "uint256"
+        },
+        {
+          "internalType": "string",
+          "name": "pet",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "res",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "police_station",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "fir_no",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "year",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "loc",
+          "type": "string"
         }
       ],
       "stateMutability": "view",

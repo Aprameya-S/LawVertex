@@ -12,6 +12,7 @@ import { Districts, StatesAndUTs } from '@/lib/legalData'
 const Page = () => {
   const [form, setForm] = useState({
     courtAddress:"",
+    courtType:"",
     name:"",
     state:"",
     district:"",
@@ -31,8 +32,8 @@ const Page = () => {
         <Label>Court Account Address</Label>
         <Input type='text' required className='mb-3' onChange={(e) => setForm({...form,['courtAddress']:e.target.value})}/>
 
-        {/* <Label>Type of Court</Label>
-        <Input type='text' required/> */}
+        <Label>Type of Court</Label>
+        <Input type='text' required className='mb-3' onChange={(e) => setForm({...form,['courtType']:e.target.value})}/>
 
         <Label>Court Complex Name</Label>
         <Input type='text' required className='mb-3' onChange={(e) => setForm({...form,['name']:e.target.value})}/>

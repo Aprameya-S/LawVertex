@@ -43,6 +43,13 @@ export const AdminCaseDetailsLinks = [
   },
 ]
 
+export const CourtsCaseDetailsLinks = [
+  {
+    title:"Add New Case",
+    href:"/CaseDetails/addCase"
+  },
+]
+
 export const CaseDetailsLinks = [
   {
     title:"Locate Court",

@@ -40,7 +40,7 @@ const Page = () => {
       <div className="grid grid-cols-3 gap-4 mt-4">
         {
           stats.map((item,index) => (
-            <Card key={index} className='border-2 border-blue-600 p-4'>
+            <Card key={index} className='border-2 border-input p-4 shadow-md'>
               <h1 className='text-center text-[30px] font-semibold'>{item.value}</h1>
               <h2 className='text-center text-[16px] font-medium'>{item.title}</h2>
             </Card>

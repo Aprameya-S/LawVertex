@@ -1,7 +1,7 @@
 import React from 'react'
 import Link from "next/link";
 import WalletConnect from '@/components/WalletConnect';
-import { AdminCaseDetailsLinks, CaseDetailsLinks } from '@/lib/links';
+import { AdminCaseDetailsLinks, CaseDetailsLinks, CourtsCaseDetailsLinks } from '@/lib/links';
 
 const Layout = ({
   children,
@@ -23,7 +23,11 @@ const Layout = ({
             <Link href={item.href} key={index} className='pl-[10px] border-l-2 border-slate-300 font-normal text-slate-600 text-[14px] py-1 hover:text-slate-800 hover:border-slate-500 dark:text-gray-400 dark:hover:text-white dark:border-gray-600 dark:hover:border-white'>{item.title}</Link>
           ))
         }
-        <Link href='/addNewCase' className='pl-[10px] border-l-2 border-slate-300 font-normal text-slate-600 text-[14px] py-1 hover:text-slate-800 hover:border-slate-500 dark:text-gray-400 dark:hover:text-white dark:border-gray-600 dark:hover:border-white'>Add New Case</Link>
+        {
+          CourtsCaseDetailsLinks.map((item,index) => (
+            <Link href={item.href} key={index} className='pl-[10px] border-l-2 border-slate-300 font-normal text-slate-600 text-[14px] py-1 hover:text-slate-800 hover:border-slate-500 dark:text-gray-400 dark:hover:text-white dark:border-gray-600 dark:hover:border-white'>{item.title}</Link>
+          ))
+        }
 
        
         <Link href='/uploadPublicDocs' className='pl-[10px] border-l-2 border-slate-300 font-normal text-slate-600 text-[14px] py-1 hover:text-slate-800 hover:border-slate-500 dark:text-gray-400 dark:hover:text-white dark:border-gray-600 dark:hover:border-white'>Upload Public Doc</Link>
