@@ -26,7 +26,7 @@ const AccessListTable2 = (props:Props) => {
     try {
       setIsRevokeLoading(true)
       await revokeAccess({publicid,userAddress})
-      let newAccessList = accessList.splice(index,1);
+      let newAccessList = accessList.toSpliced(index,1);
       setAccessList(newAccessList)
       setIsRevokeLoading(false)
     } catch (error) {

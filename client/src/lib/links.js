@@ -48,6 +48,10 @@ export const CourtsCaseDetailsLinks = [
     title:"Add New Case",
     href:"/CaseDetails/addCase"
   },
+  {
+    title:"Add Act Violation",
+    href:"/CaseDetails/addActViolation"
+  },
 ]
 
 export const CaseDetailsLinks = [

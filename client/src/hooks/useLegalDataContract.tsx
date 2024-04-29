@@ -3,7 +3,6 @@ import abi from '../lib/legalDataContract.json'
 import {toast} from  'react-toastify';
 
 
-
 export const createEthereumContract = () => {
   // const provider = new ethers.providers.JsonRpcProvider('https://eth-sepolia.g.alchemy.com/v2/-OHVSCL0DxGaycEqcJqlTHyH1mPk4QTP');
   const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -45,8 +44,9 @@ export const getAllCourts = async() => {
 export const viewCase = async(cnr:string) => {
   try {
     const legalDataContract = createEthereumContract()
+    const info = await legalDataContract.infos(cnr)
     const data = await legalDataContract.viewCase(cnr)
-    return data
+    return {...data,...info}
   } catch (error) {
     throw(error)
   }
@@ -81,6 +81,32 @@ export const addCase = async(caseForm:any, caseInfoForm:any) => {
     )
     // console.log(data)
     toast("Court created!")
+
+  } catch (error) {
+    throw(error)
+  }
+}
+
+
+export const getActs = async(cnr:string) => {
+  try {
+    const legalDataContract = createEthereumContract()
+    const data = await legalDataContract.getActs(cnr)
+    return data
+  } catch (error) {
+    throw(error)
+  }
+}
+
+export const addAct = async(CNR:string,acts:Array<any>) => {
+  try {
+    const legalDataContract = createEthereumContract()
+    const data = await legalDataContract.addAct(
+      CNR,
+      acts
+    )
+    // console.log(data)
+    toast("Act/s updated")
 
   } catch (error) {
     throw(error)

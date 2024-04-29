@@ -60,6 +60,7 @@ contract LawVertex {
   
   struct Court {
     address owner;
+    string court_type;
     uint slno;
     string name;
     string location;
@@ -81,14 +82,13 @@ contract LawVertex {
   Court[] courts;
   Party[] parties;
   Case[] cases;
-  
 
   mapping(string => uint256) cnr_cases; //cnr->case
-  mapping(string => CaseInfo) infos; //cnr->case_info
+  mapping(string => CaseInfo) public infos; //cnr->case_info
   mapping(string => string) status; //cnr->status
   mapping(string => ActStruct[]) acts;
   mapping(address => string) roles;
-  mapping(string => string[]) docs; //cnr -> documents
+  mapping(string => string[]) public docs; //cnr -> documents
   
   mapping(string => mapping(string => address[])) adv; //cnr -> party -> advocate addresses
   mapping(address => string[]) adv_cases;  //advAddress -> cnrs
@@ -121,12 +121,13 @@ contract LawVertex {
 
   function addCourt(
     address _owner,
+    string memory _court_type,
     string memory _name,
     string memory _location,
     string memory _tel
   ) external {
     require(msg.sender==admin, "Not authorized");
-    courts.push(Court(_owner,courts.length,_name,_location,_tel));
+    courts.push(Court(_owner,_court_type,courts.length,_name,_location,_tel));
     roles[_owner] = "court";
   }
 
@@ -249,26 +250,32 @@ contract LawVertex {
   }
 
   function addCaseInfo(
+    string memory _cnr,
     string memory _pet,
     string memory _res,
     string memory _status,
     string memory _police_station,
     string memory _fir_no,
-    string memory _year,
-    string memory _loc
+    string memory _year
   ) external {
     
-    CaseInfo storage newCaseInfo = infos[cases[caseCount-1].cnr];
+    CaseInfo storage newCaseInfo = infos[_cnr];
     require(cases[caseCount-1].court_address==msg.sender && keccak256(abi.encodePacked(roles[msg.sender])) == keccak256(abi.encodePacked("court")), "Not authorized");
 
     newCaseInfo._id = caseCount-1;
-    status[cases[caseCount-1].cnr]=_status;
+    status[_cnr]=_status;
     newCaseInfo.pet =_pet;
     newCaseInfo.res =_res;
     newCaseInfo.police_station =_police_station;
     newCaseInfo.fir_no =_fir_no;
     newCaseInfo.year =_year;
-    newCaseInfo.loc =_loc;
+
+    for(uint i=0;i<courts.length;i++){
+      if(msg.sender==courts[i].owner){
+        newCaseInfo.loc =courts[i].location;
+        return;
+      }
+    }
   }
 
   function updateCaseInfo(
@@ -286,13 +293,8 @@ contract LawVertex {
     newCaseInfo.res =_res;
   }
 
-
   function addPublicDocument(string memory _cnr,string memory _url) external {
       require(msg.sender==cases[cnr_cases[_cnr]].owner, "You don't have permission to publish public documents");
       docs[_cnr].push(_url);
-  }
-
-  function displayPublicDocuments(string memory _cnr) external view returns(string[] memory){
-      return docs[_cnr];
   }
 }
