@@ -8,7 +8,7 @@ export const createEthereumContract = () => {
   const provider = new ethers.providers.Web3Provider(window.ethereum);
 
   const signer = provider.getSigner();
-  const legalDataContract = new ethers.Contract("0x4C913114De4cE13fF9586b129aD3c791c84B644B" || "", abi.abi, signer);
+  const legalDataContract = new ethers.Contract("0x2D7acd929c34089Ff97d05B96d5Dd9257A7D1Fdb" || "", abi.abi, signer);
 
   return legalDataContract;
 };
@@ -47,7 +47,7 @@ export const viewCase = async(cnr:string) => {
     const info = await legalDataContract.infos(cnr)
     const data = await legalDataContract.viewCase(cnr)
     return {...data,...info}
-  } catch (error) {
+  } catch (error:any) {
     throw(error)
   }
 }
@@ -113,3 +113,27 @@ export const addAct = async(CNR:string,acts:Array<any>) => {
   }
 }
 
+export const getHistory = async(cnr:string) => {
+  try {
+    const legalDataContract = createEthereumContract()
+    const data = await legalDataContract.getHistory(cnr)
+    return data
+  } catch (error) {
+    throw(error)
+  }
+}
+
+export const addHistory = async(CNR:string,history:Array<any>) => {
+  try {
+    const legalDataContract = createEthereumContract()
+    const data = await legalDataContract.addHistory(
+      CNR,
+      history
+    )
+    // console.log(data)
+    toast("Hearings updated")
+
+  } catch (error) {
+    throw(error)
+  }
+}

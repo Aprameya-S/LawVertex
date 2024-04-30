@@ -52,6 +52,10 @@ export const CourtsCaseDetailsLinks = [
     title:"Add Act Violation",
     href:"/CaseDetails/addActViolation"
   },
+  {
+    title:"Add Proceeding",
+    href:"/CaseDetails/addProceedingInfo"
+  },
 ]
 
 export const CaseDetailsLinks = [
@@ -61,6 +65,6 @@ export const CaseDetailsLinks = [
   },
   {
     title:"CNR Search",
-    href:"/CaseDetails/cnrSearch"
+    href:"/CaseDetails/cnrSearch?page=case-details"
   },
 ]
