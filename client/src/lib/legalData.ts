@@ -1,4 +1,4 @@
-export const StatesAndUTs = [
+export const StatesAndUTs:any = [
   "Andhra Pradesh",
   "Arunachal Pradesh",
   "Assam",
@@ -37,7 +37,7 @@ export const StatesAndUTs = [
   "Puducherry"
 ];
 
-export const Districts = {
+export const Districts:any = {
   "Andhra Pradesh": [
     "Srikakulam",
     "Vizianagaram",
