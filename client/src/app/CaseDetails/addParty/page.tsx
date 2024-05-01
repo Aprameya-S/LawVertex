@@ -52,7 +52,7 @@ const Page = () => {
           <Label>Petitioner Name</Label>
           <Input type='text' required className='mb-3'></Input>
 
-          <Label>Petitioner's Lead Advocate Name</Label>
+          <Label>Petitioner&#39s Lead Advocate Name</Label>
           <Input type='text' required className='mb-3'></Input>
 
           <Label>Mailing Address</Label>
@@ -70,7 +70,7 @@ const Page = () => {
           <Label>Respondent Name</Label>
           <Input type='text' required className='mb-3'></Input>
 
-          <Label>Respondent's Lead Advocate Name</Label>
+          <Label>Respondent&#39s Lead Advocate Name</Label>
           <Input type='text' required className='mb-3'></Input>
 
           <Label>Mailing Address</Label>
