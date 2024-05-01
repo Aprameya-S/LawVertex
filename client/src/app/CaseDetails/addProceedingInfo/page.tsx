@@ -48,7 +48,7 @@ const Page = () => {
       console.error(error)
       toast.error("Something went wrong")
     }
-    document.getElementById("addProceedingForm")?.reset();
+    e.target.reset();
     setIsLoading(false)
   }
 

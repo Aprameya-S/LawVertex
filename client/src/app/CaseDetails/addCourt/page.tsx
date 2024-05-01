@@ -45,7 +45,7 @@ const Page = () => {
         </SelectTrigger>
         <SelectContent>
           {
-            StatesAndUTs.map((item,index) => (
+            StatesAndUTs.map((item:any,index:number) => (
               <SelectItem value={item} key={index}>{item}</SelectItem>
             ))
           }
