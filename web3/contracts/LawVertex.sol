@@ -16,16 +16,21 @@ contract LawVertex {
   address private admin;
   uint public caseCount;
 
-  constructor() {
-    contractOwner = msg.sender;
-    admin = msg.sender;
-    caseCount = 0;
-  }
+  
 
   struct ActStruct{
     string name;
     string section;
   } 
+
+  struct History{
+    string judge;
+    string date;
+    string next_hearing_date;
+    string next_hearing_purpose;
+    string business;
+    string presentee;
+  }
 
   struct CaseInfo {
     uint _id;
@@ -36,7 +41,6 @@ contract LawVertex {
     string police_station;
     string fir_no;
     string year;
-    string loc;
   }
 
   struct Case {
@@ -53,7 +57,6 @@ contract LawVertex {
     string first_hearing;
     string next_hearing;
     string stage;
-    address court_address;
     string court_no;
     string judge;
   }
@@ -68,51 +71,42 @@ contract LawVertex {
   }
 
   struct Party {
-    address owner;
-    address lead_adv_add;
-    uint slno;
+    string party;
     string name;
-    string cnr;
-    string location;
-    string email;
-    string phone;
     string lead_adv;
+    string location;
   }
 
   Court[] courts;
-  Party[] parties;
   Case[] cases;
 
   mapping(string => uint256) cnr_cases; //cnr->case
   mapping(string => CaseInfo) public infos; //cnr->case_info
   mapping(string => string) status; //cnr->status
   mapping(string => ActStruct[]) acts;
+  mapping(string => History[]) histories;
+  mapping(string => Party[]) parties;
   mapping(address => string) roles;
-  mapping(string => string[]) public docs; //cnr -> documents
-  
-  mapping(string => mapping(string => address[])) adv; //cnr -> party -> advocate addresses
-  mapping(address => string[]) adv_cases;  //advAddress -> cnrs
-  mapping(address => mapping(string => string)) adv_role; //advAddress -> cnr -> role
+  mapping(string => string[]) docs; //cnr -> documents
 
+    
+  constructor() {
+    contractOwner = msg.sender;
+    admin = msg.sender;
+    caseCount = 1;
+    cases.push(Case(msg.sender,"",0,"",0,"","invalid","","","","",""));
+  }
 
   function getAllCourts () external view returns (Court[] memory){
     return courts;
-  } 
+  }
 
   function getActs (string memory _cnr) external view returns(ActStruct[] memory){
     return acts[_cnr];
   }
 
-  function getAdvocate (string memory _cnr, string memory _party) external view returns(address[] memory){
-    return adv[_cnr][_party];
-  }
-
-  function getAdocateRole (address _advAddress, string memory _cnr) external view returns(string memory){
-    return adv_role[_advAddress][_cnr];
-  }
-  
-  function getAllParties () external view returns (Party[] memory){
-    return parties;
+  function getHistory (string memory _cnr) external view returns(History[] memory){
+    return histories[_cnr];
   }
 
   function getAllCases () external view returns (Case[] memory){
@@ -132,18 +126,14 @@ contract LawVertex {
   }
 
   function addParty(
-    address _owner,
-    address _lead_adv_add,
-    string memory _name,
     string memory _cnr,
-    string memory _location,
-    string memory _email,
-    string memory _phone,
-    string memory _lead_adv
+    string memory _party,
+    string memory _name,
+    string memory _lead_adv,
+    string memory _location
   ) external {
     require(keccak256(abi.encodePacked(roles[msg.sender])) == keccak256(abi.encodePacked("court")), "Not authorized");
-    parties.push(Party(_owner,_lead_adv_add,parties.length,_name,_cnr,_location,_email,_phone,_lead_adv));
-    roles[_owner] = "party";
+    parties[_cnr].push(Party(_party,_name,_lead_adv,_location));
   }
 
   function addCase(
@@ -162,10 +152,8 @@ contract LawVertex {
     string memory _court_no,
     string memory _judge
   ) external {
-
     require(keccak256(abi.encodePacked(roles[msg.sender])) == keccak256(abi.encodePacked("court")), "Not authorized");
     cases.push(Case(msg.sender,_case_type,_filing_no,_filing_date,_reg_no,_reg_date,_cnr,_first_hearing,_next_hearing,_stage,
-      msg.sender,
       _court_no,
       _judge
     ));
@@ -176,6 +164,7 @@ contract LawVertex {
   }
 
   function viewCase(string memory _cnr) external view returns (Case memory){
+    require(cnr_cases[_cnr]!=0,"CNR does not exist");
     return cases[cnr_cases[_cnr]];
   }
 
@@ -194,28 +183,26 @@ contract LawVertex {
     }
   }
 
-  function updateAdvocates(
+  function addHistory(
     string memory _cnr,
-    address[] memory _adv_addresses,
-    string[] memory _parties,
-    string[] memory _roles
+    History[] memory _histories
   )external{
-    require(cases[cnr_cases[_cnr]].court_address==msg.sender && keccak256(abi.encodePacked(roles[msg.sender])) == keccak256(abi.encodePacked("court")), "Not authorized");
-    require(_adv_addresses.length==_roles.length, "Incorrect input format");
+    require(keccak256(abi.encodePacked(roles[msg.sender])) == keccak256(abi.encodePacked("court")), "Not authorized");
 
-    for(uint i=0;i<adv[_cnr]["pet"].length;i++){
-      adv[_cnr]["pet"].pop();
-    }
-    for(uint i=0;i<adv[_cnr]["res"].length;i++){
-      adv[_cnr]["res"].pop();
+    while(acts[_cnr].length!=0){
+      acts[_cnr].pop();
     }
 
-    for(uint i=0;i<_roles.length;i++){
-      adv[_cnr][_parties[i]].push(_adv_addresses[i]);
-      adv_cases[_adv_addresses[i]].push(_cnr);
-      adv_role[_adv_addresses[i]][_cnr]=_roles[i];
+    for(uint i=0;i<_histories.length;i++){
+      histories[_cnr].push(History(
+        _histories[i].judge,
+        _histories[i].date,
+        _histories[i].next_hearing_date,
+        _histories[i].next_hearing_purpose,
+        _histories[i].business,
+        _histories[i].presentee
+      ));
     }
-
   }
 
   function updateCase(
@@ -229,7 +216,7 @@ contract LawVertex {
 
     Case storage newCase = cases[cnr_cases[_cnr]];
 
-    require(newCase.court_address==msg.sender && keccak256(abi.encodePacked(roles[msg.sender])) == keccak256(abi.encodePacked("court")), "Not authorized");
+    require(newCase.owner==msg.sender && keccak256(abi.encodePacked(roles[msg.sender])) == keccak256(abi.encodePacked("court")), "Not authorized");
 
     newCase.next_hearing = _next_hearing;
     newCase.stage = _stage;
@@ -249,6 +236,7 @@ contract LawVertex {
     }
   }
 
+  // Use for both creating and updateing
   function addCaseInfo(
     string memory _cnr,
     string memory _pet,
@@ -260,7 +248,7 @@ contract LawVertex {
   ) external {
     
     CaseInfo storage newCaseInfo = infos[_cnr];
-    require(cases[caseCount-1].court_address==msg.sender && keccak256(abi.encodePacked(roles[msg.sender])) == keccak256(abi.encodePacked("court")), "Not authorized");
+    require(cases[caseCount-1].owner==msg.sender && keccak256(abi.encodePacked(roles[msg.sender])) == keccak256(abi.encodePacked("court")), "Not authorized");
 
     newCaseInfo._id = caseCount-1;
     status[_cnr]=_status;
@@ -269,32 +257,19 @@ contract LawVertex {
     newCaseInfo.police_station =_police_station;
     newCaseInfo.fir_no =_fir_no;
     newCaseInfo.year =_year;
-
-    for(uint i=0;i<courts.length;i++){
-      if(msg.sender==courts[i].owner){
-        newCaseInfo.loc =courts[i].location;
-        return;
-      }
-    }
   }
 
-  function updateCaseInfo(
-    string memory _cnr,
-    string memory _pet,
-    string memory _status,
-    string memory _res
-  ) external {
-    require(cases[cnr_cases[_cnr]].court_address==msg.sender && keccak256(abi.encodePacked(roles[msg.sender])) == keccak256(abi.encodePacked("court")), "Not authorized");
-
-    CaseInfo storage newCaseInfo = infos[_cnr];
-
-    newCaseInfo.pet =_pet;
-    status[_cnr]=_status;
-    newCaseInfo.res =_res;
+  function getParties(string memory _cnr)external view returns(Party[] memory){
+    return parties[_cnr];
   }
 
   function addPublicDocument(string memory _cnr,string memory _url) external {
       require(msg.sender==cases[cnr_cases[_cnr]].owner, "You don't have permission to publish public documents");
       docs[_cnr].push(_url);
   }
+
+  function viewPublicDocuments(string memory _cnr)external view returns(string[] memory){
+    return docs[_cnr];
+  }
 }
+

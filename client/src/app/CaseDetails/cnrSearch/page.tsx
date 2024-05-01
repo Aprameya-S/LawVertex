@@ -42,13 +42,14 @@ const Page = () => {
   const searchParams = useSearchParams()
   const page = searchParams.get('page')
   
-  console.log(parties)
+  console.log(caseData)
 
   return (
     <>
+    
     <PageTitle>Search by CNR Number</PageTitle>
     <form onSubmit={handleSearch} className="flex gap-3">
-      <Input type='text' onChange={(e) => setCNR(e.target.value)} placeholder='16-digit CNR Number' required/>
+      <Input type='text' placeholder='16-digit CNR Number' required/>
       <Button>Search</Button>
     </form>
     <nav className="flex gap-2 my-4">

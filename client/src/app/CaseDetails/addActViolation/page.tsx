@@ -5,6 +5,7 @@ import { Input } from '@/components/ui/input'
 import React, { useEffect, useState } from 'react'
 import { getActs,addAct } from '@/hooks/useLegalDataContract'
 import { toast } from 'react-toastify'
+import CaseCard from '@/components/CaseCard'
 
 const Page = () => {
   const [CNR, setCNR] = useState("")
@@ -12,9 +13,11 @@ const Page = () => {
   const [newAct, setNewAct] = useState({name:"",section:""})
   const [isLoading, setIsLoading] = useState(false)
 
+
   const handleSearch = async(e:any) => {
     e.preventDefault()
-    const data = await getActs(CNR)
+    setCNR(e.target[0].value)
+    const data = await getActs(e.target[0].value)
     var parsedData:any = []
     data.forEach((i:any) => {
       parsedData.push({name:i.name,section:i.section})
@@ -51,12 +54,14 @@ const Page = () => {
     <>
       <PageTitle>Add / Update Act Violation</PageTitle>
       <form onSubmit={handleSearch} className="flex gap-3">
-        <Input type='text' onChange={(e) => setCNR(e.target.value)} placeholder='16-digit CNR Number' required/>
+        <Input type='text' placeholder='16-digit CNR Number' required/>
         <Button>Search</Button>
       </form>
+
+      <CaseCard CNR={CNR}/>
       
       {
-        acts!==undefined && <form className='mt-5 flex flex-col gap-3' onSubmit={handleSubmit}>
+        acts!==undefined && <form className='mt-3 flex flex-col gap-3' onSubmit={handleSubmit}>
         {
           acts.map((item:any,index:number) => (
             <div className="flex gap-3" key={index}>
@@ -69,7 +74,7 @@ const Page = () => {
           ))
         }
         {
-          acts.length==0 && <p className='text-red-600'>No violated acts registered</p>
+          acts.length==0 && <p className='text-red-600 font-medium'>No violated acts registered</p>
         }
         <div className="flex gap-3">
           <Input type='text' placeholder='Act in violation' value={newAct.name} onChange={(e) => setNewAct({...newAct,['name']:e.target.value})}/>

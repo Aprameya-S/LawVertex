@@ -1,4 +1,5 @@
 "use client"
+import CaseCard from '@/components/CaseCard'
 import PageTitle from '@/components/PageTitle'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -46,13 +47,14 @@ const Page = () => {
         <Input type='text' placeholder='16-digit CNR Number' required/>
         <Button type='submit'>Search</Button>
       </form>
+      <CaseCard CNR={CNR}/>
       <main>
       <h2 className='font-medium text-blue-600 mt-4'>Petitioner</h2>
         <form onSubmit={handleAddPetitioner}>
           <Label>Petitioner Name</Label>
           <Input type='text' required className='mb-3'></Input>
 
-          <Label>Petitioner&#39s Lead Advocate Name</Label>
+          <Label>Petitioner&#39;s Lead Advocate Name</Label>
           <Input type='text' required className='mb-3'></Input>
 
           <Label>Mailing Address</Label>
@@ -70,7 +72,7 @@ const Page = () => {
           <Label>Respondent Name</Label>
           <Input type='text' required className='mb-3'></Input>
 
-          <Label>Respondent&#39s Lead Advocate Name</Label>
+          <Label>Respondent&#39;s Lead Advocate Name</Label>
           <Input type='text' required className='mb-3'></Input>
 
           <Label>Mailing Address</Label>

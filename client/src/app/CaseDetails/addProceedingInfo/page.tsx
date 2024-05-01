@@ -7,6 +7,7 @@ import { getHistory,addAct, addHistory } from '@/hooks/useLegalDataContract'
 import { toast } from 'react-toastify'
 import { Textarea } from '@/components/ui/textarea'
 import { Label } from '@/components/ui/label'
+import CaseCard from '@/components/CaseCard'
 
 const Page = () => {
   const [CNR, setCNR] = useState("")
@@ -23,7 +24,8 @@ const Page = () => {
 
   const handleSearch = async(e:any) => {
     e.preventDefault()
-    const data = await getHistory(CNR)
+    setCNR(e.target[0].value)
+    const data = await getHistory(e.target[0].value)
     var parsedData:any = []
     data.forEach((i:any) => {
       parsedData.push({
@@ -59,9 +61,11 @@ const Page = () => {
     <>
       <PageTitle>Add Proceedings</PageTitle>
       <form onSubmit={handleSearch} className="flex gap-3">
-        <Input type='text' onChange={(e) => setCNR(e.target.value)} placeholder='16-digit CNR Number' required/>
+        <Input type='text' placeholder='16-digit CNR Number' required/>
         <Button>Search</Button>
       </form>
+
+      <CaseCard CNR={CNR}/>
       
       {
         history!==undefined && <form id='addProceedingForm' className='mt-5' onSubmit={handleSubmit}>
