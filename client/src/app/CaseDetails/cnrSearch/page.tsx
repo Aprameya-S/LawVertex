@@ -3,7 +3,7 @@ import PageTitle from '@/components/PageTitle'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import React, { useEffect, useState } from 'react'
-import { getAllCourts, viewCase, getActs } from '@/hooks/useLegalDataContract'
+import { getAllCourts, viewCase, getActs, getParties } from '@/hooks/useLegalDataContract'
 import { toast } from 'react-toastify'
 import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
@@ -14,18 +14,23 @@ const Page = () => {
   const [caseData, setCaseData] = useState<any>({exists:null})
   const [court, setCourt] = useState<any>([])
   const [acts, setActs] = useState<any>([])
+  const [parties, setParties] = useState([])
 
   const handleSearch = async(e:any) => {
     e.preventDefault();
+    setCNR(e.target[0].value)
     try {
       setCaseData({...caseData,['exists']:false})
-      const data = await viewCase(CNR)
+      const data = await viewCase(e.target[0].value)
       setCaseData({...data,['exists']:true})
 
       const allCourts = await getAllCourts()
       setCourt(allCourts.filter((item:any) => item.owner===data.owner)[0])
 
-      const violatedActs = await getActs(CNR)
+      const p = await getParties(e.target[0].value)
+      setParties(p)
+
+      const violatedActs = await getActs(e.target[0].value)
       setActs(violatedActs)
     } catch (error:any) {
       if(error.error.code===-32603){
@@ -34,14 +39,10 @@ const Page = () => {
     }
   } 
 
-  // console.log(caseData,court,acts)
-
-  // if(CNR!=="" && caseData.exists==false) return (
-  //   <><h1>Not Found</h1></>
-  // )
   const searchParams = useSearchParams()
   const page = searchParams.get('page')
   
+  console.log(parties)
 
   return (
     <>
@@ -119,6 +120,36 @@ const Page = () => {
 
                 <b className='border-r-2 border-input pl-4 p-2 font-semibold'>Judge</b>
                 <p className='p-2 pl-4'>{caseData.judge}</p>
+              </div>
+            </div>
+
+            {/* Petitioner */}
+            <div className="mt-5">
+              <h2 className='font-medium text-blue-600 my-2'>Petitioner/s</h2>
+              <div className="rounded-[16px] border-2 border-input p-2 pl-4">
+                {
+                  parties.filter((i:any) => i.party==="pet").map((item:any,index:number) => (
+                    <div className="text-sm" key={index}>
+                      <p className='font-semibold'>{index+1}) {item.name}</p>
+                      <i>Advocate: {item.lead_adv}</i>
+                    </div>
+                  ))
+                }
+              </div>
+            </div>
+
+            {/* Respondent */}
+            <div className="mt-5">
+              <h2 className='font-medium text-blue-600 my-2'>Respondent/s</h2>
+              <div className="rounded-[16px] border-2 border-input p-2 pl-4">
+                {
+                  parties.filter((i:any) => i.party==="res").map((item:any,index:number) => (
+                    <div className="text-sm" key={index}>
+                      <p className='font-semibold'>{index+1}) {item.name}</p>
+                      <i>Advocate: {item.lead_adv}</i>
+                    </div>
+                  ))
+                }
               </div>
             </div>
 

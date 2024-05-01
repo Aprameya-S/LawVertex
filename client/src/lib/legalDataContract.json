@@ -6,159 +6,12 @@
       "type": "constructor"
     },
     {
-      "inputs": [],
-      "name": "caseCount",
-      "outputs": [
-        {
-          "internalType": "uint256",
-          "name": "",
-          "type": "uint256"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function",
-      "constant": true
-    },
-    {
-      "inputs": [],
-      "name": "contractOwner",
-      "outputs": [
-        {
-          "internalType": "address",
-          "name": "",
-          "type": "address"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function",
-      "constant": true
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "string",
-          "name": "",
-          "type": "string"
-        },
-        {
-          "internalType": "uint256",
-          "name": "",
-          "type": "uint256"
-        }
-      ],
-      "name": "docs",
-      "outputs": [
-        {
-          "internalType": "string",
-          "name": "",
-          "type": "string"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function",
-      "constant": true
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "string",
-          "name": "",
-          "type": "string"
-        }
-      ],
-      "name": "infos",
-      "outputs": [
-        {
-          "internalType": "uint256",
-          "name": "_id",
-          "type": "uint256"
-        },
-        {
-          "internalType": "string",
-          "name": "pet",
-          "type": "string"
-        },
-        {
-          "internalType": "string",
-          "name": "res",
-          "type": "string"
-        },
-        {
-          "internalType": "string",
-          "name": "police_station",
-          "type": "string"
-        },
-        {
-          "internalType": "string",
-          "name": "fir_no",
-          "type": "string"
-        },
-        {
-          "internalType": "string",
-          "name": "year",
-          "type": "string"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function",
-      "constant": true
-    },
-    {
-      "inputs": [],
-      "name": "getAllCourts",
-      "outputs": [
-        {
-          "components": [
-            {
-              "internalType": "address",
-              "name": "owner",
-              "type": "address"
-            },
-            {
-              "internalType": "string",
-              "name": "court_type",
-              "type": "string"
-            },
-            {
-              "internalType": "uint256",
-              "name": "slno",
-              "type": "uint256"
-            },
-            {
-              "internalType": "string",
-              "name": "name",
-              "type": "string"
-            },
-            {
-              "internalType": "string",
-              "name": "location",
-              "type": "string"
-            },
-            {
-              "internalType": "string",
-              "name": "tel",
-              "type": "string"
-            }
-          ],
-          "internalType": "struct LawVertex.Court[]",
-          "name": "",
-          "type": "tuple[]"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function",
-      "constant": true
-    },
-    {
       "inputs": [
         {
           "internalType": "string",
           "name": "_cnr",
           "type": "string"
-        }
-      ],
-      "name": "getActs",
-      "outputs": [
+        },
         {
           "components": [
             {
@@ -173,285 +26,11 @@
             }
           ],
           "internalType": "struct LawVertex.ActStruct[]",
-          "name": "",
+          "name": "_acts",
           "type": "tuple[]"
         }
       ],
-      "stateMutability": "view",
-      "type": "function",
-      "constant": true
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "string",
-          "name": "_cnr",
-          "type": "string"
-        }
-      ],
-      "name": "getHistory",
-      "outputs": [
-        {
-          "components": [
-            {
-              "internalType": "string",
-              "name": "judge",
-              "type": "string"
-            },
-            {
-              "internalType": "string",
-              "name": "date",
-              "type": "string"
-            },
-            {
-              "internalType": "string",
-              "name": "next_hearing_date",
-              "type": "string"
-            },
-            {
-              "internalType": "string",
-              "name": "next_hearing_purpose",
-              "type": "string"
-            },
-            {
-              "internalType": "string",
-              "name": "business",
-              "type": "string"
-            },
-            {
-              "internalType": "string",
-              "name": "presentee",
-              "type": "string"
-            }
-          ],
-          "internalType": "struct LawVertex.History[]",
-          "name": "",
-          "type": "tuple[]"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function",
-      "constant": true
-    },
-    {
-      "inputs": [],
-      "name": "getAllParties",
-      "outputs": [
-        {
-          "components": [
-            {
-              "internalType": "address",
-              "name": "owner",
-              "type": "address"
-            },
-            {
-              "internalType": "address",
-              "name": "lead_adv_add",
-              "type": "address"
-            },
-            {
-              "internalType": "uint256",
-              "name": "slno",
-              "type": "uint256"
-            },
-            {
-              "internalType": "string",
-              "name": "name",
-              "type": "string"
-            },
-            {
-              "internalType": "string",
-              "name": "cnr",
-              "type": "string"
-            },
-            {
-              "internalType": "string",
-              "name": "location",
-              "type": "string"
-            },
-            {
-              "internalType": "string",
-              "name": "email",
-              "type": "string"
-            },
-            {
-              "internalType": "string",
-              "name": "phone",
-              "type": "string"
-            },
-            {
-              "internalType": "string",
-              "name": "lead_adv",
-              "type": "string"
-            }
-          ],
-          "internalType": "struct LawVertex.Party[]",
-          "name": "",
-          "type": "tuple[]"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function",
-      "constant": true
-    },
-    {
-      "inputs": [],
-      "name": "getAllCases",
-      "outputs": [
-        {
-          "components": [
-            {
-              "internalType": "address",
-              "name": "owner",
-              "type": "address"
-            },
-            {
-              "internalType": "string",
-              "name": "case_type",
-              "type": "string"
-            },
-            {
-              "internalType": "uint256",
-              "name": "filing_no",
-              "type": "uint256"
-            },
-            {
-              "internalType": "string",
-              "name": "filing_date",
-              "type": "string"
-            },
-            {
-              "internalType": "uint256",
-              "name": "reg_no",
-              "type": "uint256"
-            },
-            {
-              "internalType": "string",
-              "name": "reg_date",
-              "type": "string"
-            },
-            {
-              "internalType": "string",
-              "name": "cnr",
-              "type": "string"
-            },
-            {
-              "internalType": "string",
-              "name": "first_hearing",
-              "type": "string"
-            },
-            {
-              "internalType": "string",
-              "name": "next_hearing",
-              "type": "string"
-            },
-            {
-              "internalType": "string",
-              "name": "stage",
-              "type": "string"
-            },
-            {
-              "internalType": "address",
-              "name": "court_address",
-              "type": "address"
-            },
-            {
-              "internalType": "string",
-              "name": "court_no",
-              "type": "string"
-            },
-            {
-              "internalType": "string",
-              "name": "judge",
-              "type": "string"
-            }
-          ],
-          "internalType": "struct LawVertex.Case[]",
-          "name": "",
-          "type": "tuple[]"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function",
-      "constant": true
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "address",
-          "name": "_owner",
-          "type": "address"
-        },
-        {
-          "internalType": "string",
-          "name": "_court_type",
-          "type": "string"
-        },
-        {
-          "internalType": "string",
-          "name": "_name",
-          "type": "string"
-        },
-        {
-          "internalType": "string",
-          "name": "_location",
-          "type": "string"
-        },
-        {
-          "internalType": "string",
-          "name": "_tel",
-          "type": "string"
-        }
-      ],
-      "name": "addCourt",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "address",
-          "name": "_owner",
-          "type": "address"
-        },
-        {
-          "internalType": "address",
-          "name": "_lead_adv_add",
-          "type": "address"
-        },
-        {
-          "internalType": "string",
-          "name": "_name",
-          "type": "string"
-        },
-        {
-          "internalType": "string",
-          "name": "_cnr",
-          "type": "string"
-        },
-        {
-          "internalType": "string",
-          "name": "_location",
-          "type": "string"
-        },
-        {
-          "internalType": "string",
-          "name": "_email",
-          "type": "string"
-        },
-        {
-          "internalType": "string",
-          "name": "_phone",
-          "type": "string"
-        },
-        {
-          "internalType": "string",
-          "name": "_lead_adv",
-          "type": "string"
-        }
-      ],
-      "name": "addParty",
+      "name": "addAct",
       "outputs": [],
       "stateMutability": "nonpayable",
       "type": "function"
@@ -525,113 +104,72 @@
           "internalType": "string",
           "name": "_cnr",
           "type": "string"
-        }
-      ],
-      "name": "viewCase",
-      "outputs": [
+        },
         {
-          "components": [
-            {
-              "internalType": "address",
-              "name": "owner",
-              "type": "address"
-            },
-            {
-              "internalType": "string",
-              "name": "case_type",
-              "type": "string"
-            },
-            {
-              "internalType": "uint256",
-              "name": "filing_no",
-              "type": "uint256"
-            },
-            {
-              "internalType": "string",
-              "name": "filing_date",
-              "type": "string"
-            },
-            {
-              "internalType": "uint256",
-              "name": "reg_no",
-              "type": "uint256"
-            },
-            {
-              "internalType": "string",
-              "name": "reg_date",
-              "type": "string"
-            },
-            {
-              "internalType": "string",
-              "name": "cnr",
-              "type": "string"
-            },
-            {
-              "internalType": "string",
-              "name": "first_hearing",
-              "type": "string"
-            },
-            {
-              "internalType": "string",
-              "name": "next_hearing",
-              "type": "string"
-            },
-            {
-              "internalType": "string",
-              "name": "stage",
-              "type": "string"
-            },
-            {
-              "internalType": "address",
-              "name": "court_address",
-              "type": "address"
-            },
-            {
-              "internalType": "string",
-              "name": "court_no",
-              "type": "string"
-            },
-            {
-              "internalType": "string",
-              "name": "judge",
-              "type": "string"
-            }
-          ],
-          "internalType": "struct LawVertex.Case",
-          "name": "",
-          "type": "tuple"
+          "internalType": "string",
+          "name": "_pet",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "_res",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "_status",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "_police_station",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "_fir_no",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "_year",
+          "type": "string"
         }
       ],
-      "stateMutability": "view",
-      "type": "function",
-      "constant": true
+      "name": "addCaseInfo",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
     },
     {
       "inputs": [
         {
+          "internalType": "address",
+          "name": "_owner",
+          "type": "address"
+        },
+        {
           "internalType": "string",
-          "name": "_cnr",
+          "name": "_court_type",
           "type": "string"
         },
         {
-          "components": [
-            {
-              "internalType": "string",
-              "name": "name",
-              "type": "string"
-            },
-            {
-              "internalType": "string",
-              "name": "section",
-              "type": "string"
-            }
-          ],
-          "internalType": "struct LawVertex.ActStruct[]",
-          "name": "_acts",
-          "type": "tuple[]"
+          "internalType": "string",
+          "name": "_name",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "_location",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "_tel",
+          "type": "string"
         }
       ],
-      "name": "addAct",
+      "name": "addCourt",
       "outputs": [],
       "stateMutability": "nonpayable",
       "type": "function"
@@ -695,6 +233,370 @@
         },
         {
           "internalType": "string",
+          "name": "_party",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "_name",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "_lead_adv",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "_location",
+          "type": "string"
+        }
+      ],
+      "name": "addParty",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "_cnr",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "_url",
+          "type": "string"
+        }
+      ],
+      "name": "addPublicDocument",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "caseCount",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "contractOwner",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "_cnr",
+          "type": "string"
+        }
+      ],
+      "name": "getActs",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "string",
+              "name": "name",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "section",
+              "type": "string"
+            }
+          ],
+          "internalType": "struct LawVertex.ActStruct[]",
+          "name": "",
+          "type": "tuple[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getAllCases",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "address",
+              "name": "owner",
+              "type": "address"
+            },
+            {
+              "internalType": "string",
+              "name": "case_type",
+              "type": "string"
+            },
+            {
+              "internalType": "uint256",
+              "name": "filing_no",
+              "type": "uint256"
+            },
+            {
+              "internalType": "string",
+              "name": "filing_date",
+              "type": "string"
+            },
+            {
+              "internalType": "uint256",
+              "name": "reg_no",
+              "type": "uint256"
+            },
+            {
+              "internalType": "string",
+              "name": "reg_date",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "cnr",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "first_hearing",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "next_hearing",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "stage",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "court_no",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "judge",
+              "type": "string"
+            }
+          ],
+          "internalType": "struct LawVertex.Case[]",
+          "name": "",
+          "type": "tuple[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getAllCourts",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "address",
+              "name": "owner",
+              "type": "address"
+            },
+            {
+              "internalType": "string",
+              "name": "court_type",
+              "type": "string"
+            },
+            {
+              "internalType": "uint256",
+              "name": "slno",
+              "type": "uint256"
+            },
+            {
+              "internalType": "string",
+              "name": "name",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "location",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "tel",
+              "type": "string"
+            }
+          ],
+          "internalType": "struct LawVertex.Court[]",
+          "name": "",
+          "type": "tuple[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "_cnr",
+          "type": "string"
+        }
+      ],
+      "name": "getHistory",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "string",
+              "name": "judge",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "date",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "next_hearing_date",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "next_hearing_purpose",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "business",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "presentee",
+              "type": "string"
+            }
+          ],
+          "internalType": "struct LawVertex.History[]",
+          "name": "",
+          "type": "tuple[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "_cnr",
+          "type": "string"
+        }
+      ],
+      "name": "getParties",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "string",
+              "name": "party",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "name",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "lead_adv",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "location",
+              "type": "string"
+            }
+          ],
+          "internalType": "struct LawVertex.Party[]",
+          "name": "",
+          "type": "tuple[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "",
+          "type": "string"
+        }
+      ],
+      "name": "infos",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "_id",
+          "type": "uint256"
+        },
+        {
+          "internalType": "string",
+          "name": "pet",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "res",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "police_station",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "fir_no",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "year",
+          "type": "string"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "_cnr",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
           "name": "_next_hearing",
           "type": "string"
         },
@@ -725,41 +627,79 @@
           "internalType": "string",
           "name": "_cnr",
           "type": "string"
-        },
-        {
-          "internalType": "string",
-          "name": "_pet",
-          "type": "string"
-        },
-        {
-          "internalType": "string",
-          "name": "_res",
-          "type": "string"
-        },
-        {
-          "internalType": "string",
-          "name": "_status",
-          "type": "string"
-        },
-        {
-          "internalType": "string",
-          "name": "_police_station",
-          "type": "string"
-        },
-        {
-          "internalType": "string",
-          "name": "_fir_no",
-          "type": "string"
-        },
-        {
-          "internalType": "string",
-          "name": "_year",
-          "type": "string"
         }
       ],
-      "name": "addCaseInfo",
-      "outputs": [],
-      "stateMutability": "nonpayable",
+      "name": "viewCase",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "address",
+              "name": "owner",
+              "type": "address"
+            },
+            {
+              "internalType": "string",
+              "name": "case_type",
+              "type": "string"
+            },
+            {
+              "internalType": "uint256",
+              "name": "filing_no",
+              "type": "uint256"
+            },
+            {
+              "internalType": "string",
+              "name": "filing_date",
+              "type": "string"
+            },
+            {
+              "internalType": "uint256",
+              "name": "reg_no",
+              "type": "uint256"
+            },
+            {
+              "internalType": "string",
+              "name": "reg_date",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "cnr",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "first_hearing",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "next_hearing",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "stage",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "court_no",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "judge",
+              "type": "string"
+            }
+          ],
+          "internalType": "struct LawVertex.Case",
+          "name": "",
+          "type": "tuple"
+        }
+      ],
+      "stateMutability": "view",
       "type": "function"
     },
     {
@@ -768,16 +708,17 @@
           "internalType": "string",
           "name": "_cnr",
           "type": "string"
-        },
-        {
-          "internalType": "string",
-          "name": "_url",
-          "type": "string"
         }
       ],
-      "name": "addPublicDocument",
-      "outputs": [],
-      "stateMutability": "nonpayable",
+      "name": "viewPublicDocuments",
+      "outputs": [
+        {
+          "internalType": "string[]",
+          "name": "",
+          "type": "string[]"
+        }
+      ],
+      "stateMutability": "view",
       "type": "function"
     }
   ]

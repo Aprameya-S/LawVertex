@@ -35,7 +35,7 @@ const Page = () => {
     <>
       <PageTitle>Home</PageTitle>
       <div className="block w-full h-[60px] bg-gradient-to-b from-white dark:from-[#0e0e10] to-transparent mb-[-60px] z-20 relative dark:hidden"></div>
-      <img src='./images/SCI.jpg' alt='court' className='block z-10 relative rounded-[20px]'/>
+      <img src='./images/SCI.jpg' alt='court' className='block z-10 relative rounded-[20px] shadow-lg'/>
 
       <div className="grid grid-cols-3 gap-4 mt-4">
         {

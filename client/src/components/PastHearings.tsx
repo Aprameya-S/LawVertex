@@ -24,14 +24,13 @@ const PastHearings = (props:any) => {
 
   useEffect(() => {
     getData()
-  },[])
-
-  
+  },[props.CNR])
 
   return (
     <>
-    <h2 className='font-medium text-blue-600 my-2'>Case History</h2>
-    <main>
+    <h2 className='font-medium text-blue-600 my-2'>{history.length==0 && 'No '}Case History</h2>
+
+    {history.length!=0 && <main>
       <div className="rounded-[16px] border-2 border-input overflow-hidden">
         <div className="grid grid-cols-4">
           <p className='font-semibold text-sm  p-2 pl-4 border-r-2 border-input'>Judge</p>
@@ -79,6 +78,7 @@ const PastHearings = (props:any) => {
       </div>
       
     </main>
+    }
     </>
   )
 }

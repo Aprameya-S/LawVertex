@@ -8,7 +8,7 @@ export const createEthereumContract = () => {
   const provider = new ethers.providers.Web3Provider(window.ethereum);
 
   const signer = provider.getSigner();
-  const legalDataContract = new ethers.Contract("0x2D7acd929c34089Ff97d05B96d5Dd9257A7D1Fdb" || "", abi.abi, signer);
+  const legalDataContract = new ethers.Contract("0x9f279488c57E328268DcC8C1Da0Da789FaF4cccd" || "", abi.abi, signer);
 
   return legalDataContract;
 };
@@ -55,7 +55,7 @@ export const viewCase = async(cnr:string) => {
 export const addCase = async(caseForm:any, caseInfoForm:any) => {
   try {
     const legalDataContract = createEthereumContract()
-    console.log(caseForm,caseInfoForm)
+    // console.log(caseForm,caseInfoForm)
     const data = await legalDataContract.addCase(
       caseForm.case_type,
       caseForm.filing_no,
@@ -132,6 +132,35 @@ export const addHistory = async(CNR:string,history:Array<any>) => {
     )
     // console.log(data)
     toast("Hearings updated")
+
+  } catch (error) {
+    throw(error)
+  }
+}
+
+export const getParties = async(cnr:string) => {
+  try {
+    const legalDataContract = createEthereumContract()
+    const data = await legalDataContract.getParties(cnr)
+    return data
+  } catch (error) {
+    throw(error)
+  }
+}
+
+
+export const addParty = async(form:any) => {
+  try {
+    const legalDataContract = createEthereumContract()
+    const data = await legalDataContract.addParty(
+      form.cnr,
+      form.party,
+      form.name,
+      form.adv,
+      form.location
+    )
+    // console.log(data)
+    toast("Party added!")
 
   } catch (error) {
     throw(error)
