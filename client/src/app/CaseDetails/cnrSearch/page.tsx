@@ -8,6 +8,7 @@ import { toast } from 'react-toastify'
 import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import PastHearings from '@/components/PastHearings'
+import PublicDocuments from '@/components/PublicDocuments'
 
 const Page = () => {
   const [CNR, setCNR] = useState("")
@@ -20,7 +21,7 @@ const Page = () => {
     e.preventDefault();
     setCNR(e.target[0].value)
     try {
-      setCaseData({...caseData,['exists']:false})
+      setCaseData({exists:false})
       const data = await viewCase(e.target[0].value)
       setCaseData({...data,['exists']:true})
 
@@ -33,25 +34,26 @@ const Page = () => {
       const violatedActs = await getActs(e.target[0].value)
       setActs(violatedActs)
     } catch (error:any) {
-      if(error.error.code===-32603){
-        toast.error("CNR does not exist")
-      }
+      console.error(error)
     }
   } 
 
   const searchParams = useSearchParams()
   const page = searchParams.get('page')
   
-  console.log(caseData)
+  // console.log(caseData)
 
   return (
     <>
-    
     <PageTitle>Search by CNR Number</PageTitle>
     <form onSubmit={handleSearch} className="flex gap-3">
-      <Input type='text' placeholder='16-digit CNR Number' required/>
+      <div className="relative w-full">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-search absolute left-[10px] top-2.5 h-4 w-4 text-muted-foreground"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg>
+        <Input type='text' placeholder='16-digit CNR Number' className='pl-8' required/>
+      </div>
       <Button>Search</Button>
     </form>
+    {!caseData.exists && <p className='text-red-600 font-medium mt-2'>CNR does not exist</p>}
     <nav className="flex gap-2 my-4">
       <Link href='?page=case-details'>
         <Button variant='secondary' size='sm'>Case Details</Button>
@@ -64,17 +66,19 @@ const Page = () => {
       </Link>
     </nav>
     {
-      court.length!=0 && page==="case-history" ? (
+      caseData.exists && page==="case-history" ? (
         <>
           <h1 className='text-[20px] font-medium'>{court.name} - {court.court_type}</h1>
           <PastHearings CNR={CNR}/>
         </>
-      ) : court.length!=0 && page==="documents" ? (
-        <h1>doc</h1>
+      ) : caseData.exists && page==="documents" ? (
+        <>
+        <PublicDocuments CNR={CNR} types={["Interim Orders","Final Orders","Judgements","misc"]}/>
+        </>
       ) : (
         <>
         {
-          court.length!=0 &&
+          caseData.exists &&
           <main className=''>
               <h1 className='text-[20px] font-medium'>{court.name} - {court.court_type}</h1>
             {/* Case Details */}
@@ -174,7 +178,12 @@ const Page = () => {
             <div className="mt-5">
               <h2 className='font-medium text-blue-600 my-2'>Acts in violation</h2>
 
-              <div className="rounded-[16px] border-2 border-input  text-sm overflow-hidden">
+                {
+                  acts.length==0 && <p>No violation registered</p>
+                }
+              {
+                acts.length!=0 &&
+                <div className="rounded-[16px] border-2 border-input  text-sm overflow-hidden">
                 {
                   acts.map((item:any,index:number) => (
                     <div key={index} className='grid grid-cols-[1fr_3fr]'>
@@ -183,7 +192,7 @@ const Page = () => {
                     </div>
                   ))
                 }
-              </div>
+              </div>}
             </div>
           </main>
         }

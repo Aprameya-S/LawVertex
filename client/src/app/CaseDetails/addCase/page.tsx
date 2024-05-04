@@ -10,10 +10,16 @@ import { addCase } from '@/hooks/useLegalDataContract'
 const Page = () => {
   const [caseForm, setCaseForm] = useState({})
   const [caseInfoForm, setCaseInfoForm] = useState({})
+  const [isLoading, setIsLoading] = useState(false)
 
   const handleSubmit = async (e:any) => {
     e.preventDefault()
-    addCase(caseForm,caseInfoForm)
+    setIsLoading(true)
+    await addCase(caseForm,caseInfoForm)
+    e.target.reset()
+    setCaseForm({})
+    setCaseInfoForm({})
+    setIsLoading(false)
   }
   
   
@@ -110,7 +116,12 @@ const Page = () => {
         <Input type='text' onChange={(e:any) => setCaseInfoForm({...caseInfoForm,['fir_no']:e.target.value})} className='mb-3' required/>
             
           
-        <Button type='submit'>Submit</Button>
+        <Button type='submit' disabled={isLoading}>
+          {
+            isLoading && <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-2 lucide lucide-rotate-cw animate-spin"><path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/></svg>
+          }
+          Submit
+        </Button>
 
       </form>
     </>

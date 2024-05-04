@@ -266,7 +266,22 @@
         },
         {
           "internalType": "string",
-          "name": "_url",
+          "name": "_name",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "_uploadedAt",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "_cid",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "_class",
           "type": "string"
         }
       ],
@@ -591,6 +606,25 @@
     {
       "inputs": [
         {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "roles",
+      "outputs": [
+        {
+          "internalType": "string",
+          "name": "",
+          "type": "string"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
           "internalType": "string",
           "name": "_cnr",
           "type": "string"
@@ -713,9 +747,31 @@
       "name": "viewPublicDocuments",
       "outputs": [
         {
-          "internalType": "string[]",
+          "components": [
+            {
+              "internalType": "string",
+              "name": "name",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "uploadedAt",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "cid",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "class",
+              "type": "string"
+            }
+          ],
+          "internalType": "struct LawVertex.Document[]",
           "name": "",
-          "type": "string[]"
+          "type": "tuple[]"
         }
       ],
       "stateMutability": "view",

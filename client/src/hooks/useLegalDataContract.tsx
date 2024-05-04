@@ -8,7 +8,7 @@ export const createEthereumContract = () => {
   const provider = new ethers.providers.Web3Provider(window.ethereum);
 
   const signer = provider.getSigner();
-  const legalDataContract = new ethers.Contract("0x9f279488c57E328268DcC8C1Da0Da789FaF4cccd" || "", abi.abi, signer);
+  const legalDataContract = new ethers.Contract("0x4C9b4F5c1075596F118ea77e70D82301A63C9aDB" || "", abi.abi, signer);
 
   return legalDataContract;
 };
@@ -35,6 +35,16 @@ export const getAllCourts = async() => {
   try {
     const legalDataContract = createEthereumContract()
     const data = await legalDataContract.getAllCourts()
+    return data
+  } catch (error) {
+    throw(error)
+  }
+}
+
+export const getAllCases = async() => {
+  try {
+    const legalDataContract = createEthereumContract()
+    const data = await legalDataContract.getAllCases()
     return data
   } catch (error) {
     throw(error)
@@ -100,6 +110,7 @@ export const getActs = async(cnr:string) => {
 
 export const addAct = async(CNR:string,acts:Array<any>) => {
   try {
+    console.log(CNR,acts)
     const legalDataContract = createEthereumContract()
     const data = await legalDataContract.addAct(
       CNR,
@@ -148,7 +159,6 @@ export const getParties = async(cnr:string) => {
   }
 }
 
-
 export const addParty = async(form:any) => {
   try {
     const legalDataContract = createEthereumContract()
@@ -166,3 +176,34 @@ export const addParty = async(form:any) => {
     throw(error)
   }
 }
+
+export const addPublicDocument = async(cnr:string,form:any,cid:string) => {
+  // console.log(cnr,form,cid)
+  try {
+    const legalDataContract = createEthereumContract()
+    const data = await legalDataContract.addPublicDocument(
+      cnr,
+      form.name,
+      form.uploadedAt,
+      cid,
+      form.type
+    )
+    // console.log(data)
+    toast("Document uploaded")
+
+  } catch (error) {
+    throw(error)
+  }
+}
+
+export const viewPublicDocuments = async(cnr:string) => {
+  try {
+    const legalDataContract = createEthereumContract()
+    const data = await legalDataContract.viewPublicDocuments(cnr)
+    return data
+  } catch (error) {
+    throw(error)
+  }
+}
+
+

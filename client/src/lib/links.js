@@ -60,15 +60,27 @@ export const CourtsCaseDetailsLinks = [
     title:"Add Party",
     href:"/CaseDetails/addParty"
   },
+  {
+    title:"Upload Document",
+    href:"/CaseDetails/uploadPublicDocs"
+  },
 ]
 
 export const CaseDetailsLinks = [
   {
-    title:"Locate Court",
-    href:"/CaseDetails/locateCourt"
+    title:"Case Status",
+    href:"/CaseDetails/caseStatus?page=case-details"
   },
   {
     title:"CNR Search",
     href:"/CaseDetails/cnrSearch?page=case-details"
+  },
+  {
+    title:"Court Orders",
+    href:"/CaseDetails/courtOrders"
+  },
+  {
+    title:"Locate Court",
+    href:"/CaseDetails/locateCourt"
   },
 ]

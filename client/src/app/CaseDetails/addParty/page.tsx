@@ -18,10 +18,6 @@ const Page = () => {
     const data:any = await getParties(e.target[0].value)
     setCNR(e.target[0].value)
     console.log(data)
-    // var parsedData:any = []
-    // data.forEach((i:any) => {
-    //   parsedData.push({name:i.name,section:i.section})
-    // });
   }
 
   const handleAddPetitioner = async(e:any) => {
@@ -44,12 +40,18 @@ const Page = () => {
     <>
     <PageTitle>Add / Update Parties</PageTitle>
       <form onSubmit={handleSearch} className="flex gap-3">
-        <Input type='text' placeholder='16-digit CNR Number' required/>
+        <div className="relative w-full">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-search absolute left-[10px] top-2.5 h-4 w-4 text-muted-foreground"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg>
+          <Input type='text' placeholder='16-digit CNR Number' className='pl-8' required/>
+        </div>
+
         <Button type='submit'>Search</Button>
       </form>
       <CaseCard CNR={CNR}/>
+      {
+      CNR!=="" && 
       <main>
-      <h2 className='font-medium text-blue-600 mt-4'>Petitioner</h2>
+        <h2 className='font-medium text-blue-600 mt-4'>Petitioner</h2>
         <form onSubmit={handleAddPetitioner}>
           <Label>Petitioner Name</Label>
           <Input type='text' required className='mb-3'></Input>
@@ -85,6 +87,7 @@ const Page = () => {
           </Button>
         </form>
       </main>
+      }
     </>
   )
 }
