@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { deleteFile, getOwnedFile } from '@/hooks/useFileTransferContract'
 import { Button } from '@/components/ui/button';
 import Loader from '@/components/Loader';
-import { decryptfile } from '@/lib/decryptFile';
+import { decryptfile } from '@/lib/AES';
 import MultiMediaRenderer from '@/components/MultiMediaRenderer';
 import FileInfo from '@/components/FileInfo';
 import { toast } from 'react-toastify';
@@ -55,9 +55,8 @@ const Page = ({ params }: { params: { publicid: string } }) => {
           publicid:res[6],
           cid: res[7],
           encrypted:  res[8],
-          searchable: res[9],
-          canRequest: res[10],
-          exists: res[11]
+          canRequest: res[9],
+          exists: res[10]
         })
 
         //if file is encrypted, decrypt and set url
@@ -97,7 +96,7 @@ const Page = ({ params }: { params: { publicid: string } }) => {
     fetchData()
   },[])
 
-  console.log(fileUrl)
+  // console.log(fileUrl)
 
   return isLoading ? (
     <Loader />

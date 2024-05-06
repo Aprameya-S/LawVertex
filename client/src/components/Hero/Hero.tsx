@@ -57,25 +57,25 @@ const Hero = () => {
                 <span><h1>with Blockchain</h1></span>
                 <div className="line"></div>
                 <div className="buttons">
-                    <Link href='/campaigns'>
+                    <Link href='/CaseDetails/caseStatus'>
                         <button className="gradient-button">
-                        <span>Dashboard</span>
+                        <span>Search case</span>
                         <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" clipRule="evenodd" d="m.819 50.513 8.307 8.238 38.423-38.454-.059 28.89h11.638V.424H10.47l-.14 11.564h28.983L.819 50.513Zm55.31-47.09v42.764V3.424Z" fill="currentColor"></path></svg></button>
                     </Link>
-                    <Link href='/research/campaigns'>
-                        <button className="gradient-button"><span>Fund a research campaign</span><svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" clipRule="evenodd" d="m.819 50.513 8.307 8.238 38.423-38.454-.059 28.89h11.638V.424H10.47l-.14 11.564h28.983L.819 50.513Zm55.31-47.09v42.764V3.424Z" fill="currentColor"></path></svg></button>
+                    <Link href='/Vault'>
+                        <button className="gradient-button"><span>Send files</span><svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" clipRule="evenodd" d="m.819 50.513 8.307 8.238 38.423-38.454-.059 28.89h11.638V.424H10.47l-.14 11.564h28.983L.819 50.513Zm55.31-47.09v42.764V3.424Z" fill="currentColor"></path></svg></button>
                     </Link>
                 </div>
                 
             </div>
             <div className="img"></div>
             <div className="raise-funds">
-                <Link href='/create-campaign'>
+                <Link href='/findAttorney'>
                      <button className="gradient-button">
-                     <span>Create a campaign</span>
+                     <span>Find an attorney</span>
                      <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" clipRule="evenodd" d="m.819 50.513 8.307 8.238 38.423-38.454-.059 28.89h11.638V.424H10.47l-.14 11.564h28.983L.819 50.513Zm55.31-47.09v42.764V3.424Z" fill="currentColor"></path></svg></button>
                 </Link>
-                <p>Raise funds for health-related campaigns, such as medical treatments, surgeries, and therapies, without worrying about the high costs associated with traditional fundraising methods.</p>
+                <p>Discover the future of legal representation with our revolutionary platform. Seamlessly navigate through a secure repository of attorney profiles, each meticulously linked to relevant case histories, ensuring transparency and trust. Effortlessly find the perfect legal advocate for your needs, backed by verified credentials and a tamper-proof track record. </p>
             </div>
             
         </div>

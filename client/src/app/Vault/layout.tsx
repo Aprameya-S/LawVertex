@@ -25,7 +25,8 @@ const Layout = ({
         <FileUploadButton />
         {
           VaultLinks.map((item,index) => (
-            <Link key={index} href={item.href} className={`pl-[10px] border-l-2  text-[14px] py-1 hover:text-slate-800 hover:border-slate-500  ${(path===item.href)?'text-black dark:text-white font-semibold border-blue-600 hover:border-blue-600 dark:hover:border-blue-600':'border-slate-300 font-normal text-slate-600 dark:text-gray-400 dark:hover:text-white dark:border-gray-600 dark:hover:border-white'}`}>
+            <Link key={index} href={item.href} className={`text-[14px] py-1 hover:text-slate-800 flex gap-2  items-center ${(path===item.href)?'text-black dark:text-white font-semibold':'font-normal text-slate-600 dark:text-gray-400 dark:hover:text-white '}`}>
+              {item.icon}
               {item.title}
             </Link>
           ))

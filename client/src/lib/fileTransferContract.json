@@ -48,11 +48,6 @@
 			},
 			{
 				"internalType": "bool",
-				"name": "_searchable",
-				"type": "bool"
-			},
-			{
-				"internalType": "bool",
 				"name": "_canRequest",
 				"type": "bool"
 			},
@@ -145,19 +140,6 @@
 		"type": "function"
 	},
 	{
-		"inputs": [],
-		"name": "usercount",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
 		"inputs": [
 			{
 				"internalType": "string",
@@ -195,7 +177,7 @@
 						"type": "bool"
 					}
 				],
-				"internalType": "struct filetransfer.Access[]",
+				"internalType": "struct FileTransfer.Access[]",
 				"name": "",
 				"type": "tuple[]"
 			}
@@ -262,11 +244,6 @@
 					},
 					{
 						"internalType": "bool",
-						"name": "searchable",
-						"type": "bool"
-					},
-					{
-						"internalType": "bool",
 						"name": "canRequest",
 						"type": "bool"
 					},
@@ -276,7 +253,7 @@
 						"type": "string"
 					}
 				],
-				"internalType": "struct filetransfer.PrivateFile",
+				"internalType": "struct FileTransfer.PrivateFile",
 				"name": "",
 				"type": "tuple"
 			}
@@ -343,11 +320,6 @@
 					},
 					{
 						"internalType": "bool",
-						"name": "searchable",
-						"type": "bool"
-					},
-					{
-						"internalType": "bool",
 						"name": "canRequest",
 						"type": "bool"
 					},
@@ -357,7 +329,7 @@
 						"type": "string"
 					}
 				],
-				"internalType": "struct filetransfer.PrivateFile",
+				"internalType": "struct FileTransfer.PrivateFile",
 				"name": "",
 				"type": "tuple"
 			}
@@ -418,11 +390,6 @@
 					},
 					{
 						"internalType": "bool",
-						"name": "searchable",
-						"type": "bool"
-					},
-					{
-						"internalType": "bool",
 						"name": "canRequest",
 						"type": "bool"
 					},
@@ -432,7 +399,7 @@
 						"type": "string"
 					}
 				],
-				"internalType": "struct filetransfer.PrivateFile[]",
+				"internalType": "struct FileTransfer.PrivateFile[]",
 				"name": "",
 				"type": "tuple[]"
 			}
@@ -493,11 +460,6 @@
 					},
 					{
 						"internalType": "bool",
-						"name": "searchable",
-						"type": "bool"
-					},
-					{
-						"internalType": "bool",
 						"name": "canRequest",
 						"type": "bool"
 					},
@@ -507,9 +469,28 @@
 						"type": "string"
 					}
 				],
-				"internalType": "struct filetransfer.PrivateFile[]",
+				"internalType": "struct FileTransfer.PrivateFile[]",
 				"name": "",
 				"type": "tuple[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_address",
+				"type": "address"
+			}
+		],
+		"name": "viewRequestableFiles",
+		"outputs": [
+			{
+				"internalType": "string[]",
+				"name": "",
+				"type": "string[]"
 			}
 		],
 		"stateMutability": "view",

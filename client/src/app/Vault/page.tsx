@@ -9,6 +9,7 @@ import FileUploadButton from "@/components/FileUploadButton"
 import Loader from "@/components/Loader"
 import { Button } from "@/components/ui/button"
 import useLocalStorage from "@/hooks/useLocalStorage"
+import PageTitle from "@/components/PageTitle"
 
 const Page = () => {
   const [searchQuery, setSearchQuery] = useState<string>("")
@@ -38,10 +39,10 @@ const Page = () => {
     </>
   ) : (
     <>
-    
+      <PageTitle>Personal Storage</PageTitle>
           <div className="flex gap-3">
             <div className="relative w-full">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="lucide lucide-search absolute left-2 top-2.5 h-4 w-4 text-muted-foreground"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-search absolute left-[10px] top-2.5 h-4 w-4 text-muted-foreground"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg>
               <Input className="pl-8" type="text" placeholder="Search" onChange={(e:any)=>setSearchQuery(e.target.value)}/>
             </div>
             <div className="hidden sm:block lg:hidden">
@@ -76,7 +77,7 @@ const Page = () => {
         </div>
         ) : (
           <>
-          <div className={`${filesLayout==="grid"?'grid':'block'} sm:grid-cols-2 xl:grid-cols-3 gap-3 mt-8`}>
+          <div className={`${filesLayout==="grid"?'grid':'block'} sm:grid-cols-2 xl:grid-cols-3 gap-3 mt-6`}>
             {
               files?.map((file:any, index:number) => (
                 <OwnedFileCard filesLayout={filesLayout} key={index} file={file} refreshData={loadFiles}/>

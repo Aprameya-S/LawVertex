@@ -11,7 +11,7 @@ interface Props{
 
 const MultiMediaRenderer = (props:any) => {
   const [visible,setVisible] = useState(false)
-  console.log(props)
+  // console.log(props)
 
   if(props.format.includes("image/")) return (
     <div className="border border-dashed border-gray-500 p-[20px] rounded-[15px] w-full sm:w-fit sm:max-w-[400px] mt-4">
