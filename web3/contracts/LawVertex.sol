@@ -15,7 +15,6 @@ contract LawVertex {
   address public contractOwner;
   address private admin;
   uint public caseCount;
-
   
 
   struct ActStruct{
@@ -77,6 +76,13 @@ contract LawVertex {
     string location;
   }
 
+  struct Document {
+    string name;
+    string uploadedAt;
+    string cid;
+    string class;
+  }
+
   Court[] courts;
   Case[] cases;
 
@@ -86,13 +92,14 @@ contract LawVertex {
   mapping(string => ActStruct[]) acts;
   mapping(string => History[]) histories;
   mapping(string => Party[]) parties;
-  mapping(address => string) roles;
-  mapping(string => string[]) docs; //cnr -> documents
+  mapping(address => string) public roles;
+  mapping(string => Document[]) docs; //cnr -> documents
 
     
   constructor() {
     contractOwner = msg.sender;
     admin = msg.sender;
+    roles[msg.sender]="admin";
     caseCount = 1;
     cases.push(Case(msg.sender,"",0,"",0,"","invalid","","","","",""));
   }
@@ -263,12 +270,12 @@ contract LawVertex {
     return parties[_cnr];
   }
 
-  function addPublicDocument(string memory _cnr,string memory _url) external {
+  function addPublicDocument(string memory _cnr, string memory _name, string memory _uploadedAt, string memory _cid,string memory _class) external {
       require(msg.sender==cases[cnr_cases[_cnr]].owner, "You don't have permission to publish public documents");
-      docs[_cnr].push(_url);
+      docs[_cnr].push(Document(_name,_uploadedAt,_cid,_class));
   }
 
-  function viewPublicDocuments(string memory _cnr)external view returns(string[] memory){
+  function viewPublicDocuments(string memory _cnr)external view returns(Document[] memory){
     return docs[_cnr];
   }
 }
