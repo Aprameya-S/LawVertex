@@ -4,9 +4,8 @@ import Image from "next/image";
 
 export default function page() {
   return (
-
         <main className="">
-          {/* <Hero/> */}
+          <Hero/>
         </main>
   );
 }
