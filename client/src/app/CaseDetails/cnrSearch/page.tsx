@@ -8,40 +8,54 @@ import { toast } from 'react-toastify'
 import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import PastHearings from '@/components/PastHearings'
+import { useRouter } from 'next/navigation';
 import PublicDocuments from '@/components/PublicDocuments'
 
 const Page = () => {
-  const [CNR, setCNR] = useState("")
+  const [CNR, setCNR] = useState<any>("")
   const [caseData, setCaseData] = useState<any>({exists:null})
   const [court, setCourt] = useState<any>([])
   const [acts, setActs] = useState<any>([])
   const [parties, setParties] = useState([])
+  
+  const searchParams = useSearchParams()
+  const router = useRouter();
 
-  const handleSearch = async(e:any) => {
-    e.preventDefault();
-    setCNR(e.target[0].value)
+  const getData = async(cnr:string) => {
     try {
       setCaseData({exists:false})
-      const data = await viewCase(e.target[0].value)
+      const data = await viewCase(cnr)
       setCaseData({...data,['exists']:true})
 
       const allCourts = await getAllCourts()
       setCourt(allCourts.filter((item:any) => item.owner===data.owner)[0])
 
-      const p = await getParties(e.target[0].value)
+      const p = await getParties(cnr)
       setParties(p)
 
-      const violatedActs = await getActs(e.target[0].value)
+      const violatedActs = await getActs(cnr)
       setActs(violatedActs)
     } catch (error:any) {
       console.error(error)
     }
+  }
+
+  const handleSearch = async(e:any) => {
+    e.preventDefault();
+    setCNR(e.target[0].value)
+    router.push(`?cnr=${e.target[0].value}`)
+    getData(e.target[0].value)
   } 
 
-  const searchParams = useSearchParams()
   const page = searchParams.get('page')
   
-  // console.log(caseData)
+  useEffect(() => {
+    const cnr = searchParams.get('cnr')
+    if(cnr){
+      setCNR(cnr)
+      getData(cnr)
+    }
+  },[])
 
   return (
     <>
@@ -55,20 +69,16 @@ const Page = () => {
     </form>
     {!caseData.exists && <p className='text-red-600 font-medium mt-2'>CNR does not exist</p>}
     <nav className="flex gap-2 my-4">
-      <Link href='?page=case-details'>
-        <Button variant='secondary' size='sm'>Case Details</Button>
-      </Link>
-      <Link href='?page=case-history'>
-        <Button variant='secondary' size='sm'>Case History</Button>
-      </Link>
-      <Link href='?page=documents'>
-        <Button variant='secondary' size='sm'>Documents</Button>
-      </Link>
+        <Button onClick={(e:any) => router.push(`?cnr=${CNR}`+'&page=case-details')} variant='secondary' size='sm'>Case Details</Button>
+        <Button onClick={(e:any) => router.push(`?cnr=${CNR}`+'&page=case-history')} variant='secondary' size='sm'>Case History</Button>
+        <Button onClick={(e:any) => router.push(`?cnr=${CNR}`+'&page=documents')} variant='secondary' size='sm'>Documents</Button>
     </nav>
     {
       caseData.exists && page==="case-history" ? (
         <>
-          <h1 className='text-[20px] font-medium'>{court.name} - {court.court_type}</h1>
+          <h1 className='text-[20px] font-medium'>
+            {court.name} - {court.court_type}
+          </h1>
           <PastHearings CNR={CNR}/>
         </>
       ) : caseData.exists && page==="documents" ? (
@@ -80,7 +90,12 @@ const Page = () => {
         {
           caseData.exists &&
           <main className=''>
-              <h1 className='text-[20px] font-medium'>{court.name} - {court.court_type}</h1>
+              <h1 className='text-[20px] font-medium flex'>
+                {court.name} - {court.court_type}
+                <span className='text-sm border border-blue-600 bg-blue-200 dark:bg-[#18316b] flex items-center px-[10px] rounded-full gap-2 scale-75 '>
+                  {caseData.stage}
+                </span>
+              </h1>
             {/* Case Details */}
             <div className="">
               <h2 className='font-medium text-blue-600 my-2'>Case Details</h2>

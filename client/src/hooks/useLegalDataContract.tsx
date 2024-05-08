@@ -13,6 +13,19 @@ export const createEthereumContract = () => {
   return legalDataContract;
 };
 
+export const getRole = async() => {
+  try {
+    const legalDataContract = createEthereumContract()
+    const { ethereum } = window;
+    const accounts = await ethereum.request({method: 'eth_accounts'})
+    const data = await legalDataContract.roles(accounts[0])
+    console.log(data)
+    return data
+  } catch (error:any) {
+    throw(error)
+  }
+}
+
 export const addCourt = async(form:any) => {
   try {
     const legalDataContract = createEthereumContract()
