@@ -1,5 +1,5 @@
 "use client"
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Button } from '@/components/ui/button'
@@ -35,7 +35,27 @@ const Page = ({ params }: { params: { address: string } }) => {
     setIsLoading(false)
   }
 
+  const checkUserExists = async() => {
+    const response = await fetch('/api/vault/addressExists', {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify({
+        address:params.address
+      })
+    })
+    const data = await response.json()
+    .then((result) => {
+      // console.log(result)
+      if(result.addressExists)
+        push(`/Vault`)
+    })
 
+  }
+  useEffect(() => {
+    checkUserExists()
+  },[])
 
   return (
     <div className='grid grid-cols-2 border-2 border-input rounded-xl w-fit p-8 mx-auto my-auto mt-[10vh] shadow-lg'>

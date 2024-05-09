@@ -48,12 +48,15 @@ const Page = ({ params }: { params: { publicid: string } }) => {
   const [allUsers, setAllUsers] = useState([])
 
   // console.log(allUsers)
+  
+  
 
   const handleSubmit = async(e:any) => {
     e.preventDefault()
     try {
       setIsGrantLoading(true)
       var newpublicid=generateId(40)
+      var newpassword=generateId(10)
           fetch(`https://b75d97dda9827edd7e665521bd610b09.ipfscdn.io/ipfs/${ogFile.cid.split('//')[1]}`)
           .then((res) => res.blob())
           .then(async blob => {
@@ -63,7 +66,7 @@ const Page = ({ params }: { params: { publicid: string } }) => {
             if(ogFile.encrypted===true){
               decryptfile(nfile,ogFile.format,"password")
               .then(async(res) => {
-                var encrypted:any = await encryptfile(res?.fileBlob,res?.fileBlob.type,"password12")
+                var encrypted:any = await encryptfile(res?.fileBlob,res?.fileBlob.type,newpassword)
                 var encFile = new File([encrypted.fileBlob], ogFile.name);
                 const uri = await upload({
                   data: [encFile]
@@ -75,7 +78,7 @@ const Page = ({ params }: { params: { publicid: string } }) => {
               })
             }
             else{
-                var encrypted:any = await encryptfile(nfile,nfile.type,"password12")
+                var encrypted:any = await encryptfile(nfile,nfile.type,newpassword)
                 var encFile = new File([encrypted.fileBlob], ogFile.name);
                 const uri = await upload({
                   data: [encFile]
@@ -98,7 +101,7 @@ const Page = ({ params }: { params: { publicid: string } }) => {
                 senderName:owner['name'],
                 senderWalletAddress: ogFile.owner,
                 receiverWalletAddress: form.receivingUserAddress,
-                password: "password12",
+                password: newpassword,
                 publicid: newpublicid,
                 mailTo:rec['email']
               })
