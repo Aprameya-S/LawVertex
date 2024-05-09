@@ -5,6 +5,8 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import React, { useState } from 'react'
 import { addCase } from '@/hooks/useLegalDataContract'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+import { CaseTypes } from '@/lib/legalData'
 
 
 const Page = () => {
@@ -31,6 +33,18 @@ const Page = () => {
         <div className="case">
         <Label>Case Type</Label>
         <Input type='text' onChange={(e:any) => setCaseForm({...caseForm,['case_type']:e.target.value})} className='mb-3' required/>
+        <Select onValueChange={(val) => setCaseForm({...caseForm,['case_type']:val})} required>
+            <SelectTrigger className="mb-3">
+              <SelectValue placeholder="Select Type" />
+            </SelectTrigger>
+            <SelectContent>
+              {           
+                CaseTypes.map((item:string,index:number) => (
+                  <SelectItem value={item} key={index}>{item}</SelectItem>
+                ))
+              }
+            </SelectContent>
+          </Select>
 
         <div className="grid sm:grid-cols-2 gap-3 mb-3">
           <div className="">

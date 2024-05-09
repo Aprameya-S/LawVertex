@@ -209,13 +209,13 @@ const Page = ({ params }: { params: { publicid: string } }) => {
             <Label htmlFor="email">User address</Label>
             <Input type="text" id="email" placeholder="0x...." onChange={(e) => setForm({...form, ['receivingUserAddress']: e.target.value})} className='overflow-x-scroll' required/>
 
-            <div className="flex flex-row items-start space-x-3 space-y-0 rounded-md border border-input p-4 shadow mt-5 mb-5">
+            {/* <div className="flex flex-row items-start space-x-3 space-y-0 rounded-md border border-input p-4 shadow mt-5 mb-5">
               <Checkbox id='pfilesearchable' className='mt-[2px]' onCheckedChange={(e:any) => setForm({...form, ['viewOnly']: e?true:false})}/>
               <label className="text-sm font-medium " htmlFor="pfilesearchable">
                 View Only<br/>
                 <p className='text-gray-500'>Enabling this does not allow file download.</p>
               </label>
-            </div>
+            </div> */}
             <Button type='submit' className='w-full' disabled={isGrantLoading}>
               {
                 isGrantLoading && <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-rotate-cw animate-spin mr-2"><path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/></svg>
