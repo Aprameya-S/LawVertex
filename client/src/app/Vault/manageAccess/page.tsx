@@ -48,6 +48,7 @@ const Page = () => {
     const users = await response.json()
     .then((result) => {
       setAllUsers(result)
+      console.log(result)
     })
   }
 
