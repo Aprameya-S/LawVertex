@@ -22,6 +22,8 @@ import FileInfo from '@/components/FileInfo'
 import Image from 'next/image'
 import accessPlaceholder from '../../../../../public/images/accessPlaceholder.png'
 import AccessListTable from '@/components/AccessListTable'
+import { toast } from 'react-toastify'
+import { useRouter } from 'next/navigation'
 
 
 function readFile(input:any){
@@ -48,7 +50,7 @@ const Page = ({ params }: { params: { publicid: string } }) => {
   const [allUsers, setAllUsers] = useState([])
 
   // console.log(allUsers)
-  
+  const { push } = useRouter();
   
 
   const handleSubmit = async(e:any) => {
@@ -116,63 +118,69 @@ const Page = ({ params }: { params: { publicid: string } }) => {
   }
 
   const getData = async() => {
-    const data = await getOwnedFile(params.publicid as string)
-    .then((res) => {
-      setOgFile({
-        owner: res[0],
-        name: res[1],
-        desc: res[2],
-        format: res[3],
-        size:res[4],
-        createAt: res[5],
-        publicid:res[6],
-        cid: res[7],
-        encrypted:  res[8],
-        searchable: res[9],
-        canRequest: res[10],
-        exists: res[11],
-        copy: res.copy
-      })
-    })
-
-    const response = await fetch('/api/vault/getAllUsers', {
-      method: 'GET',
-      headers: {
-        'content-type': 'application/json'
-      }
-    })
-
-    const users = await response.json()
-    .then(async(result) => {
-      setAllUsers(result)
-      var accessData = await viewAccessList(params.publicid)
+    try {
+      const data = await getOwnedFile(params.publicid as string)
       .then((res) => {
-        // console.log(res)
-        let list:any = []
-
-        res.forEach((i:any) => {
-          let item = {
-            ogpublicid:i.ogpublicid,
-            publicid:i.publicid,
-            user:i.user,
-            username: result.filter((j:any) => j.address.toLowerCase()==i.user.toLowerCase())[0]?result.filter((j:any) => j.address.toLowerCase()==i.user.toLowerCase())[0]['name']:"Unknown",
-            valid:i.valid,
-            viewOnly: i.viewOnly,
-          }
-          list.push(item)
+        setOgFile({
+          owner: res[0],
+          name: res[1],
+          desc: res[2],
+          format: res[3],
+          size:res[4],
+          createAt: res[5],
+          publicid:res[6],
+          cid: res[7],
+          encrypted:  res[8],
+          searchable: res[9],
+          canRequest: res[10],
+          exists: res[11],
+          copy: res.copy
         })
-
-        setAccessList(list)
       })
-    })
-
-    // setAccessList(accessData)
-    setIsLoading(false)
+  
+      const response = await fetch('/api/vault/getAllUsers', {
+        method: 'GET',
+        headers: {
+          'content-type': 'application/json'
+        }
+      })
+  
+      const users = await response.json()
+      .then(async(result) => {
+        setAllUsers(result)
+        var accessData = await viewAccessList(params.publicid)
+        .then((res) => {
+          // console.log(res)
+          let list:any = []
+  
+          res.forEach((i:any) => {
+            let item = {
+              ogpublicid:i.ogpublicid,
+              publicid:i.publicid,
+              user:i.user,
+              username: result.filter((j:any) => j.address.toLowerCase()==i.user.toLowerCase())[0]?result.filter((j:any) => j.address.toLowerCase()==i.user.toLowerCase())[0]['name']:"Unknown",
+              valid:i.valid,
+              viewOnly: i.viewOnly,
+            }
+            list.push(item)
+          })
+  
+          setAccessList(list)
+        })
+      })
+  
+      // setAccessList(accessData)
+      setIsLoading(false)
+      
+    } catch (error) {
+      toast.error("File not found",{toastId:'file_not_found'})
+      push('/Vault/manageAccess')
+    }
     
   } 
 
   useEffect(() => {
-    getData()
+      getData()
   },[])
   
 
