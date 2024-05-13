@@ -32,7 +32,7 @@ const Page = () => {
         {/* Case */}
         <div className="case">
         <Label>Case Type</Label>
-        <Input type='text' onChange={(e:any) => setCaseForm({...caseForm,['case_type']:e.target.value})} className='mb-3' required/>
+        {/* <Input type='text' onChange={(e:any) => setCaseForm({...caseForm,['case_type']:e.target.value})} className='mb-3' required/> */}
         <Select onValueChange={(val) => setCaseForm({...caseForm,['case_type']:val})} required>
             <SelectTrigger className="mb-3">
               <SelectValue placeholder="Select Type" />
