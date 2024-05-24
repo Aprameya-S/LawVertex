@@ -3,37 +3,47 @@
 pragma solidity >=0.8.2 <0.9.0;
 
 contract Advocates{
-  mapping(string => mapping(string => address[])) adv; //cnr -> party -> advocate addresses
-  mapping(address => string[]) adv_cases;  //advAddress -> cnrs
-  mapping(address => mapping(string => string)) adv_role; //advAddress -> cnr -> role
-
-  function getAdvocate (string memory _cnr, string memory _party) external view returns(address[] memory){
-    return adv[_cnr][_party];
+  struct Advocate{
+    address adv_address;
+    string name;
+    string cnr;
+    string party;
   }
 
-  function getAdvocateRole (address _advAddress, string memory _cnr) external view returns(string memory){
-    return adv_role[_advAddress][_cnr];
+  mapping(string => Advocate[]) cnr_adv; //cnr -> Advocate
+  mapping(address => string[]) adv_cnr; //advocate address -> cnrs
+  
+
+  function getAdvocates (string memory _cnr) external view returns(Advocate[] memory){
+    return cnr_adv[_cnr];
   }
 
-  function addOrUpdateAdvocates(
+  function getAdvocateCases (address _adv_address) external view returns(string[] memory){
+    return adv_cnr[_adv_address];
+  }
+
+  function addAdvocates(
     string memory _cnr,
-    address[] memory _adv_addresses,
-    string[] memory _parties,
-    string[] memory _roles
-  )external{
-    require(_adv_addresses.length==_roles.length, "Incorrect input format");
-
-    for(uint i=0;i<adv[_cnr]["pet"].length;i++){
-      adv[_cnr]["pet"].pop();
-    }
-    for(uint i=0;i<adv[_cnr]["res"].length;i++){
-      adv[_cnr]["res"].pop();
+    address[] memory _adv_address,
+    string[] memory _name,
+    string[] memory _party
+  ) public {
+    while(cnr_adv[_cnr].length>0){
+      cnr_adv[_cnr].pop();
     }
 
-    for(uint i=0;i<_roles.length;i++){
-      adv[_cnr][_parties[i]].push(_adv_addresses[i]);
-      adv_cases[_adv_addresses[i]].push(_cnr);
-      adv_role[_adv_addresses[i]][_cnr]=_roles[i];
+    for(uint i=0;i<_name.length;i++){
+      cnr_adv[_cnr].push(Advocate(_adv_address[i], _name[i], _cnr, _party[i]));
+      bool exists=false;
+      for(uint j=0;j<adv_cnr[_adv_address[i]].length;j++){
+        if(keccak256(abi.encodePacked(adv_cnr[_adv_address[i]][j]))==keccak256(abi.encodePacked(_cnr))){
+          exists=true;
+        }
+      }
+      if(!exists){
+        adv_cnr[_adv_address[i]].push(_cnr);
+      }
     }
   }
+   
 }

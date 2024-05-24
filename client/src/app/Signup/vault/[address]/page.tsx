@@ -15,23 +15,33 @@ const Page = ({ params }: { params: { address: string } }) => {
   const createUser = async(e:any) => {
     e.preventDefault()
     setIsLoading(true)
-    const response = await fetch('/api/vault/createUser', {
-      method: 'POST',
-      headers: {
-        'content-type': 'application/json'
-      },
-      body: JSON.stringify({
-        name: form.name,
-        email: form.email,
-        address: params.address
+    try {
+      const response = await fetch('/api/vault/createUser', {
+        method: 'POST',
+        headers: {
+          'content-type': 'application/json'
+        },
+        body: JSON.stringify({
+          name: form.name,
+          email: form.email,
+          address: params.address
+        })
       })
-    })
-    .then((res) => {
-      if(res.status==201){
-        toast("Signup successful!")
-        push('/Vault')
-      }
-    })
+      .then((res) => {
+        if(res.status==201){
+          toast("Signup successful!")
+          push('/Vault')
+        }
+        if(res.status==500){
+          toast.error("Email is already registered.Try again.")
+        }
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+    } catch (error) {
+      toast.error("Something went wrong...")
+    }
     setIsLoading(false)
   }
 

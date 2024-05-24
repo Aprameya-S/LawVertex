@@ -41,6 +41,9 @@ const CaseCard = ({CNR}:PropType) => {
 
   if(caseData.exists) return (
     <div className='bg-input dark:bg-secondary rounded-[15px] p-[20px] mt-4'>
+      <span className='text-sm border border-blue-600 bg-blue-200 dark:bg-[#18316b] px-[10px] rounded-full scale-75 flex w-fit font-medium relative left-[-8px]'>
+        {caseData.stage}
+      </span>
       {
         (parties.filter((i:any) => i.party==="pet").length!=0 && parties.filter((i:any) => i.party==="res").length!=0) && 
         <h1 className='font-medium text-[20px]'>
@@ -49,7 +52,8 @@ const CaseCard = ({CNR}:PropType) => {
         </h1>
       }
       <h2>{court.name}, {court.location}</h2>
-      <h2 className='text-blue-600 text-sm font-medium'>CNR: {CNR}</h2>
+      <h2 className='text-sm font-medium'>CNR: {CNR}</h2>
+      
     </div>
   )
   else if(CNR!="") return (

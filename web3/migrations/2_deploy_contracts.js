@@ -4,6 +4,6 @@ const Advocates = artifacts.require("Advocates")
 
 module.exports = function(deployer) {
   // deployer.deploy(FileTransfer);
-  deployer.deploy(LawVertex);
+  // deployer.deploy(LawVertex);
   deployer.deploy(Advocates);
 };

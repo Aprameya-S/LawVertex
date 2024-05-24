@@ -109,6 +109,24 @@ export const addCase = async(caseForm:any, caseInfoForm:any) => {
     throw(error)
   }
 }
+export const updateCase = async(caseData:any) => {
+  try {
+    const legalDataContract = createEthereumContract()
+    // console.log(caseForm,caseInfoForm)
+    const data = await legalDataContract.updateCase(
+      caseData.cnr,
+      caseData.next_hearing,
+      caseData.stage,
+      caseData.court_no,
+      caseData.judge
+    )
+    
+    toast("Update successful.")
+
+  } catch (error) {
+    throw(error)
+  }
+}
 
 
 export const getActs = async(cnr:string) => {
