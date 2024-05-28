@@ -10,6 +10,7 @@ import Link from 'next/link'
 import PastHearings from '@/components/PastHearings'
 import { useRouter } from 'next/navigation';
 import PublicDocuments from '@/components/PublicDocuments'
+import { getAdvocates } from '@/hooks/useAdvocateContract'
 
 const Page = () => {
   const [CNR, setCNR] = useState<any>("")
@@ -17,6 +18,7 @@ const Page = () => {
   const [court, setCourt] = useState<any>([])
   const [acts, setActs] = useState<any>([])
   const [parties, setParties] = useState([])
+  const [advocates, setAdvocates] = useState([])
   
   const searchParams = useSearchParams()
   const router = useRouter();
@@ -40,11 +42,17 @@ const Page = () => {
     }
   }
 
+  const getAllAdvocates = async(cnr:string) => {
+    let data = await getAdvocates(cnr)
+    setAdvocates(data)
+  }
+
   const handleSearch = async(e:any) => {
     e.preventDefault();
     setCNR(e.target[0].value)
     router.push(`?cnr=${e.target[0].value}`)
     getData(e.target[0].value)
+    getAllAdvocates(e.target[0].value)
   } 
 
   const page = searchParams.get('page')
@@ -54,6 +62,7 @@ const Page = () => {
     if(cnr){
       setCNR(cnr)
       getData(cnr)
+      getAllAdvocates(cnr)
     }
   },[])
 
@@ -151,11 +160,23 @@ const Page = () => {
                   parties.filter((i:any) => i.party==="pet").map((item:any,index:number) => (
                     <div className="text-sm" key={index}>
                       <p className='font-semibold'>{index+1}) {item.name}</p>
-                      <i>Advocate: {item.lead_adv}</i>
+                      <i>Lead Advocate: {item.lead_adv}</i>
                     </div>
                   ))
                 }
+
+                {advocates.filter((i:any) => i.party==="Petitioner").length!=0 && <p className='font-semibold text-sm mt-2'>Advocates:</p>}
+                {
+                  advocates.filter((i:any) => i.party==="Petitioner").map((item:any,index:number) => (
+                    <Link key={index} href={`/advocate/${item.adv_address}`} target='_blank' className='flex items-center text-blue-600 text-sm w-fit'>
+                      {item.name}
+                      <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-arrow-up-right"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+                    </Link>
+                  ))
+                }
               </div>
+
+              
             </div>
 
             {/* Respondent */}
@@ -166,8 +187,18 @@ const Page = () => {
                   parties.filter((i:any) => i.party==="res").map((item:any,index:number) => (
                     <div className="text-sm" key={index}>
                       <p className='font-semibold'>{index+1}) {item.name}</p>
-                      <i>Advocate: {item.lead_adv}</i>
+                      <i>Lead Advocate: {item.lead_adv}</i>
                     </div>
+                  ))
+                }
+
+                {advocates.filter((i:any) => i.party==="Respondent").length!=0 && <p className='font-semibold text-sm mt-2'>Advocates:</p>}
+                {
+                  advocates.filter((i:any) => i.party==="Respondent").map((item:any,index:number) => (
+                    <Link key={index} href={`/advocate/${item.adv_address}`} target='_blank' className='flex items-center text-blue-600 text-sm w-fit'>
+                      {item.name}
+                      <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-arrow-up-right"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+                    </Link>
                   ))
                 }
               </div>

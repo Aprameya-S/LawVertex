@@ -65,6 +65,10 @@ export const CourtsCaseDetailsLinks = [
     href:"/CaseDetails/addParty"
   },
   {
+    title:"Add Advocates",
+    href:"/CaseDetails/addAdvocate"
+  },
+  {
     title:"Upload Document",
     href:"/CaseDetails/uploadPublicDocs"
   },
