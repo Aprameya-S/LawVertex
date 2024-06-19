@@ -10,5 +10,4 @@ export async function POST(request) {
     
     await FileTransferUser.create({name,address,email})
     return NextResponse.json({message: "User created"}, {status: 201})
-
 }

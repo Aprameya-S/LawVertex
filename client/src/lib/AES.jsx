@@ -19,7 +19,7 @@ function readEncryptedFile(file){
   }
 
 var Aes = {};
-
+// let newKey=parseInt(process.env.NEXT_PUBLIC_SBOX_KEY, 16); 
 
 /**
  * AES Cipher function: encrypt 'input' state with Rijndael algorithm [§5.1];
@@ -92,7 +92,6 @@ Aes.keyExpansion = function(key) {
         // xor w[i] with w[i-1] and w[i-Nk]
         for (var t=0; t<4; t++) w[i][t] = w[i-Nk][t] ^ temp[t];
     }
-
     return w;
 };
 
@@ -103,30 +102,39 @@ Aes.keyExpansion = function(key) {
  */
 Aes.subBytes = function(s, Nb) {
     for (var r=0; r<4; r++) {
-        for (var c=0; c<Nb; c++) s[r][c] = Aes.sBox[s[r][c]];
+        for (var c=0; c<Nb; c++){
+            s[r][c] = s[r][c]&parseInt(process.env.NEXT_PUBLIC_SBOX_KEY, 16)|Aes.sBox[s[r][c]];
+        }
     }
+
+    // for (var r=0; r<4; r++) {
+    //     for (var c=0; c<Nb; c++) s[r][c] = sBox[s[r][c]];
+    // }
+
     return s;
 };
 
+function rotateArray(arr, k) {
+    let rotatedArr = arr.slice(k);
+    for(let i = 0; i < k; i++) {
+        rotatedArr.push(arr[i]);
+    }
+    return rotatedArr;
+  }
 
 /**
  * Shift row r of state S left by r bytes [§5.1.2]
  * @private
  */
 Aes.shiftRows = function(s, Nb) {
-    // var t = new Array(4);
-    // for (var r=1; r<4; r++) {
-    //     for (var c=0; c<4; c++) t[c] = s[r][(c+r)%Nb];  // shift into temp copy
-    //     for (var c=0; c<4; c++) s[r][c] = t[c];         // and copy back
-    // }          // note that this will work for Nb=4,5,6, but not 7,8 (always 4 for AES):
-    // return s;  // see asmaes.sourceforge.net/rijndael/rijndaelImplementation.pdf
-
-    s = s.map((_, colIndex) => s.map(row => row[colIndex]));
-    s[0][0]=[s[3][3],s[3][3]=s[0][0]][0]
-    s[1][1]=[s[2][2],s[2][2]=s[1][1]][0]
-
-    return s
+    var t = new Array(4);
+    for (var r=1; r<4; r++) {
+        s[r]=rotateArray(s[r],r);
+    }          
+    return s;
 };
+
+
 
 
 /**
@@ -233,6 +241,9 @@ Aes.Ctr = {};
  *   var encr = Aes.Ctr.encrypt('big secret', 'pāşšŵōřđ', 256); // encr: 'lwGl66VVwVObKIr6of8HVqJr'
  */
 Aes.Ctr.encrypt = function(plaintext, password, nBits) {
+
+
+
     var blockSize = 16;  // block size fixed at 16 bytes / 128 bits (Nb=4) for AES
     if (!(nBits==128 || nBits==192 || nBits==256)) return ''; // standard allows 128/192/256 bit keys
     // plaintext = new TextEncoder("utf-8").encode(plaintext);
