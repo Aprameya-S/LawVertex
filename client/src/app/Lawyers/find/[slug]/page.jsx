@@ -62,12 +62,13 @@ export default function Page(){
               rating,
               title,
               review,
-              name: "Joshua Tauro",
+              name: localStorage.getItem("name") || "Joshua Tauro",
               lawyerID: slug
             })
           })
         const response = await addReview.json()
         if(response.isCompleted){
+            console.log(response)
             toast("Successfully added review")
             setTitle("")
             setRating(0)
@@ -150,7 +151,7 @@ export default function Page(){
                     </DrawerContent>
                 </Drawer>
                 <div className="grid grid-cols-2 gap-10 ">
-                    {reviews.map(({name, title, review, rating}) => <LawyerReview title={title} name={name} rating={rating} review={review} />)}
+                    {reviews.map(({name, title, review, rating, profileImage}) => <LawyerReview title={title} name={name} rating={rating} review={review} profileImage={profileImage} />)}
 
                 </div>
         </div>

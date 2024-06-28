@@ -21,6 +21,9 @@ const LawyerReviewSchema = new Schema(
     lawyerID: {
         type: String,
         required: true
+    },
+    profileImage:{
+      type: String
     }
   },
   {

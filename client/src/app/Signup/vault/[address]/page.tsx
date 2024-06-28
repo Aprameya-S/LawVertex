@@ -30,6 +30,7 @@ const Page = ({ params }: { params: { address: string } }) => {
       .then((res) => {
         if(res.status==201){
           toast("Signup successful!")
+          localStorage.setItem("name", form.name)
           push('/Vault')
         }
         if(res.status==500){
