@@ -9,7 +9,7 @@ export const HeaderLinks = [
   },
   {
     title:"Search Advocate",
-    href:"SearchAdvocate" 
+    href:"Lawyers" 
   },
 ]
 
@@ -83,4 +83,44 @@ export const CaseDetailsLinks = [
     title:"Locate Court",
     href:"/CaseDetails/locateCourt"
   },
+]
+
+export const SearchLawyersLinks = [
+  {
+    title: "Home",
+    href: "/Lawyers",
+    icon: <svg
+    viewBox="0 0 24 24"
+    fill="currentColor"
+    height="1em"
+    width="1em"
+  >
+    <path d="M12.71 2.29a1 1 0 00-1.42 0l-9 9a1 1 0 000 1.42A1 1 0 003 13h1v7a2 2 0 002 2h12a2 2 0 002-2v-7h1a1 1 0 001-1 1 1 0 00-.29-.71zM6 20v-9.59l6-6 6 6V20z" />
+  </svg>
+  },
+  {
+    title: "View all lawyers",
+    href:"/Lawyers/find",
+    icon: <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-send"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
+  }
+]
+
+export const RegisterLawyerLinks = [
+  {
+    title: "Home",
+    href: "/Lawyers",
+    icon: <svg
+    viewBox="0 0 24 24"
+    fill="currentColor"
+    height="1em"
+    width="1em"
+  >
+    <path d="M12.71 2.29a1 1 0 00-1.42 0l-9 9a1 1 0 000 1.42A1 1 0 003 13h1v7a2 2 0 002 2h12a2 2 0 002-2v-7h1a1 1 0 001-1 1 1 0 00-.29-.71zM6 20v-9.59l6-6 6 6V20z" />
+  </svg>
+  },
+  {
+    title: "View all lawyers",
+    href: "/Lawyers/find",
+    icon: <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-send"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
+  }
 ]
