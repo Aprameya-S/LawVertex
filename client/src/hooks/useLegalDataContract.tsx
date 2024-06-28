@@ -13,6 +13,19 @@ export const createEthereumContract = () => {
   return legalDataContract;
 };
 
+export const getRole = async() => {
+  try {
+    const legalDataContract = createEthereumContract()
+    const { ethereum } = window;
+    const accounts = await ethereum.request({method: 'eth_accounts'})
+    const data = await legalDataContract.roles(accounts[0])
+    console.log(data)
+    return data
+  } catch (error:any) {
+    throw(error)
+  }
+}
+
 export const addCourt = async(form:any) => {
   try {
     const legalDataContract = createEthereumContract()
@@ -91,6 +104,24 @@ export const addCase = async(caseForm:any, caseInfoForm:any) => {
     )
     // console.log(data)
     toast("Court created!")
+
+  } catch (error) {
+    throw(error)
+  }
+}
+export const updateCase = async(caseData:any) => {
+  try {
+    const legalDataContract = createEthereumContract()
+    // console.log(caseForm,caseInfoForm)
+    const data = await legalDataContract.updateCase(
+      caseData.cnr,
+      caseData.next_hearing,
+      caseData.stage,
+      caseData.court_no,
+      caseData.judge
+    )
+    
+    toast("Update successful.")
 
   } catch (error) {
     throw(error)

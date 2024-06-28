@@ -1,5 +1,5 @@
 "use client"
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Button } from '@/components/ui/button'
@@ -15,27 +15,57 @@ const Page = ({ params }: { params: { address: string } }) => {
   const createUser = async(e:any) => {
     e.preventDefault()
     setIsLoading(true)
-    const response = await fetch('/api/vault/createUser', {
+    try {
+      const response = await fetch('/api/vault/createUser', {
+        method: 'POST',
+        headers: {
+          'content-type': 'application/json'
+        },
+        body: JSON.stringify({
+          name: form.name,
+          email: form.email,
+          address: params.address
+        })
+      })
+      .then((res) => {
+        if(res.status==201){
+          toast("Signup successful!")
+          push('/Vault')
+        }
+        if(res.status==500){
+          toast.error("Email is already registered.Try again.")
+        }
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+    } catch (error) {
+      toast.error("Something went wrong...")
+    }
+    setIsLoading(false)
+  }
+
+  const checkUserExists = async() => {
+    const response = await fetch('/api/vault/addressExists', {
       method: 'POST',
       headers: {
         'content-type': 'application/json'
       },
       body: JSON.stringify({
-        name: form.name,
-        email: form.email,
-        address: params.address
+        address:params.address
       })
     })
-    .then((res) => {
-      if(res.status==201){
-        toast("Signup successful!")
-        push('/Vault')
-      }
+    const data = await response.json()
+    .then((result) => {
+      // console.log(result)
+      if(result.addressExists)
+        push(`/Vault`)
     })
-    setIsLoading(false)
+
   }
-
-
+  useEffect(() => {
+    checkUserExists()
+  },[])
 
   return (
     <div className='grid grid-cols-2 border-2 border-input rounded-xl w-fit p-8 mx-auto my-auto mt-[10vh] shadow-lg'>

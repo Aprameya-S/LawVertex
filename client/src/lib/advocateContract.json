@@ -1,0 +1,92 @@
+{
+  "abi":[
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "_cnr",
+          "type": "string"
+        },
+        {
+          "internalType": "address[]",
+          "name": "_adv_address",
+          "type": "address[]"
+        },
+        {
+          "internalType": "string[]",
+          "name": "_name",
+          "type": "string[]"
+        },
+        {
+          "internalType": "string[]",
+          "name": "_party",
+          "type": "string[]"
+        }
+      ],
+      "name": "addAdvocates",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_adv_address",
+          "type": "address"
+        }
+      ],
+      "name": "getAdvocateCases",
+      "outputs": [
+        {
+          "internalType": "string[]",
+          "name": "",
+          "type": "string[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "_cnr",
+          "type": "string"
+        }
+      ],
+      "name": "getAdvocates",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "address",
+              "name": "adv_address",
+              "type": "address"
+            },
+            {
+              "internalType": "string",
+              "name": "name",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "cnr",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "party",
+              "type": "string"
+            }
+          ],
+          "internalType": "struct Advocates.Advocate[]",
+          "name": "",
+          "type": "tuple[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ]
+}

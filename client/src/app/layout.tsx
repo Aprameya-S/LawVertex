@@ -7,6 +7,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import Providers from "@/components/Providers";
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 
 export const metadata: Metadata = {
@@ -45,6 +46,7 @@ export default function RootLayout({
               </DashboardNav>
             </Providers>
             <Toaster />
+            <SpeedInsights/>
           </body>
     </html>
   );

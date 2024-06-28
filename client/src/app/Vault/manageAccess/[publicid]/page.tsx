@@ -22,6 +22,8 @@ import FileInfo from '@/components/FileInfo'
 import Image from 'next/image'
 import accessPlaceholder from '../../../../../public/images/accessPlaceholder.png'
 import AccessListTable from '@/components/AccessListTable'
+import { toast } from 'react-toastify'
+import { useRouter } from 'next/navigation'
 
 
 function readFile(input:any){
@@ -48,12 +50,15 @@ const Page = ({ params }: { params: { publicid: string } }) => {
   const [allUsers, setAllUsers] = useState([])
 
   // console.log(allUsers)
+  const { push } = useRouter();
+  
 
   const handleSubmit = async(e:any) => {
     e.preventDefault()
     try {
       setIsGrantLoading(true)
       var newpublicid=generateId(40)
+      var newpassword=generateId(10)
           fetch(`https://b75d97dda9827edd7e665521bd610b09.ipfscdn.io/ipfs/${ogFile.cid.split('//')[1]}`)
           .then((res) => res.blob())
           .then(async blob => {
@@ -63,7 +68,7 @@ const Page = ({ params }: { params: { publicid: string } }) => {
             if(ogFile.encrypted===true){
               decryptfile(nfile,ogFile.format,"password")
               .then(async(res) => {
-                var encrypted:any = await encryptfile(res?.fileBlob,res?.fileBlob.type,"password12")
+                var encrypted:any = await encryptfile(res?.fileBlob,res?.fileBlob.type,newpassword)
                 var encFile = new File([encrypted.fileBlob], ogFile.name);
                 const uri = await upload({
                   data: [encFile]
@@ -75,7 +80,7 @@ const Page = ({ params }: { params: { publicid: string } }) => {
               })
             }
             else{
-                var encrypted:any = await encryptfile(nfile,nfile.type,"password12")
+                var encrypted:any = await encryptfile(nfile,nfile.type,newpassword)
                 var encFile = new File([encrypted.fileBlob], ogFile.name);
                 const uri = await upload({
                   data: [encFile]
@@ -98,7 +103,7 @@ const Page = ({ params }: { params: { publicid: string } }) => {
                 senderName:owner['name'],
                 senderWalletAddress: ogFile.owner,
                 receiverWalletAddress: form.receivingUserAddress,
-                password: "password12",
+                password: newpassword,
                 publicid: newpublicid,
                 mailTo:rec['email']
               })
@@ -113,63 +118,69 @@ const Page = ({ params }: { params: { publicid: string } }) => {
   }
 
   const getData = async() => {
-    const data = await getOwnedFile(params.publicid as string)
-    .then((res) => {
-      setOgFile({
-        owner: res[0],
-        name: res[1],
-        desc: res[2],
-        format: res[3],
-        size:res[4],
-        createAt: res[5],
-        publicid:res[6],
-        cid: res[7],
-        encrypted:  res[8],
-        searchable: res[9],
-        canRequest: res[10],
-        exists: res[11],
-        copy: res.copy
-      })
-    })
-
-    const response = await fetch('/api/vault/getAllUsers', {
-      method: 'GET',
-      headers: {
-        'content-type': 'application/json'
-      }
-    })
-
-    const users = await response.json()
-    .then(async(result) => {
-      setAllUsers(result)
-      var accessData = await viewAccessList(params.publicid)
+    try {
+      const data = await getOwnedFile(params.publicid as string)
       .then((res) => {
-        // console.log(res)
-        let list:any = []
-
-        res.forEach((i:any) => {
-          let item = {
-            ogpublicid:i.ogpublicid,
-            publicid:i.publicid,
-            user:i.user,
-            username: result.filter((j:any) => j.address.toLowerCase()==i.user.toLowerCase())[0]?result.filter((j:any) => j.address.toLowerCase()==i.user.toLowerCase())[0]['name']:"Unknown",
-            valid:i.valid,
-            viewOnly: i.viewOnly,
-          }
-          list.push(item)
+        setOgFile({
+          owner: res[0],
+          name: res[1],
+          desc: res[2],
+          format: res[3],
+          size:res[4],
+          createAt: res[5],
+          publicid:res[6],
+          cid: res[7],
+          encrypted:  res[8],
+          searchable: res[9],
+          canRequest: res[10],
+          exists: res[11],
+          copy: res.copy
         })
-
-        setAccessList(list)
       })
-    })
-
-    // setAccessList(accessData)
-    setIsLoading(false)
+  
+      const response = await fetch('/api/vault/getAllUsers', {
+        method: 'GET',
+        headers: {
+          'content-type': 'application/json'
+        }
+      })
+  
+      const users = await response.json()
+      .then(async(result) => {
+        setAllUsers(result)
+        var accessData = await viewAccessList(params.publicid)
+        .then((res) => {
+          // console.log(res)
+          let list:any = []
+  
+          res.forEach((i:any) => {
+            let item = {
+              ogpublicid:i.ogpublicid,
+              publicid:i.publicid,
+              user:i.user,
+              username: result.filter((j:any) => j.address.toLowerCase()==i.user.toLowerCase())[0]?result.filter((j:any) => j.address.toLowerCase()==i.user.toLowerCase())[0]['name']:"Unknown",
+              valid:i.valid,
+              viewOnly: i.viewOnly,
+            }
+            list.push(item)
+          })
+  
+          setAccessList(list)
+        })
+      })
+  
+      // setAccessList(accessData)
+      setIsLoading(false)
+      
+    } catch (error) {
+      toast.error("File not found",{toastId:'file_not_found'})
+      push('/Vault/manageAccess')
+    }
     
   } 
 
   useEffect(() => {
-    getData()
+      getData()
   },[])
   
 
@@ -206,13 +217,13 @@ const Page = ({ params }: { params: { publicid: string } }) => {
             <Label htmlFor="email">User address</Label>
             <Input type="text" id="email" placeholder="0x...." onChange={(e) => setForm({...form, ['receivingUserAddress']: e.target.value})} className='overflow-x-scroll' required/>
 
-            <div className="flex flex-row items-start space-x-3 space-y-0 rounded-md border border-input p-4 shadow mt-5 mb-5">
+            {/* <div className="flex flex-row items-start space-x-3 space-y-0 rounded-md border border-input p-4 shadow mt-5 mb-5">
               <Checkbox id='pfilesearchable' className='mt-[2px]' onCheckedChange={(e:any) => setForm({...form, ['viewOnly']: e?true:false})}/>
               <label className="text-sm font-medium " htmlFor="pfilesearchable">
                 View Only<br/>
                 <p className='text-gray-500'>Enabling this does not allow file download.</p>
               </label>
-            </div>
+            </div> */}
             <Button type='submit' className='w-full' disabled={isGrantLoading}>
               {
                 isGrantLoading && <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-rotate-cw animate-spin mr-2"><path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/></svg>

@@ -53,7 +53,7 @@ const Page = () => {
 
   return (
     <>
-    <PageTitle>Search by CNR Number</PageTitle>
+    <PageTitle>Search Case</PageTitle>
     
     <CaseNumberSearch setCaseData={setsearchResult}/>
 
