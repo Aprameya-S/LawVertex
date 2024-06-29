@@ -99,7 +99,7 @@ const Page = () => {
           acts.length==0 && <p className='text-red-600 font-medium'>No violated acts registered</p>
         } */}
         <div className="flex gap-3">
-          <Input type='text' placeholder='Wallet Address' value={newAdvocate.address} onChange={(e) => setNewAdvocate({...newAdvocate,['address']:e.target.value})}/>
+          <Input type='text' placeholder='Wallet Address' value={newAdvocate.address} onChange={(e) => setNewAdvocate({...newAdvocate,['address']:e.target.value.toLowerCase()})}/>
           <Input type='text' placeholder='Full Name' value={newAdvocate.name} onChange={(e) => setNewAdvocate({...newAdvocate,['name']:e.target.value})}/>
           <Select onValueChange={(val) => setNewAdvocate({...newAdvocate,['party']:val})}>
             <SelectTrigger className="mb-3">

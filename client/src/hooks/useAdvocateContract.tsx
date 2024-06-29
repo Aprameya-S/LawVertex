@@ -26,8 +26,8 @@ export const getAdvocates = async(cnr:string) => {
 export const getAdvocateCases = async(address:string) => {
   try {
     const legalDataContract = createEthereumContract()
-    const data = await legalDataContract.getAdvocateCases("0x6314CFFC21Ade895DfDcAF3589dD5797e42B4905")
-    console.log(data)
+    const data = await legalDataContract.getAdvocateCases(address)
+    // console.log(data)
     return data
   } catch (error) {
     throw(error)

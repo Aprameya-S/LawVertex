@@ -6,6 +6,10 @@ const LawyerSchema = new Schema(
         type: String,
         required: true
     },
+    walletAddress: {
+        type: String,
+        required: true
+    },
     type: {
         type: String,
         required: true,
@@ -15,10 +19,6 @@ const LawyerSchema = new Schema(
         required: true
     },
     email: {
-        type: String,
-        required: true
-    },
-    cases: {
         type: String,
         required: true
     },

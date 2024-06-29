@@ -9,9 +9,6 @@ pragma solidity >=0.8.2 <0.9.0;
  */
 contract LawVertex {
 
-  // constructor() payable {}
-  // receive() external payable {}
-
   address public contractOwner;
   address private admin;
   uint public caseCount;
@@ -94,7 +91,6 @@ contract LawVertex {
   mapping(string => Party[]) parties;
   mapping(address => string) public roles;
   mapping(string => Document[]) docs; //cnr -> documents
-
     
   constructor() {
     contractOwner = msg.sender;
