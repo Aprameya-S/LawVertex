@@ -17,9 +17,9 @@ import {
 const Page = () => {
     const [searchName, setSearchName] = useState('')
 
-    const [lawyers, setLawyers] = useState([])
-    const [filterSearch, setFilterSearch] = useState([])
-    const [lawyerTypeFilter, setLawyerTypeFilter] = useState()
+    const [lawyers, setLawyers] = useState<any>([])
+    const [filterSearch, setFilterSearch] = useState<any>([])
+    const [lawyerTypeFilter, setLawyerTypeFilter] = useState<any>()
     // const [isFiltererd]
     useEffect(() => {
         const getLawyers = async() => {
@@ -42,15 +42,15 @@ const Page = () => {
 
     const filterByName = () => {
         // clear all filters to default
-        setLawyerTypeFilter()
+        setLawyerTypeFilter(undefined)
 
-        lawyers.map(law => console.log(law.name))
-        console.log(lawyers.filter(law => law.name.toLowerCase().includes(searchName)))
-        setFilterSearch(lawyers.filter(lawyer => lawyer.name.includes(searchName)))
+        lawyers.map((law:any) => console.log(law.name))
+        console.log(lawyers.filter((law:any) => law.name.toLowerCase().includes(searchName)))
+        setFilterSearch(lawyers.filter((lawyer:any) => lawyer.name.includes(searchName)))
     }
 
     const handleClearFilters = () => {
-        setLawyerTypeFilter()
+        setLawyerTypeFilter(undefined)
 
         setSearchName("")
         setFilterSearch(lawyers)
@@ -60,7 +60,7 @@ const Page = () => {
     useEffect(() => {
         setFilterSearch(lawyers)
         if(lawyerTypeFilter){
-            setFilterSearch(prev => prev.filter(lawyer => lawyer.type === lawyerTypeFilter))
+            setFilterSearch((prev:any) => prev.filter((lawyer:any) => lawyer.type === lawyerTypeFilter))
         }
     }, [lawyerTypeFilter])
 
@@ -90,7 +90,7 @@ const Page = () => {
                     <Button onClick={filterByName} className="">Search</Button>
                 </div>
                 <div className="mt-3 flex gap-3">
-                    <DropdownMenu className="w-20">
+                    <DropdownMenu>
                         <DropdownMenuTrigger asChild className="">
                             <Button variant="outline" className="w-full bg-transparent"> {lawyerTypeFilter ? lawyerTypeFilter : "Select the type of lawyer"}</Button>
                         </DropdownMenuTrigger>
@@ -113,7 +113,7 @@ const Page = () => {
             
             <div className="grid grid-cols-2 gap-5 mt-5">
                 {
-                    filterSearch.length > 0 ? filterSearch.map(({name,walletAddress, type, number, email, profileImage, _id, rating, totalRatings}, index) => <AdvocateCard walletAddress={walletAddress} key={index} lawyerImg={profileImage} type={type} name={name} number={number} email={email} id={_id} rating={rating/totalRatings} /> ) : (
+                    filterSearch.length > 0 ? filterSearch.map(({name,walletAddress, type, number, email, profileImage, _id, rating, totalRatings}:any, index:number) => <AdvocateCard walletAddress={walletAddress} key={index} lawyerImg={profileImage} type={type} name={name} number={number} email={email} id={_id} rating={rating/totalRatings} /> ) : (
                         <div>
                             <h1>No such lawyers found</h1>
                         </div>
