@@ -14,16 +14,18 @@ import {
     DropdownMenuRadioGroup,
     DropdownMenuTrigger,
   } from "@/components/ui/dropdown-menu"
+import Loader from "@/components/Loader"
+import PageTitle from "@/components/PageTitle"
 const Page = () => {
     const [searchName, setSearchName] = useState('')
-
+    const [isLoading, setIsLoading] = useState<boolean>(true)
     const [lawyers, setLawyers] = useState<any>([])
     const [filterSearch, setFilterSearch] = useState<any>([])
     const [lawyerTypeFilter, setLawyerTypeFilter] = useState<any>()
-    // const [isFiltererd]
+    
+    
     useEffect(() => {
         const getLawyers = async() => {
-
             const response = await fetch("/api/lawyers/getLawyers",{
                 method: 'GET',
                 headers: {
@@ -35,6 +37,7 @@ const Page = () => {
                 setFilterSearch(res.lawyers)
                 setLawyers(res.lawyers)
             })
+            setIsLoading(false)
             // console.log(response)
         }
         getLawyers();
@@ -82,7 +85,7 @@ const Page = () => {
     
     return(
         <>
-            <h1 className="text-lg mt-5 font-medium">Advocates</h1>
+            <PageTitle>Search Advocate</PageTitle>
             <div className="relative w-full mt-3">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-search absolute left-[10px] top-2.5 h-4 w-4 text-muted-foreground"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg>
                 <div className="flex gap-3">
@@ -111,15 +114,23 @@ const Page = () => {
                
             </div> */}
             
-            <div className="grid grid-cols-2 gap-5 mt-5">
-                {
-                    filterSearch.length > 0 ? filterSearch.map(({name,walletAddress, type, number, email, profileImage, _id, rating, totalRatings}:any, index:number) => <AdvocateCard walletAddress={walletAddress} key={index} lawyerImg={profileImage} type={type} name={name} number={number} email={email} id={_id} rating={rating/totalRatings} /> ) : (
-                        <div>
-                            <h1>No such lawyers found</h1>
-                        </div>
-                    )
-                }
-            </div>
+            {
+                isLoading ? (
+                    <div className="mt-3">
+                        <Loader/>
+                    </div>
+                ) : (
+                    <div className="grid grid-cols-2 gap-5 mt-5">
+                        {
+                            filterSearch.length > 0 ? filterSearch.map(({name,walletAddress, type, number, email, profileImage, _id, rating, totalRatings}:any, index:number) => <AdvocateCard walletAddress={walletAddress} key={index} lawyerImg={profileImage} type={type} name={name} number={number} email={email} id={_id} rating={rating/totalRatings} /> ) : (
+                                <div>
+                                    <h1>No such lawyers found</h1>
+                                </div>
+                            )
+                        }
+                    </div>
+                )
+            }
         </>
     )
 }
